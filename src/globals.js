@@ -36,6 +36,9 @@ export default {
     sprites: [],
 
     //datos del nivel
-    level: {}
+    level: {},
+
+    //temporizacion nivel
+    levelTime: {}
 
 };

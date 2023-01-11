@@ -46,6 +46,7 @@ function updatePlayer(sprite)
 function playGame()
 {
     updateSprites();
+    updateLevelTime();
 }
 
 function updateSprites()
@@ -88,4 +89,19 @@ function updatePirate(sprite)
     sprite.state = State.LEFT_2;
 
     sprite.frames.frameCounter = 3;
+}
+
+function updateLevelTime()
+{
+    //incrementamos el ocntador de cambio de valor
+    globals.levelTime.timeChangeCounter += globals.deltaTime;
+
+    //Si ha pasado el tiempo necesario, cambiamos el valor del timer
+    if(globals.levelTime.timeChangeCounter > globals.levelTime.timeChangeValue && globals.levelTime.value != 0){ //lo segundo es para que cuando llegue a 0, el tiempo no siga bajando
+        globals.levelTime.value--;
+
+        //reseteamos timeChangeCounter
+        globals.levelTime.timeChangeCounter = 0;
+    }
+    
 }

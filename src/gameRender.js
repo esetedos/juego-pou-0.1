@@ -1,6 +1,7 @@
 import globals from "./globals.js";
 import { Game } from "./constants.js";
 import {Tile} from "./constants.js";
+import Timer from "./Timer.js"; //lo he puesto yo (no está en los tutoriales)
 
 //Función que renderiza los gráficos
 export default function render()
@@ -126,7 +127,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     const score = 1500;
     const highScore = 130000;
     const life = 40;
-    const time = 3000;
+    const time = globals.levelTime.value;
 
     //Draw score
     globals.ctxHUD.font = '8px emulogic';
