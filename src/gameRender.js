@@ -45,12 +45,12 @@ function drawGame()
 function renderSprite(sprite)
 {
     //calculamos la posicion del tile de inicio
-    const xPosInit = sprite.imageSet.initCol * sprite.imageSet.gridSize;
-    const yPosInit = sprite.imageSet.initFil * sprite.imageSet.gridSize;
+    const xPosInit = sprite.imageSet.initCol * sprite.imageSet.xGridSize;
+    const yPosInit = sprite.imageSet.initFil * sprite.imageSet.yGridSize;
 
     //Calculamos la posicion en el tiempo a dibujar
-    const xTile = xPosInit + sprite.frames.frameCounter * sprite.imageSet.gridSize + sprite.imageSet.xOffset;
-    const yTile = yPosInit + sprite.state * sprite.imageSet.gridSize + sprite.imageSet.yOffset;
+    const xTile = xPosInit + sprite.frames.frameCounter * sprite.imageSet.xGridSize + sprite.imageSet.xOffset;
+    const yTile = yPosInit + sprite.state * sprite.imageSet.yGridSize + sprite.imageSet.yOffset;
 
     const xPos = Math.floor(sprite.xPos);
     const yPos = Math.floor(sprite.yPos);
@@ -93,7 +93,7 @@ function drawSpriteRectangle(sprite)
 
 function renderMap()
 {
-    const brickSize = globals.level.imageSet.gridSize;
+    const brickSize = globals.level.imageSet.xGridSize;
     const levelData = globals.level.data;
 
     //dibujamos el mapa

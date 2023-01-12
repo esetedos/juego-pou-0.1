@@ -88,7 +88,7 @@ function initSprites()//////////////////////////////////////////////////////////
 function initPlataforms(){
     for(let i = 0; i < 3 ; i++){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-        const imageSet = new ImageSet(2, 0, 30, 6, 30, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(2, 0, 30, 6, 30, 30, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);
@@ -105,7 +105,7 @@ function initPlataforms(){
 function initPlayer()
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(0, 0, 15, 15, 27, 6, 6);
+    const imageSet = new ImageSet(0, 0, 15, 15, 27, 27, 6, 6);
 
     //creamos los datos de la animacion. 8 frames / state
     const frames = new Frames(3);
@@ -120,7 +120,7 @@ function initPlayer()
 function initLevel()
 {
     //creamos las propiedades de las imagenes del mapa: initFil, initCol, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(0, 0, 32, 32, 32, 0, 0);
+    const imageSet = new ImageSet(0, 0, 32, 32, 32, 32, 0, 0);
 
     //creamos y guardamos nuestro nivel
     globals.level = new Level(level1, imageSet);

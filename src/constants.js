@@ -29,7 +29,7 @@ export const State = {
     SOLID:    0,
 
     //Estados JOKER, KNIGHT
-    STILL: 0
+    STILL: 0 //para la flecha también
 }
 
 //diferentes tileSets
