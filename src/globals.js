@@ -42,10 +42,5 @@ export default {
     levelTime: {},
 
     //posiciones de las plataformas
-    posicionPlat1: Math.floor(Math.random() * 140),
-
-    posicionPlat2: Math.floor(Math.random() * 140),
-
-    posicionPlat3: Math.floor(Math.random() * 140)
-
+  
 };

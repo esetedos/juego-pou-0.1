@@ -94,7 +94,7 @@ function initPlataforms(){
         const frames = new Frames(1);
 
         //creamos nuestro sprite
-        const plataforma = new Sprite(SpriteID.PIRATE, State.REGULAR, 100, 100, imageSet, frames);
+        const plataforma = new Sprite(SpriteID.PLATAFORM, State.REGULAR, 100, 100, imageSet, frames, Math.floor(Math.random() * 200), Math.floor(Math.random() * 3));
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -111,7 +111,7 @@ function initPlayer()
     const frames = new Frames(3);
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 100, 70, imageSet, frames);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 100, 70, imageSet, frames, 0, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

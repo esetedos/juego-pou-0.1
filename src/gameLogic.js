@@ -74,7 +74,7 @@ function updateSprite(sprite)
             break;
 
          //case del pirata
-         case SpriteID.PIRATE:
+         case SpriteID.PLATAFORM:
             updatePlataform(sprite);
             break;
 
@@ -87,12 +87,12 @@ function updateSprite(sprite)
 function updatePlataform(sprite)
 {
     //aqui actualizaremos el estado de ls vriables del pirata
-    sprite.xPos = 150;
+    sprite.xPos = sprite.xInitPosition;
     sprite.yPos = 130;
 
     sprite.state = State.SOLID;
 
-    sprite.frames.frameCounter = 0;  
+    sprite.frames.frameCounter = sprite.platType;  
 }
 
 function updateLevelTime()
