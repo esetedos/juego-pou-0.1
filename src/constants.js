@@ -50,3 +50,5 @@ export const Block = {
     CRISTAL_2:  7
 
 }
+
+let contadorPrueba = 0;

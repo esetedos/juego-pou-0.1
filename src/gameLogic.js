@@ -1,6 +1,10 @@
 import globals from "./globals.js";
 import { Game, State, SpriteID } from "./constants.js";
 
+
+let contadorPrueba = 0;
+
+
 export default function update()
 {
     //Change what the game is doing based on the game state
@@ -71,7 +75,7 @@ function updateSprite(sprite)
 
          //case del pirata
          case SpriteID.PIRATE:
-            updatePirate(sprite);
+            updatePlataform(sprite);
             break;
 
         //caso del enemigo
@@ -80,7 +84,7 @@ function updateSprite(sprite)
     }
 }
 
-function updatePirate(sprite)
+function updatePlataform(sprite)
 {
     //aqui actualizaremos el estado de ls vriables del pirata
     sprite.xPos = 150;
@@ -88,7 +92,7 @@ function updatePirate(sprite)
 
     sprite.state = State.SOLID;
 
-    sprite.frames.frameCounter = 0;
+    sprite.frames.frameCounter = 0;  
 }
 
 function updateLevelTime()

@@ -86,17 +86,20 @@ function initSprites()//////////////////////////////////////////////////////////
 }
 
 function initPlataforms(){
-    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(2, 0, 30, 6, 30, 0, 6); //se supone que grid side sería 30, y yOffset 12
+    for(let i = 0; i < 3 ; i++){
+        //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
+        const imageSet = new ImageSet(2, 0, 30, 6, 30, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
-    //creamos los datos de la animacion. 8 framesn / state
-    const frames = new Frames(1);
+        //creamos los datos de la animacion. 8 framesn / state
+        const frames = new Frames(1);
 
-    //creamos nuestro sprite
-    const plataforma = new Sprite(SpriteID.PIRATE, State.REGULAR, 100, 100, imageSet, frames);
+        //creamos nuestro sprite
+        const plataforma = new Sprite(SpriteID.PIRATE, State.REGULAR, 100, 100, imageSet, frames);
 
-    //añadimos el pirate al array de sprites
-    globals.sprites.push(plataforma);
+        //añadimos el pirate al array de sprites
+        globals.sprites.push(plataforma);
+    }
+
 }
 
 function initPlayer()
