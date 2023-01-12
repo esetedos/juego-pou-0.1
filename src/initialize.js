@@ -45,7 +45,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/conejos3.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/sprites.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -56,6 +56,7 @@ function loadAssets()
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
+    
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
@@ -81,33 +82,33 @@ function loadHandler(){
 function initSprites()///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     initPlayer();
-    initPirate();
+    initPlataforms();
 }
 
-function initPirate(){
+function initPlataforms(){
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(5, 0, 32, 47, 64, 17, 16);
+    const imageSet = new ImageSet(2, 0, 30, 6, 30, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
     //creamos los datos de la animacion. 8 framesn / state
     const frames = new Frames(1);
 
     //creamos nuestro sprite
-    const pirate = new Sprite(SpriteID.PIRATE, State.RIGHT_2, 100, 100, imageSet, frames);
+    const plataforma = new Sprite(SpriteID.PIRATE, State.REGULAR, 100, 100, imageSet, frames);
 
     //añadimos el pirate al array de sprites
-    globals.sprites.push(pirate);
+    globals.sprites.push(plataforma);
 }
 
 function initPlayer()
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(0, 0, 15, 15, 0, 6, 6);
+    const imageSet = new ImageSet(0, 0, 15, 15, 27, 6, 6);
 
     //creamos los datos de la animacion. 8 frames / state
     const frames = new Frames(3);
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 100, 70, imageSet, frames);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 100, 70, imageSet, frames);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

@@ -28,7 +28,7 @@ function updatePlayer(sprite)
     sprite.xPos = 10;
     sprite.yPos = 50;
 
-    sprite.frames.frameCounter = 2;
+    sprite.frames.frameCounter = 0;
 
     sprite.state = State.LEFT;
 }
@@ -86,9 +86,9 @@ function updatePirate(sprite)
     sprite.xPos = 150;
     sprite.yPos = 130;
 
-    sprite.state = State.LEFT_2;
+    sprite.state = State.SOLID;
 
-    sprite.frames.frameCounter = 3;
+    sprite.frames.frameCounter = 0;
 }
 
 function updateLevelTime()
