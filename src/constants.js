@@ -15,7 +15,7 @@ export const FPS = 30;
 export const SpriteID = {
     PLAYER: 0,
     PLATAFORM: 1,
-    JOKER: 2,
+    ARROW: 2,
     KNIGHT: 3
 }
 

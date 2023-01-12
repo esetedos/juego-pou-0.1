@@ -45,7 +45,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/sprites.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/sprites2.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -83,12 +83,28 @@ function initSprites()//////////////////////////////////////////////////////////
 {
     initPlayer();
     initPlataforms();
+    initArrow();
+}
+
+function initArrow(){
+        //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+        const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
+
+        //creamos los datos de la animacion. 8 framesn / state
+        const frames = new Frames(1);
+
+        //creamos nuestro sprite
+        const flecha = new Sprite(SpriteID.ARROW, State.STILL, 100, 100, imageSet, frames, Math.floor(Math.random() * 150+40), 0);
+
+        //añadimos el pirate al array de sprites
+        globals.sprites.push(flecha);
+
 }
 
 function initPlataforms(){
     for(let i = 0; i < 3 ; i++){
-        //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-        const imageSet = new ImageSet(2, 0, 30, 6, 30, 30, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+        const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);

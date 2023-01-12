@@ -73,15 +73,31 @@ function updateSprite(sprite)
             updatePlayer(sprite)
             break;
 
-         //case del pirata
+         //case de la(s) plataforma(s)
          case SpriteID.PLATAFORM:
             updatePlataform(sprite);
+            break;
+
+        //case de la flecha
+        case SpriteID.ARROW:
+            updateArrow(sprite);
             break;
 
         //caso del enemigo
         default:
             break;
     }
+}
+
+function updateArrow(sprite)
+{
+    //aqui actualizaremos el estado de ls vriables del pirata
+    sprite.xPos = 200;
+    sprite.yPos = sprite.xInitPosition;
+
+    sprite.state = State.STILL;
+
+    sprite.frames.frameCounter = 0;  
 }
 
 function updatePlataform(sprite)
