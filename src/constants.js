@@ -22,10 +22,8 @@ export const SpriteID = {
 //identificador de estado de sprite (direccion)
 export const State = {
     // Estados PLAYER
-    UP: 0,
-    LEFT: 1,
-    DOWN: 2,
-    RIGHT: 3,
+    LEFT: 0,
+    RIGHT: 1,
 
     //Estados PIRATE
     LEFT_2: 0,

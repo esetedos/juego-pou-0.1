@@ -45,7 +45,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/spritesheet.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/conejos3.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -89,7 +89,7 @@ function initPirate(){
     const imageSet = new ImageSet(5, 0, 32, 47, 64, 17, 16);
 
     //creamos los datos de la animacion. 8 framesn / state
-    const frames = new Frames(8);
+    const frames = new Frames(1);
 
     //creamos nuestro sprite
     const pirate = new Sprite(SpriteID.PIRATE, State.RIGHT_2, 100, 100, imageSet, frames);
@@ -101,13 +101,13 @@ function initPirate(){
 function initPlayer()
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(0, 0, 44, 57, 64, 10, 6);
+    const imageSet = new ImageSet(0, 0, 15, 15, 0, 6, 6);
 
     //creamos los datos de la animacion. 8 frames / state
-    const frames = new Frames(8);
+    const frames = new Frames(3);
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.UP, 100, 70, imageSet, frames);
+    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 100, 70, imageSet, frames);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
