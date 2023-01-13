@@ -6,6 +6,7 @@ import Frames from "./Frames.js";
 import { Level, level1 } from "./Level.js";
 import Timer from "./Timer.js";
 import Physics from "./Physics.js";
+import { keydownHandler, keyupHandler } from "./events.js";
 
 //Función que inicializa los elementos HTML
 function initHTMLelements()
@@ -37,6 +38,12 @@ function initVars()
 
     //Inicializamos el estado del juego
     globals.gameState = Game.PLAYING;
+
+    //Inicializamos los estado sde las acciones
+    globals.action = {
+        moveLeft:   false,
+        moveRight:  false
+    }
 }
 
 function loadAssets()
@@ -153,6 +160,18 @@ function initTimers()
     //creamos timer de valor 200, con cambios cada 0.5 segundos
     globals.levelTime = new Timer(200, 0.5);
 }
+
+
+function initEvents()
+{
+    //add the keyboard event listeners
+    window.addEventListener("keydown", keydownHandler, false);
+    window.addEventListener("keyup", keyupHandler, false);
+}
+
+
+
+
 
 
 

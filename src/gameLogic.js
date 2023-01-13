@@ -59,13 +59,23 @@ function updateSprites()
     for (let i = 0; i < globals.sprites.length; ++i)
     {
         const sprite = globals.sprites[i];
+        
+        //la eliminación de sprites en off. cuando se borra el 4º, el que era 5º pasa a ser el 4º. poner i-- para que no salga error
+        //poner aqui en un if que si está en estado off/block, entonces que entre con el splice
+        //poner esto --> sprite.splice(i,1)
+        /*
+        if(sprite.state == State.BROKE){ //aquí iría el splice (para eliminar el objeto)
+
+        }
+        */
+        
         updateSprite(sprite);
     }
     
 }
 
 function updateSprite(sprite)
-{
+{ 
     const type = sprite.id;
     switch (type)
     {
@@ -103,8 +113,9 @@ function updateArrow(sprite)
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
     
     if(sprite.xPos > 270){
-        sprite.xPos = -30;
-        sprite.yPos =  Math.floor(Math.random() * 150+40);
+        sprite.state = State.BROKE;
+        // sprite.xPos = -30;
+        // sprite.yPos =  Math.floor(Math.random() * 150+40);
     }
 }
 

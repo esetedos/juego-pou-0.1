@@ -24,8 +24,11 @@ export const State = {
     // Estados PLAYER
     LEFT:   0,
     RIGHT:  1,
+    STILL_LEFT: 2,
+    STILL_RIGHT: 3, 
 
-    //Estados PIRATE
+    //Estados PIRATE- PLATAFORMAS
+    BROKE:   -1,  //para hacer splice
     SOLID:    0,
 
     //Estados JOKER, KNIGHT
@@ -49,4 +52,9 @@ export const Block = {
     CRISTAL_1:  6,
     CRISTAL_2:  7
 
+}
+
+export const Key = {
+    RIGHT:  39,
+    LEFT:   37 
 }

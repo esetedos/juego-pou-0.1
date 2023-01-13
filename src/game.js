@@ -1,10 +1,11 @@
 import globals from "./globals.js";
 
 //importamos loadAssets
-import {initHTMLelements, loadAssets, initSprites, initVars, initLevel, initTimers} from "./initialize.js";
+import {initHTMLelements, loadAssets, initSprites, initVars, initLevel, initTimers, initEvents} from "./initialize.js";
 
 import update from "./gameLogic.js";
 import render from "./gameRender.js";
+
 
 
 
@@ -33,6 +34,8 @@ function init()
     window.requestAnimationFrame(gameLoop);
 
     initTimers();
+
+    initEvents();
 }
 
 //GAME EXECUTE

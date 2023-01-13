@@ -41,6 +41,6 @@ export default {
     //temporizacion nivel
     levelTime: {},
 
-    //posiciones de las plataformas
-  
+    //Objeto que guarda el estado de la tecla pulsada
+    action: {},
 };
