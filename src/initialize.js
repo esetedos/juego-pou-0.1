@@ -98,6 +98,7 @@ function initArrow(){
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);
+        
 
         //creamos los datos de la animacion. 8 framesn / state
         const physics = new Physics(90);    //velocidad de la flecha, velocidad de las flechas
@@ -105,7 +106,7 @@ function initArrow(){
         //creamos nuestro sprite
         const flecha = new Sprite(SpriteID.ARROW, State.STILL, -30, Math.floor(Math.random() * 150+40), imageSet, frames, 0, 0, physics);
 
-        //añadimos el pirate al array de sprites
+         //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
 
 }
