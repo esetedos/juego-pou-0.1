@@ -1,7 +1,7 @@
 //clase gestora de los sprites
 export default class Sprite
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, xInitPosition, platType)
+    constructor(id, state, xPos, yPos, imageSet, frames, xInitPosition, platType, physics)
     {
         this.id             = id;               //Tipo de sprite
         this.state          = state;            //estado de animacion del sprite
@@ -11,5 +11,6 @@ export default class Sprite
         this.frames         = frames;           //datos de los frames de animacion
         this.xInitPosition  = xInitPosition;    //posición inicial (sobretodo para usarlo con las plataformas)
         this.platType       = platType;
+        this.physics        = physics;          //datos de las fisicas
     }
 }

@@ -2,6 +2,7 @@ import globals from "./globals.js";
 import { Game, State, SpriteID } from "./constants.js";
 
 
+
 let contadorPrueba = 0;
 
 
@@ -100,15 +101,29 @@ function updateArrow(sprite)
     sprite.frames.frameCounter = 0;  
 }
 
+//función que actualiza  las plataformas
 function updatePlataform(sprite)
 {
-    //aqui actualizaremos el estado de ls vriables del pirata
-    sprite.xPos = sprite.xInitPosition;
-    sprite.yPos = 130;
+    sprite.physics.vy = sprite.physics.vLimit;
+
+    //aqui actualizaremos el estado de las vriables del pirata
+    
+    //sprite.xPos = sprite.xInitPosition;
+    //sprite.yPos = 0;
 
     sprite.state = State.SOLID;
 
-    sprite.frames.frameCounter = sprite.platType;  
+    //esto mantiene las tres plataformas con la misma imagen siempre
+    //sprite.frames.frameCounter = sprite.platType;  
+
+    sprite.yPos += sprite.physics.vy * globals.deltaTime;
+
+    //esto es para que cuando lleguen abajo, vuelvan arriba en un sitio aleatorio y qeu tengan un dibujo aleatorio
+    if(sprite.yPos > 190){
+        sprite.yPos = 0;
+        sprite.xPos =  Math.floor(Math.random() * 200);
+        sprite.frames.frameCounter = Math.floor(Math.random() * 3); 
+    }
 }
 
 function updateLevelTime()
@@ -124,4 +139,15 @@ function updateLevelTime()
         globals.levelTime.timeChangeCounter = 0;
     }
     
+}
+
+function updateAnimationFrame(sprite)
+{
+    sprite.frames.frameCounter++;
+
+    //Si hemos llegado al máximo de frames reiniciamos el contador (animación cíclica)
+    if(sprite.frames.frameCounter === sprite.frames.framesPerState)
+    {
+        sprite.frames.frameCounter = 0;
+    }
 }

@@ -5,6 +5,7 @@ import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import { Level, level1 } from "./Level.js";
 import Timer from "./Timer.js";
+import Physics from "./Physics.js";
 
 //Función que inicializa los elementos HTML
 function initHTMLelements()
@@ -107,8 +108,11 @@ function initPlataforms(){
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);
 
-        //creamos nuestro sprite
-        const plataforma = new Sprite(SpriteID.PLATAFORM, State.REGULAR, 100, 100, imageSet, frames, Math.floor(Math.random() * 200), Math.floor(Math.random() * 3));
+        //creamos nuestro objeto physics con vLimit = 40 pixels/second
+        const physics = new Physics(40);
+
+        //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+        const plataforma = new Sprite(SpriteID.PLATAFORM, State.REGULAR, Math.floor(Math.random() * 200), 0, imageSet, frames, 0, Math.floor(Math.random() * 3), physics);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
