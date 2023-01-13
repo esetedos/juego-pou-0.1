@@ -116,7 +116,7 @@ function initPlataforms(){
         const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
-        const frames = new Frames(1);
+        const frames = new Frames(1, 5);
 
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
         const physics = new Physics(40); //velocidad de las plataformas
@@ -183,5 +183,6 @@ export {
     loadAssets,
     initSprites,
     initLevel,
-    initTimers
+    initTimers,
+    initEvents
 }

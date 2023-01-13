@@ -142,6 +142,8 @@ function updatePlataform(sprite)
         sprite.xPos =  Math.floor(Math.random() * 200);
         sprite.frames.frameCounter = Math.floor(Math.random() * 3); 
     }
+
+    //updateAnimationFrame(sprite);
 }
 
 function updateLevelTime()
@@ -161,7 +163,16 @@ function updateLevelTime()
 
 function updateAnimationFrame(sprite)
 {
-    sprite.frames.frameCounter++;
+    //aumentamos el contador de timepo entre frames
+    sprite.frames.frameChangeCounter++;
+
+    //cambiamos de frame cuando el lag de animación alcanza animSpeed
+    if(sprite.frames.frameChangeCounter === sprite.frames.speed)
+    {
+        //cambiamos de frame y reseteamos el contador de cambio de frame
+        sprite.frames.frameCounter++;
+        sprite.frames.frameChangeCounter = 0;
+    }
 
     //Si hemos llegado al máximo de frames reiniciamos el contador (animación cíclica)
     if(sprite.frames.frameCounter === sprite.frames.framesPerState)
