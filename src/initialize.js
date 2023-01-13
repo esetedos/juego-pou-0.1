@@ -55,8 +55,6 @@ function loadAssets()
     tileSet.src = "./images/fondo15.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
-
-    
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
