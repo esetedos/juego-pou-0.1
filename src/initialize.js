@@ -92,8 +92,11 @@ function initArrow(){
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);
 
+        //creamos los datos de la animacion. 8 framesn / state
+        const physics = new Physics(90);    //velocidad de la flecha, velocidad de las flechas
+
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.STILL, 100, 100, imageSet, frames, Math.floor(Math.random() * 150+40), 0);
+        const flecha = new Sprite(SpriteID.ARROW, State.STILL, -30, Math.floor(Math.random() * 150+40), imageSet, frames, 0, 0, physics);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
@@ -109,7 +112,7 @@ function initPlataforms(){
         const frames = new Frames(1);
 
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
-        const physics = new Physics(40);
+        const physics = new Physics(40); //velocidad de las plataformas
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
         const plataforma = new Sprite(SpriteID.PLATAFORM, State.REGULAR, Math.floor(Math.random() * 200), 0, imageSet, frames, 0, Math.floor(Math.random() * 3), physics);

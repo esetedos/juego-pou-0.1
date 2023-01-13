@@ -92,13 +92,20 @@ function updateSprite(sprite)
 
 function updateArrow(sprite)
 {
-    //aqui actualizaremos el estado de ls vriables del pirata
-    sprite.xPos = 200;
-    sprite.yPos = sprite.xInitPosition;
+    sprite.physics.vx = sprite.physics.vLimit;
+
+    // //aqui actualizaremos el estado de ls vriables del pirata
+    // sprite.xPos = 200;
+    // sprite.yPos = sprite.xInitPosition;
 
     sprite.state = State.STILL;
 
-    sprite.frames.frameCounter = 0;  
+    sprite.xPos += sprite.physics.vx * globals.deltaTime;
+    
+    if(sprite.xPos > 270){
+        sprite.xPos = -30;
+        sprite.yPos =  Math.floor(Math.random() * 150+40);
+    }
 }
 
 //función que actualiza  las plataformas
