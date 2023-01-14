@@ -92,6 +92,8 @@ function initSprites()//////////////////////////////////////////////////////////
     initArrow();
 }
 
+
+//algo
 function initArrow(){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
         const imageSet = new ImageSet(5, 0, 40, 8, 40, 24, 0, 12); //se supone que grid side sería 30, y yOffset 12
@@ -99,7 +101,6 @@ function initArrow(){
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);
         
-
         //creamos los datos de la animacion. 8 framesn / state
         const physics = new Physics(90);    //velocidad de la flecha, velocidad de las flechas
 
