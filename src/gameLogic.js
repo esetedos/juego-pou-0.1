@@ -3,7 +3,7 @@ import { Game, State, SpriteID } from "./constants.js";
 
 
 
-let contadorPrueba = 0;
+let contadorPrueba = 0; //?
 
 
 export default function update()
@@ -29,13 +29,45 @@ export default function update()
 //funcion que actualiza el personaje
 function updatePlayer(sprite)
 {
+    //lectura de teclado. Asignamos dirección a tecla
+    readKeyboardAndAssignState(sprite);
+
+    switch(sprite.state)
+    {
+        case State.RIGHT:
+            //si se mueve hacia abajo asignamos vy (+)
+            sprite.physics.vx = sprite.physics.vLimit;
+            sprite.physics.vy = 0;
+            //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
+            break;
+
+        case State.LEFT:
+            //si se mueve a la izquierda asignamos vx (-)
+            sprite.physics.vx = -sprite.physics.vLimit;
+            sprite.physics.vy = 0;
+            break;
+
+        default: //casos de estar parado
+            sprite.physics.vx = 0;
+            sprite.physics.vy = 0;
+    }
+
+    //calculamos distancia que se mueve (X = X + Vt)
+    sprite.xPos += sprite.physics.vx * globals.deltaTime;
+    sprite.yPos += sprite.physics.vy * globals.deltaTime;
+
+    //Actualizamos la animación
+    updateAnimationFrame(sprite);
+    
+
+/*
     //Aqui actualizaremos el estado de las variables del player
     sprite.xPos = 10;
     sprite.yPos = 50;
 
-    sprite.frames.frameCounter = 0;
-
-    sprite.state = State.LEFT;
+     sprite.frames.frameCounter = 0;
+*/
+     //sprite.state = State.LEFT;
 }
 
 
@@ -162,21 +194,41 @@ function updateLevelTime()
 }
 
 function updateAnimationFrame(sprite)
-{
-    //aumentamos el contador de timepo entre frames
-    sprite.frames.frameChangeCounter++;
+{ 
+    switch(sprite.state){
+        case State.STILL_LEFT:
+        case State.STILL_RIGHT:
+            sprite.frames.frameCounter = 0;
+            sprite.frames.frameChangeCounter = 0;
+            break;
+        
+        default:
+            //aumentamos el contador de timepo entre frames
+            sprite.frames.frameChangeCounter++;
 
-    //cambiamos de frame cuando el lag de animación alcanza animSpeed
-    if(sprite.frames.frameChangeCounter === sprite.frames.speed)
-    {
-        //cambiamos de frame y reseteamos el contador de cambio de frame
-        sprite.frames.frameCounter++;
-        sprite.frames.frameChangeCounter = 0;
-    }
+            //cambiamos de frame cuando el lag de animación alcanza animSpeed
+            if(sprite.frames.frameChangeCounter === sprite.frames.speed)
+            {
+                //cambiamos de frame y reseteamos el contador de cambio de frame
+                //sprite.frames.frameCounter++;
+                sprite.frames.frameChangeCounter = 0;
+            }
 
-    //Si hemos llegado al máximo de frames reiniciamos el contador (animación cíclica)
-    if(sprite.frames.frameCounter === sprite.frames.framesPerState)
-    {
-        sprite.frames.frameCounter = 0;
+            //Si hemos llegado al máximo de frames reiniciamos el contador (animación cíclica)
+            if(sprite.frames.frameCounter === sprite.frames.framesPerState)
+            {
+                sprite.frames.frameCounter = 0;
+            }
     }
+    
+}
+
+
+function readKeyboardAndAssignState(sprite){
+    sprite.state =  globals.action.moveLeft         ? State.LEFT :          //Left Key
+                    globals.action.moveRight        ? State.RIGHT :         //Right key
+                    sprite.state === State.LEFT     ? State.STILL_LEFT :    //No key pressed and precious state LEFT
+                    sprite.state === State.RIGHT    ? State.STILL_RIGHT :   //No key pressed and precious state RIGHT
+                    sprite.state;
+                    
 }

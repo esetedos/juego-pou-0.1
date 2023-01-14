@@ -137,10 +137,13 @@ function initPlayer()
     const imageSet = new ImageSet(0, 0, 15, 15, 27, 27, 6, 6);
 
     //creamos los datos de la animacion. 8 frames / state
-    const frames = new Frames(3);
+    const frames = new Frames(3, 5);
+
+    //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
+    const physics = new Physics(40);
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 100, 70, imageSet, frames, 0, 0);
+    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 100, 70, imageSet, frames, 0, 0, physics);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
