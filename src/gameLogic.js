@@ -44,7 +44,7 @@ function updatePlayer(sprite)
         case State.LEFT:
             //si se mueve a la izquierda asignamos vx (-)
             sprite.physics.vx = -sprite.physics.vLimit;
-            sprite.physics.vy = 1;
+            sprite.physics.vy = 0;
             break;
 
         default: //casos de estar parado
