@@ -110,7 +110,7 @@ function updatePlayer(sprite)
     //yPos seguirá un movimiento uniforme acelerado
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
-    //animazioa hemen
+    // untxiaren animazioa hemen (animación del conejo)
     if(sprite.physics.vy > 15)
     {
         sprite.frames.frameCounter=2;
