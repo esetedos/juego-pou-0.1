@@ -54,7 +54,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/sprites3.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/sprites5.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -91,8 +91,26 @@ function initSprites()//////////////////////////////////////////////////////////
     initPlayer();
     initPlataforms();
     initArrow();
+    initCarrot();
 }
 
+function initCarrot()
+{
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
+    const imageSet = new ImageSet(6, 0, 10, 6, 10, 24, 0, 8);
+
+    //creamos los datos de la animacion. 8 frames / state
+    const frames = new Frames(1); //en teoría debería ser (0, 5)
+
+    //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
+    const physics = new Physics(40);
+
+    //creamos nuestro sprite
+    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 150, 60, imageSet, frames, 0, 0, physics);
+
+    //añadimos el player al array de sprites
+    globals.sprites.push(carrot);
+}
 
 //algo
 function initArrow(){
@@ -106,7 +124,7 @@ function initArrow(){
         const physics = new Physics(90);    //velocidad de la flecha, velocidad de las flechas
 
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.STILL, -30, Math.floor(Math.random() * 150+40), imageSet, frames, 0, 0, physics);
+        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, 0, 0, physics);
 
          //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
@@ -125,7 +143,7 @@ function initPlataforms(){
         const physics = new Physics(40); //velocidad de las plataformas
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Sprite(SpriteID.PLATAFORM, State.REGULAR, Math.floor(Math.random() * 200), 0, imageSet, frames, 0, Math.floor(Math.random() * 3), physics);
+        const plataforma = new Sprite(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, 0, Math.floor(Math.random() * 3), physics);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);

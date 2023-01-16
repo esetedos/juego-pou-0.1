@@ -27,12 +27,17 @@ export const State = {
     STILL_LEFT: 2,
     STILL_RIGHT: 3, 
 
-    //Estados PIRATE- PLATAFORMAS
+    //Estados PIRATE- PLATAFORMAS, 
     BROKE:   -1,  //para hacer splice
     SOLID:    0,
 
-    //Estados JOKER, KNIGHT
-    STILL: 0 //para la flecha también
+    //Estados FLECHA (ARROW)
+    BROKE_2: -1,
+    SOLID_2: 0, //para la flecha también
+
+    //Estados de CARROT
+    BROKE_3: -1,
+    SOLID_3: 0
 }
 
 //diferentes tileSets

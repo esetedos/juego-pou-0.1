@@ -208,10 +208,28 @@ function updateSprite(sprite)
             updateArrow(sprite);
             break;
 
+        case SpriteID.CARROT:
+            updateCarrot(sprite);
+            break;
+    
+
         //caso del enemigo
         default:
             break;
     }
+}
+
+function updateCarrot(sprite)
+{
+    if(globals.action.jump) //pulsamos la tecla de salto
+    {
+        if(sprite.state === State.SOLID_3)
+        {
+            sprite.state === State.BROKE_3;
+            sprite.frames.frameCounter=1;
+            // sprite.state === State.BROKE; //no funciona así, a ver cómo lo hago
+        }
+    }  
 }
 
 function updateArrow(sprite)
@@ -222,12 +240,12 @@ function updateArrow(sprite)
     // sprite.xPos = 200;
     // sprite.yPos = sprite.xInitPosition;
 
-    sprite.state = State.STILL;
+    sprite.state = State.SOLID_2;
 
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
     
     if(sprite.xPos > 270){
-        sprite.state = State.BROKE;
+        sprite.state = State.BROKE_2;
         // sprite.xPos = -30;
         // sprite.yPos =  Math.floor(Math.random() * 150+40);
     }
