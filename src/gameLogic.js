@@ -97,7 +97,7 @@ function updatePlayer(sprite)
     }
     else //estamos en el juego
     {
-        if(globals.action.jump) //pulsamos la tecla de salto
+        if(true)    //globals.action.jump) //pulsamos la tecla de salto
         {
             sprite.physics.isOnGround = false;
 
@@ -110,27 +110,16 @@ function updatePlayer(sprite)
     //yPos seguirá un movimiento uniforme acelerado
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
+    //-----------------------------------------
+    // COLISION CON EL SUELO (PASAREMOS LUEGO A COLISIONS)
+    //-----------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize)
+    {
+        sprite.physics.isOnGround = true;
+        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
+        sprite.physics.vy = 0;
+    }
 
     //Actualizamos la animación
     updateAnimationFrame(sprite);
