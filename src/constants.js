@@ -56,5 +56,9 @@ export const Block = {
 
 export const Key = {
     RIGHT:  39,
-    LEFT:   37 
+    LEFT:   37,
+    JUMP:   32
 }
+
+//aceleración
+export const GRAVITY = 80;

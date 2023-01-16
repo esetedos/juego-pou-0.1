@@ -42,7 +42,8 @@ function initVars()
     //Inicializamos los estado sde las acciones
     globals.action = {
         moveLeft:   false,
-        moveRight:  false
+        moveRight:  false,
+        jump:       false
     }
 }
 
@@ -144,7 +145,7 @@ function initPlayer()
     const physics = new Physics(40, 40, 0.98, -100);
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, 0, 0, physics);
+    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 60, imageSet, frames, 0, 0, physics);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

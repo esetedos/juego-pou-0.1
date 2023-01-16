@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import { Game, State, SpriteID } from "./constants.js";
+import { Game, State, SpriteID, GRAVITY} from "./constants.js";
 
 
 
@@ -80,6 +80,57 @@ function updatePlayer(sprite)
     //xPos seguirá un movimiento uniforme acelerado
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
     // sprite.yPos += sprite.physics.vy * globals.deltaTime;
+
+
+    //-----------------------------------------
+    // MOVIMIENTO  VERTICAL
+    //-----------------------------------------
+
+    //Aceleración en Y es la gravedad
+    sprite.physics.ay = GRAVITY;
+
+    //No estamos en el suelo
+    if(!sprite.physics.isOnGround)
+    {
+        //calculamos velocidad en Y (V = V + at)
+        sprite.physics.vy += sprite.physics.ay * globals.deltaTime;
+    }
+    else //estamos en el juego
+    {
+        if(globals.action.jump) //pulsamos la tecla de salto
+        {
+            sprite.physics.isOnGround = false;
+
+            //asignamos velocidad inicial al salto
+            sprite.physics.vy += sprite.physics.jumpForce;
+        }
+    }
+
+    //calculamos distancia que se mueve (Y = Y + Vt)
+    //yPos seguirá un movimiento uniforme acelerado
+    sprite.yPos += sprite.physics.vy * globals.deltaTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Actualizamos la animación
     updateAnimationFrame(sprite);
