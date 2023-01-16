@@ -141,7 +141,7 @@ function initPlayer()
     const frames = new Frames(3, 5); //en teoría debería ser (0, 5)
 
     //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
-    const physics = new Physics(40, 40, 0.9, -100);
+    const physics = new Physics(40, 40, 0.98, -100);
 
     //creamos nuestro sprite
     const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, 0, 0, physics);
