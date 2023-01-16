@@ -32,27 +32,52 @@ function updatePlayer(sprite)
     //lectura de teclado. Asignamos dirección a tecla
     readKeyboardAndAssignState(sprite);
 
+    //const isLeftOrRightPressed = globals.action.moveLeft || globals.action.moveRight;
+
     switch(sprite.state)
     {
         case State.RIGHT:
-            //si se mueve hacia abajo asignamos vy (+)
+            //si se mueve a la derecha ax (+)
             sprite.physics.vx = sprite.physics.vLimit;
             sprite.physics.vy = 0;
             //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
             break;
 
         case State.LEFT:
-            //si se mueve a la izquierda asignamos vx (-)
+            //si se mueve a la izquierda asignamos ax (-)
             sprite.physics.vx = -sprite.physics.vLimit;
-            sprite.physics.vy = 0;
+             sprite.physics.vy = 0;
             break;
 
         default: //casos de estar parado
-            sprite.physics.vx = 0;
+            // sprite.physics.ax = 0;
             sprite.physics.vy = 0;
+            sprite.physics.vx = 0;
     }
 
+    // //calculamos velocidad en X y en Y (V = V at)
+    // sprite.physics.vx += sprite.physics.ax * globals.deltaTime;
+
+    // //Aplicamos fricción en los cambios de dirección y cuando no haya teclas pulsadas para reducir la velocidad rápidamente
+    // if((sprite.state === State.LEFT && sprite.physics.vx > 0) ||
+    //     (sprite.state === State.RIGHT && sprite.physics.vx < 0) ||
+    //     (!isLeftOrRightPressed))
+    // {
+    //     sprite.physics.vx *= sprite.physics.friction;
+    // }
+
+    // //limitamos a la velocidad máxima en dirección horizontal
+    // if(sprite.physics.vx > sprite.physicsvLimit) //derecha (velocidad +)
+    // {
+    //     sprite.physics.vx = sprite.physics.vLimit;
+    // }
+    // else if(sprite.physics.vx < -sprite.physics.vLimit) // Izquierda (velocidad -)
+    // {
+    //     sprite.physics.vx =- sprite.physics.vLimit;
+    // }
+
     //calculamos distancia que se mueve (X = X + Vt)
+    //xPos seguirá un movimiento uniforme acelerado
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 

@@ -138,7 +138,7 @@ function initPlayer()
     const imageSet = new ImageSet(0, 0, 15, 15, 27, 27, 6, 6);
 
     //creamos los datos de la animacion. 8 frames / state
-    const frames = new Frames(3, 5);
+    const frames = new Frames(3, 5); //en teoría debería ser (0, 5)
 
     //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
     const physics = new Physics(40, 40, 0.9, -100);
