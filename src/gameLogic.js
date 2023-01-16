@@ -211,12 +211,40 @@ function updateSprite(sprite)
         case SpriteID.CARROT:
             updateCarrot(sprite);
             break;
+
+            case SpriteID.PLATAFORMN:
+                updatePlataformN(sprite);
+                break;
+
     
 
         //caso del enemigo
         default:
             break;
     }
+}
+
+
+function updatePlataformN(sprite)
+{ 
+    sprite.frames.frameCounter = 2; 
+    sprite.physics.vy = sprite.physics.vLimit;
+
+    sprite.state = State.SOLID_4;
+
+    //esto mantiene las tres plataformas con la misma imagen siempre
+    //sprite.frames.frameCounter = sprite.platType;  
+
+    sprite.yPos += sprite.physics.vy * globals.deltaTime;
+
+    //esto es para que cuando lleguen abajo, vuelvan arriba en un sitio aleatorio y qeu tengan un dibujo aleatorio
+    if(sprite.yPos > 190){
+        sprite.yPos = 0;
+        // sprite.xPos =  Math.floor(Math.random() * 200);
+       
+    }
+
+    //updateAnimationFrame(sprite);
 }
 
 function updateCarrot(sprite)
@@ -272,7 +300,7 @@ function updatePlataform(sprite)
     if(sprite.yPos > 190){
         sprite.yPos = 0;
         sprite.xPos =  Math.floor(Math.random() * 200);
-        sprite.frames.frameCounter = Math.floor(Math.random() * 3); 
+        sprite.frames.frameCounter = Math.floor(Math.random() * 2); 
     }
 
     //updateAnimationFrame(sprite);
