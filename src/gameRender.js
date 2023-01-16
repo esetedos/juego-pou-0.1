@@ -131,22 +131,22 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
 
     //Draw score
     globals.ctxHUD.font = '8px emulogic';
-    globals.ctxHUD.fillStyle = 'lightblue';
-    globals.ctxHUD.fillText("SCORE", 8, 8);
+    globals.ctxHUD.fillStyle = 'lightgreen';
+    globals.ctxHUD.fillText("METROAK", 8, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
     globals.ctxHUD.fillText(" " + score, 8, 16);
 
     //Draw high score
-    globals.ctxHUD.fillStyle = 'lightblue';
-    globals.ctxHUD.fillText("HIGH SCORE", 72, 8);
+    globals.ctxHUD.fillStyle = 'lightgreen';
+    globals.ctxHUD.fillText("HIGH SCORE", 90, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + highScore, 80, 16);
+    globals.ctxHUD.fillText(" " + highScore, 100, 16);
 
     //Draw life
-    globals.ctxHUD.fillStyle = 'lightblue';
-    globals.ctxHUD.fillText("LIFE", 168, 8);
-    globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillRect(168, 9, life, 8);
+    // globals.ctxHUD.fillStyle = 'lightgreen';
+    // globals.ctxHUD.fillText("BIZITZA", 168, 8);
+    // globals.ctxHUD.fillStyle = 'lightgray';
+    // globals.ctxHUD.fillRect(168, 9, life, 8);
 
     //round corners. (remove 1 pixel per corner)
     globals.ctxHUD.fillStyle = 'black';
@@ -156,8 +156,8 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillRect(168 + life - 1, 15, 1, 1);
 
     //draw time
-    globals.ctxHUD.fillStyle = 'lightblue';
-    globals.ctxHUD.fillText("TIME", 224, 8);
+    globals.ctxHUD.fillStyle = 'lightgreen';
+    globals.ctxHUD.fillText("DENBORA", 190, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(time, 224, 16);
+    globals.ctxHUD.fillText(time, 215, 16);
 }
