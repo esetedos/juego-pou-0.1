@@ -164,7 +164,7 @@ function initLevel()
 function initTimers()
 {
     //creamos timer de valor 200, con cambios cada 0.5 segundos
-    globals.levelTime = new Timer(200, 0.5);
+    globals.levelTime = new Timer(0, 0.5);
 }
 
 
