@@ -1,6 +1,6 @@
 import globals from "./globals.js";
 import {Game, SpriteID, State, FPS} from "./constants.js";
-import Sprite from "./Sprite.js";
+import Sprite, { Plataformas, PlataformasN} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import { Level, level1 } from "./Level.js";
@@ -106,7 +106,7 @@ function initPlataformsN(){
         const physics = new Physics(40); //velocidad de las plataformas
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataformaN = new Sprite(SpriteID.PLATAFORMN, State.SOLID, 30, -20, imageSet, frames, 0, 2, physics);
+        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, -20, imageSet, frames, physics, 2, 5);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataformaN);
@@ -125,7 +125,7 @@ function initCarrot()
     const physics = new Physics(40);
 
     //creamos nuestro sprite
-    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 150, 60, imageSet, frames, 0, 0, physics);
+    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 150, 60, imageSet, frames, physics);
 
     //añadimos el player al array de sprites
     globals.sprites.push(carrot);
@@ -143,7 +143,7 @@ function initArrow(){
         const physics = new Physics(90);    //velocidad de la flecha, velocidad de las flechas
 
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, 0, 0, physics);
+        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, physics);
 
          //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
@@ -162,7 +162,7 @@ function initPlataforms(){
         const physics = new Physics(40); //velocidad de las plataformas
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Sprite(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, 0, Math.floor(Math.random() * 3), physics);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, physics, Math.floor(Math.random() * 3));
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -182,7 +182,7 @@ function initPlayer()
     const physics = new Physics(40, 40, 0.98, -100);
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, 0, 0, physics);
+    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, physics);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
