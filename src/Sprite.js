@@ -1,7 +1,7 @@
 //clase gestora de los sprites
 export default class Sprite
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, hitBox)
     {
         this.id             = id;               //Tipo de sprite
         this.state          = state;            //estado de animacion del sprite
@@ -10,24 +10,24 @@ export default class Sprite
         this.imageSet       = imageSet;         //datos de las imagenes del sprite
         this.frames         = frames;           //datos de los frames de animacion
         this.physics        = physics;          //datos de las fisicas
-        
+        this.hitBox         = hitBox;           //datos del hitbox
     }
 }
 
 export class Plataformas extends Sprite
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox)
     {
-        super(id, state, xPos, yPos, imageSet, frames, physics);
+        super(id, state, xPos, yPos, imageSet, frames, physics, hitBox);
         this.platType       = platType;
     }
 }
 
 export class PlataformasN extends Plataformas
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, tiempoDDesap)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox, tiempoDDesap)
     {
-        super(id, state, xPos, yPos, imageSet, frames, physics, platType);
+        super(id, state, xPos, yPos, imageSet, frames, physics, hitBox, platType);
         this.tiempoDDesap   = tiempoDDesap; //tiempo para que las plataformas tipo nube desaparezcan después del salto
     }
 }
