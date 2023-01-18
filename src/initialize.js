@@ -46,6 +46,9 @@ function initVars()
         moveRight:  false,
         jump:       false
     }
+
+    //Variables logica juego
+    globals.life = 400;
 }
 
 function loadAssets()

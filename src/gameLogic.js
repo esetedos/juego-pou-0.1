@@ -1,5 +1,6 @@
 import globals from "./globals.js";
 import { Game, State, SpriteID, GRAVITY} from "./constants.js";
+import detectCollisions from "./collisions.js";
 
 
 
@@ -21,6 +22,83 @@ export default function update()
         
         default:
             console.error("Error: Game State invalid");
+    }
+}
+
+
+
+
+
+// updateSprite(): Función que accede al id del sprite y llama a la función que actualiza cada tipo de sprite.
+
+// updateSprites(): Función que recorrerá el array sprites y llamará para cada uno de ellos a updateSprite().
+
+
+
+
+
+function playGame()
+{
+    updateSprites();
+    updateLevelTime();
+
+    //colisioes
+    detectCollisions();
+}
+
+function updateSprites()
+{
+    for (let i = 0; i < globals.sprites.length; ++i)
+    {
+        const sprite = globals.sprites[i];
+        
+        //la eliminación de sprites en off. cuando se borra el 4º, el que era 5º pasa a ser el 4º. poner i-- para que no salga error
+        //poner aqui en un if que si está en estado off/block, entonces que entre con el splice
+        //poner esto --> sprite.splice(i,1)
+        /*
+        if(sprite.state == State.BROKE){ //aquí iría el splice (para eliminar el objeto)
+
+        }
+        */
+        
+        updateSprite(sprite);
+    }
+    
+}
+
+function updateSprite(sprite)
+{ 
+    const type = sprite.id;
+    switch (type)
+    {
+        //caso del jugador
+        case SpriteID.PLAYER:
+            updatePlayer(sprite)
+            break;
+
+         //case de la(s) plataforma(s)
+         case SpriteID.PLATAFORM:
+            updatePlataform(sprite);
+            break;
+
+        //case de la flecha
+        case SpriteID.ARROW:
+            updateArrow(sprite);
+            break;
+
+        case SpriteID.CARROT:
+            updateCarrot(sprite);
+            break;
+
+            case SpriteID.PLATAFORMN:
+                updatePlataformN(sprite);
+                break;
+
+    
+
+        //caso del enemigo
+        default:
+            break;
     }
 }
 
@@ -150,78 +228,6 @@ function updatePlayer(sprite)
      sprite.frames.frameCounter = 0;
 */
      //sprite.state = State.LEFT;
-}
-
-
-
-// updateSprite(): Función que accede al id del sprite y llama a la función que actualiza cada tipo de sprite.
-
-// updateSprites(): Función que recorrerá el array sprites y llamará para cada uno de ellos a updateSprite().
-
-
-
-
-
-function playGame()
-{
-    updateSprites();
-    updateLevelTime();
-}
-
-function updateSprites()
-{
-    for (let i = 0; i < globals.sprites.length; ++i)
-    {
-        const sprite = globals.sprites[i];
-        
-        //la eliminación de sprites en off. cuando se borra el 4º, el que era 5º pasa a ser el 4º. poner i-- para que no salga error
-        //poner aqui en un if que si está en estado off/block, entonces que entre con el splice
-        //poner esto --> sprite.splice(i,1)
-        /*
-        if(sprite.state == State.BROKE){ //aquí iría el splice (para eliminar el objeto)
-
-        }
-        */
-        
-        updateSprite(sprite);
-    }
-    
-}
-
-function updateSprite(sprite)
-{ 
-    const type = sprite.id;
-    switch (type)
-    {
-        //caso del jugador
-        case SpriteID.PLAYER:
-            updatePlayer(sprite)
-            break;
-
-         //case de la(s) plataforma(s)
-         case SpriteID.PLATAFORM:
-            updatePlataform(sprite);
-            break;
-
-        //case de la flecha
-        case SpriteID.ARROW:
-            updateArrow(sprite);
-            break;
-
-        case SpriteID.CARROT:
-            updateCarrot(sprite);
-            break;
-
-            case SpriteID.PLATAFORMN:
-                updatePlataformN(sprite);
-                break;
-
-    
-
-        //caso del enemigo
-        default:
-            break;
-    }
 }
 
 

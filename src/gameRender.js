@@ -147,7 +147,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillStyle = 'lightgreen';
     globals.ctxHUD.fillText("METROAK", 8, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + score, 8, 16);
+    globals.ctxHUD.fillText(" " + globals.life, 8, 16);
 
     //Draw high score
     globals.ctxHUD.fillStyle = 'lightgreen';
