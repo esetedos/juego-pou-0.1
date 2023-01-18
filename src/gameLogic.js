@@ -5,7 +5,7 @@ import detectCollisions from "./collisions.js";
 
 
 let contadorPrueba = 0; //?
-
+let suelo = globals.canvas.height;
 
 export default function update()
 {
@@ -149,7 +149,7 @@ function updatePlayer(sprite)
     }
 
     //limitamos a la velocidad máxima en dirección horizontal
-    if(sprite.physics.vx > sprite.physicsvLimit) //derecha (velocidad +)
+    if(sprite.physics.vx > sprite.physics.vLimit) //derecha (velocidad +)
     {
         sprite.physics.vx = sprite.physics.vLimit;
     }
@@ -212,7 +212,7 @@ function updatePlayer(sprite)
     // COLISION CON EL SUELO (PASAREMOS LUEGO A COLISIONS)
     //-----------------------------------------
 
-    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize)
+    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize) //189
     {
         sprite.physics.isOnGround = true;
         sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
@@ -314,6 +314,23 @@ function updatePlataform(sprite)
     }
 
     //updateAnimationFrame(sprite);
+
+    //colisión entre plataforma y jugador
+    const player = globals.sprites[0];
+
+    if(sprite.isCollidingWithPlayer && player.physics.vy > 0)
+        {
+            //Si hay colisión reducimos las vida
+            globals.life--;
+            let suelo = player.yPos;
+            if(player.yPos > suelo - player.imageSet.ySize) //189
+            {
+                player.physics.isOnGround = true;
+                player.yPos = suelo - player.imageSet.ySize;
+                player.physics.vy = 0;
+                player.frames.frameCounter=0;
+            }
+        }
 }
 
 function updateLevelTime()
@@ -380,7 +397,7 @@ function updateLife()
         if(sprite.isCollidingWithPlayer)
         {
             //Si hay colisión reducimos las vida
-            globals.life--;
+            // globals.life--;
         }
     }
 }
