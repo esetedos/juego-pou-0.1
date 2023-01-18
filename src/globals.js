@@ -44,5 +44,7 @@ export default {
     //Objeto que guarda el estado de la tecla pulsada
     action: {},
 
-    life: 0
+    life: 0,
+
+    saltoKop: 0
 };

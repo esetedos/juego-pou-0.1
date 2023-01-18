@@ -153,7 +153,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillStyle = 'lightgreen';
     globals.ctxHUD.fillText("HIGH SCORE", 90, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + highScore, 100, 16);
+    globals.ctxHUD.fillText(" " + globals.saltoKop, 100, 16);
 
     //Draw life
     // globals.ctxHUD.fillStyle = 'lightgreen';

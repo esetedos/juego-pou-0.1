@@ -406,6 +406,7 @@ function collisionPlataform(sprite)
             player.yPos = suelo - player.imageSet.ySize;
             player.physics.vy = 0;
             player.frames.frameCounter=0;
+            globals.saltoKop++;
         }
     }
 }

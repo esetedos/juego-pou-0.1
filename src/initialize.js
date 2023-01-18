@@ -49,6 +49,7 @@ function initVars()
 
     //Variables logica juego
     globals.life = 400;
+    globals.saltoKop = 0;
 }
 
 function loadAssets()
