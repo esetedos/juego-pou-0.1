@@ -7,6 +7,7 @@ import { Level, level1 } from "./Level.js";
 import Timer from "./Timer.js";
 import Physics from "./Physics.js";
 import { keydownHandler, keyupHandler } from "./events.js";
+import HitBox from "./HitBox.js";
 
 //Función que inicializa los elementos HTML
 function initHTMLelements()
@@ -105,8 +106,11 @@ function initPlataformsN(){
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
         const physics = new Physics(40); //velocidad de las plataformas
 
+        //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+        const hitBox = new HitBox(30, 6, 0, 0)
+
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, -20, imageSet, frames, physics, 2, 5);
+        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, -20, imageSet, frames, physics, 2, 5, hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataformaN);
@@ -124,8 +128,11 @@ function initCarrot()
     //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
     const physics = new Physics(40);
 
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(6, 2, 2, 2)
+
     //creamos nuestro sprite
-    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 150, 60, imageSet, frames, physics);
+    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 150, 60, imageSet, frames, physics, hitBox);
 
     //añadimos el player al array de sprites
     globals.sprites.push(carrot);
@@ -140,10 +147,13 @@ function initArrow(){
         const frames = new Frames(1);
         
         //creamos los datos de la animacion. 8 framesn / state
-        const physics = new Physics(90);    //velocidad de la flecha, velocidad de las flechas
+        const physics = new Physics(10);    //velocidad de la flecha, velocidad de las flechas
+
+        //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+        const hitBox = new HitBox(30, 4, 8, 2)
 
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, physics);
+        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, physics, hitBox);
 
          //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
@@ -161,8 +171,11 @@ function initPlataforms(){
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
         const physics = new Physics(40); //velocidad de las plataformas
 
+        //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+        const hitBox = new HitBox(30, 6, 0, 0)
+
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, physics, Math.floor(Math.random() * 3));
+        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -181,8 +194,11 @@ function initPlayer()
     //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
     const physics = new Physics(40, 40, 0.98, -100);
 
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(14, 14, 1, 1)
+
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, physics);
+    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, physics, hitBox);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

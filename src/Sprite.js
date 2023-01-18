@@ -25,9 +25,9 @@ export class Plataformas extends Sprite
 
 export class PlataformasN extends Plataformas
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox, tiempoDDesap)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, tiempoDDesap, hitBox)
     {
-        super(id, state, xPos, yPos, imageSet, frames, physics, hitBox, platType);
+        super(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox);
         this.tiempoDDesap   = tiempoDDesap; //tiempo para que las plataformas tipo nube desaparezcan después del salto
     }
 }

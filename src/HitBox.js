@@ -15,3 +15,4 @@ export default class HitBox
 // xSize:13
 // yOffset: 1
 // xOffset: 2
+// 13, 14, 2, 1
