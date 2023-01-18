@@ -254,6 +254,8 @@ function updatePlataformN(sprite)
        
     }
 
+    collisionPlataform(sprite);
+
     //updateAnimationFrame(sprite);
 }
 
@@ -315,22 +317,9 @@ function updatePlataform(sprite)
 
     //updateAnimationFrame(sprite);
 
+    collisionPlataform(sprite);
     //colisión entre plataforma y jugador
-    const player = globals.sprites[0];
-
-    if(sprite.isCollidingWithPlayer && player.physics.vy > 0)
-        {
-            //Si hay colisión reducimos las vida
-            globals.life--;
-            let suelo = player.yPos;
-            if(player.yPos > suelo - player.imageSet.ySize) //189
-            {
-                player.physics.isOnGround = true;
-                player.yPos = suelo - player.imageSet.ySize;
-                player.physics.vy = 0;
-                player.frames.frameCounter=0;
-            }
-        }
+    
 }
 
 function updateLevelTime()
@@ -398,6 +387,25 @@ function updateLife()
         {
             //Si hay colisión reducimos las vida
             // globals.life--;
+        }
+    }
+}
+
+function collisionPlataform(sprite)
+{
+    const player = globals.sprites[0];
+
+    if(sprite.isCollidingWithPlayer && player.physics.vy > 0)
+    {
+        //Si hay colisión reducimos las vida
+        globals.life--;
+        let suelo = player.yPos;
+        if(player.yPos > suelo - player.imageSet.ySize) //189
+        {
+            player.physics.isOnGround = true;
+            player.yPos = suelo - player.imageSet.ySize;
+            player.physics.vy = 0;
+            player.frames.frameCounter=0;
         }
     }
 }
