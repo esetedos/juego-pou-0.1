@@ -39,11 +39,15 @@ export default function update()
 
 function playGame()
 {
+    //actualización de la física de Sprites
     updateSprites();
-    updateLevelTime();
 
     //colisioes
     detectCollisions();
+
+    //actualización de la lógica del juego
+    updateLevelTime();
+    updateLife();
 }
 
 function updateSprites()
@@ -365,4 +369,18 @@ function readKeyboardAndAssignState(sprite){
                     sprite.state === State.RIGHT    ? State.STILL_RIGHT :   //No key pressed and precious state RIGHT
                     sprite.state;
                     
+}
+
+function updateLife()
+{
+    for(let i = 1; i < globals.sprites.length; ++i)
+    {
+        const sprite = globals.sprites[i];
+
+        if(sprite.isCollidingWithPlayer)
+        {
+            //Si hay colisión reducimos las vida
+            globals.life--;
+        }
+    }
 }
