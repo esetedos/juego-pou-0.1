@@ -80,7 +80,7 @@ function renderSprites() //o drawSprites (que era como estaba)
        
     }
     const player = globals.sprites[0]; 
-    drawHitBox2(player); //dibujo de la segunda HitBox del player
+    drawHitBox2(player); //dibujo de la segunda HitBox del player n
 }
 
 function drawSpriteRectangle(sprite)
