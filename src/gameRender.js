@@ -77,7 +77,10 @@ function renderSprites() //o drawSprites (que era como estaba)
         
         renderSprite(sprite);
         drawHitBox(sprite);
+       
     }
+    const player = globals.sprites[0]; 
+    drawHitBox2(player); //dibujo de la segunda HitBox del player
 }
 
 function drawSpriteRectangle(sprite)
@@ -99,6 +102,18 @@ function drawHitBox(sprite)
     const y1 = Math.floor(sprite.yPos) + Math.floor(sprite.hitBox.yOffset);
     const w1 = sprite.hitBox.xSize;
     const h1 = sprite.hitBox.ySize;
+
+    globals.ctx.strokeStyle = "red";
+    globals.ctx.strokeRect(x1, y1, w1, h1);
+}
+
+function drawHitBox2(sprite)
+{
+    //datos del sprite
+    const x1 = Math.floor(sprite.xPos) + Math.floor(sprite.hitBox2.xOffset);
+    const y1 = Math.floor(sprite.yPos) + Math.floor(sprite.hitBox2.yOffset);
+    const w1 = sprite.hitBox2.xSize;
+    const h1 = sprite.hitBox2.ySize;
 
     globals.ctx.strokeStyle = "red";
     globals.ctx.strokeRect(x1, y1, w1, h1);

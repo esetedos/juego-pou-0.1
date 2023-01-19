@@ -199,10 +199,14 @@ function initPlayer()
     const physics = new Physics(40, 40, 0.98, -100);
 
     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-    const hitBox = new HitBox(10, 12, 3, 3)
+    //Para la colisión con las plataformas
+    const hitBox = new HitBox(11, 2, 2, 14)
+
+    //Segunda hitBox para la colisión con los objetos (arrow y carrot)
+    const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, physics, hitBox);
+    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, physics, hitBox, hitBox2);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

@@ -1,7 +1,7 @@
 //clase gestora de los sprites
 export default class Sprite
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics, hitBox)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, hitBox, hitBox2)
     {
         this.id                         = id;               //Tipo de sprite
         this.state                      = state;            //estado de animacion del sprite
@@ -12,6 +12,7 @@ export default class Sprite
         this.physics                    = physics;          //datos de las fisicas
         this.hitBox                     = hitBox;           //datos del hitbox
         this.isCollidingWithPlayer      = false;            //Variable que indica si ha habido colisión con el player
+        this.hitBox2                    = hitBox2;          //segunda hitBox para resto de colisiones (que no sean plataformas)
     }
 }
 
@@ -34,3 +35,4 @@ export class PlataformasN extends Plataformas
         this.tiempoDDesap           = tiempoDDesap; //tiempo para que las plataformas tipo nube desaparezcan después del salto
     }
 }
+
