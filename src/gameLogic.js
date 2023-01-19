@@ -116,8 +116,10 @@ function updatePlayer(sprite)
 
     const isLeftOrRightPressed = globals.action.moveLeft || globals.action.moveRight;
 
+    if(globals.action.moveLeft || globals.action.moveRight){
     switch(sprite.state)
     {
+        case State.RIGHT:
         case State.RIGHT:
             //si se mueve a la derecha ax (+)
             sprite.physics.ax = sprite.physics.aLimit;
@@ -125,6 +127,7 @@ function updatePlayer(sprite)
             //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
             break;
 
+        case State.LEFT:
         case State.LEFT:
             //si se mueve a la izquierda asignamos ax (-)
             sprite.physics.ax = -sprite.physics.aLimit;
@@ -136,6 +139,8 @@ function updatePlayer(sprite)
             // sprite.physics.vy = 0;
             // sprite.physics.vx = 0;
     }
+}
+else sprite.physics.ax = 0;
 
     //calculamos velocidad en X y en Y (V = V at)
     sprite.physics.vx += sprite.physics.ax * globals.deltaTime;
@@ -179,7 +184,7 @@ function updatePlayer(sprite)
     }
     else //estamos en el juego
     {
-        if(false)          //(true) //globals.action.jump) //pulsamos la tecla de salto
+        if(true) //globals.action.jump) //pulsamos la tecla de salto
         {
             sprite.physics.isOnGround = false;
 
@@ -340,8 +345,8 @@ function updateLevelTime()
 function updateAnimationFrame(sprite)
 { 
     switch(sprite.state){
-        case State.STILL_LEFT:
-        case State.STILL_RIGHT:
+        case State.LEFT:
+        case State.RIGHT:
             //sprite.frames.frameCounter = 0;
             sprite.frames.frameChangeCounter = 0;
             break;
@@ -371,8 +376,8 @@ function updateAnimationFrame(sprite)
 function readKeyboardAndAssignState(sprite){
     sprite.state =  globals.action.moveLeft         ? State.LEFT :          //Left Key
                     globals.action.moveRight        ? State.RIGHT :         //Right key
-                    sprite.state === State.LEFT     ? State.STILL_LEFT :    //No key pressed and precious state LEFT
-                    sprite.state === State.RIGHT    ? State.STILL_RIGHT :   //No key pressed and precious state RIGHT
+                    sprite.state === State.LEFT     ? State.LEFT :    //No key pressed and precious state LEFT
+                    sprite.state === State.RIGHT    ? State.RIGHT :   //No key pressed and precious state RIGHT
                     sprite.state;
                     
 }

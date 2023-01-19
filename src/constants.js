@@ -25,8 +25,6 @@ export const State = {
     // Estados PLAYER
     LEFT:   0,
     RIGHT:  1,
-    STILL_LEFT: 2,
-    STILL_RIGHT: 3, 
 
     //Estados PIRATE- PLATAFORMAS, 
     BROKE:   -1,  //para hacer splice

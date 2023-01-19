@@ -200,7 +200,7 @@ function initPlayer()
 
     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
     //Para la colisión con las plataformas
-    const hitBox = new HitBox(11, 2, 2, 14)
+    const hitBox = new HitBox(11, 2, 2, 15)
 
     //Segunda hitBox para la colisión con los objetos (arrow y carrot)
     const hitBox2 = new HitBox(10, 12, 3, 3)
