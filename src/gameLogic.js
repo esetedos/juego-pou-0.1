@@ -179,7 +179,7 @@ function updatePlayer(sprite)
     }
     else //estamos en el juego
     {
-        if(true) //globals.action.jump) //pulsamos la tecla de salto
+        if(false)          //(true) //globals.action.jump) //pulsamos la tecla de salto
         {
             sprite.physics.isOnGround = false;
 
