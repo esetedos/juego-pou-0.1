@@ -73,8 +73,7 @@ function renderSprites() //o drawSprites (que era como estaba)
         const sprite = globals.sprites[i];
 
         //TEST: DIbuja un rectangulo alrededor del sprite
-        // drawSpriteRectangle(sprite);
-        
+        // drawSpriteRectangle(sprite);     
         renderSprite(sprite);
         drawHitBox(sprite);
        

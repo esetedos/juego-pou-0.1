@@ -54,13 +54,14 @@ export const Tile = {
 //id de bloque del mapa
 export const Block = {
     EMPTY:      0,
-    VINES:      1,
-    BROWN_1:    2,
-    BROWN_2:    3,
-    DARK_1:     4,
-    GRAY:       5,
-    CRISTAL_1:  6,
-    CRISTAL_2:  7
+    SKY:        1,
+    WOOD:       2,
+    CLOUDS:     3,
+    WOOD_2:     4,
+    CLOUDS_2:   5,
+    WOOD_3:     6,
+    WOOD_4:     7,
+    WOOS_5:     8
 
 }
 

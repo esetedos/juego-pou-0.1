@@ -3,16 +3,21 @@ export default class Sprite
 {
     constructor(id, state, xPos, yPos, imageSet, frames, physics, hitBox, hitBox2)
     {
-        this.id                         = id;               //Tipo de sprite
-        this.state                      = state;            //estado de animacion del sprite
-        this.xPos                       = xPos;             //posición en x en canvas
-        this.yPos                       = yPos;             //posición en y en canvas
-        this.imageSet                   = imageSet;         //datos de las imagenes del sprite
-        this.frames                     = frames;           //datos de los frames de animacion
-        this.physics                    = physics;          //datos de las fisicas
-        this.hitBox                     = hitBox;           //datos del hitbox
-        this.isCollidingWithPlayer      = false;            //Variable que indica si ha habido colisión con el player
-        this.hitBox2                    = hitBox2;          //segunda hitBox para resto de colisiones (que no sean plataformas)
+        this.id                                 = id;               //Tipo de sprite
+        this.state                              = state;            //estado de animacion del sprite
+        this.xPos                               = xPos;             //posición en x en canvas
+        this.yPos                               = yPos;             //posición en y en canvas
+        this.imageSet                           = imageSet;         //datos de las imagenes del sprite
+        this.frames                             = frames;           //datos de los frames de animacion
+        this.physics                            = physics;          //datos de las fisicas
+        this.hitBox                             = hitBox;           //datos del hitbox
+        this.hitBox2                            = hitBox2;          //segunda hitBox para resto de colisiones (que no sean plataformas)
+        this.isCollidingWithPlayer              = false;            //Variable que indica si ha habido colisión con el player
+        this.isCollidingWithObstacleOnTop       = false;            //Indica si ha habido colisión con un obstáculo hacia ARRIBA           
+        this.isCollidingWithObstacleOnLeft      = false;            //Indica si ha habido colisión con un obstáculo hacia la IZQUIERDA
+        this.isCollidingWithObstacleOnBottom    = false;            //Indica si ha habido colisión con un obstáculo hacia ABAJO
+        this.isCollidingWithObstacleOnRight     = false;            //Indica si ha habido colisión con un obstáculo hacia la DERECHA
+        //los últimos 4 no se usan(?)
     }
 }
 
