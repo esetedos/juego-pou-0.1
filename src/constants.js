@@ -17,7 +17,8 @@ export const SpriteID = {
     PLATAFORM: 1,
     ARROW: 2,
     CARROT: 3,
-    PLATAFORMN: 4
+    PLATAFORMN: 4,
+    PLATAFORMMOVIMIENTO:    5
 }
 
 //identificador de estado de sprite (direccion)
@@ -40,7 +41,11 @@ export const State = {
 
     //estados PLATAFORMASN
     BROKE_4: -1,
-    SOLID_4: 0
+    SOLID_4: 0,
+
+    //Plataformas en movimiento
+    BROKE_5:    -1,
+    SOLID_5:    0
 }
 
 //diferentes tileSets

@@ -98,10 +98,13 @@ function updateSprite(sprite)
             updateCarrot(sprite);
             break;
 
-            case SpriteID.PLATAFORMN:
-                updatePlataformN(sprite);
-                break;
+        case SpriteID.PLATAFORMN:
+            updatePlataformN(sprite);
+            break;
 
+        case SpriteID.PLATAFORMMOVIMIENTO:
+            updatePlataformMovimiento(sprite);
+            break;
     
 
         //caso del enemigo
@@ -244,6 +247,13 @@ else sprite.physics.ax = 0;
 }
 
 
+function updatePlataformMovimiento(sprite)
+{
+    sprite.frames.frameCounter = 1;
+
+    collisionPlataform(sprite);
+}
+
 function updatePlataformN(sprite)
 { 
     sprite.frames.frameCounter = 2; 
@@ -254,6 +264,7 @@ function updatePlataformN(sprite)
     //esto mantiene las tres plataformas con la misma imagen siempre
     //sprite.frames.frameCounter = sprite.platType;  
 
+    /*
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
     //esto es para que cuando lleguen abajo, vuelvan arriba en un sitio aleatorio y qeu tengan un dibujo aleatorio
@@ -262,7 +273,7 @@ function updatePlataformN(sprite)
         // sprite.xPos =  Math.floor(Math.random() * 200);
        
     }
-
+*/
     collisionPlataform(sprite);
 
     //updateAnimationFrame(sprite);
@@ -315,7 +326,7 @@ function updatePlataform(sprite)
 
     //esto mantiene las tres plataformas con la misma imagen siempre
     //sprite.frames.frameCounter = sprite.platType;  
-
+/*
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
     //esto es para que cuando lleguen abajo, vuelvan arriba en un sitio aleatorio y qeu tengan un dibujo aleatorio
@@ -324,11 +335,13 @@ function updatePlataform(sprite)
         sprite.xPos =  Math.floor(Math.random() * 200);
         sprite.frames.frameCounter = Math.floor(Math.random() * 2); 
     }
-
+*/
     //updateAnimationFrame(sprite);
 
     collisionPlataform(sprite);
     //colisión entre plataforma y jugador
+
+    movimientoHorizontal(sprite);
     
 }
 
@@ -387,10 +400,9 @@ function readKeyboardAndAssignState(sprite){
                     
 }
 
-function updateLife(sprite){
-    const player = globals.sprites[0];
-
-    if(sprite.isCollidingWithPlayer)
+function updateLife(sprite)
+{
+    if(sprite.isCollidingWithPlayer2)
     {
         //Si hay colisión reducimos las vida
         globals.life--;
@@ -404,7 +416,7 @@ function collisionPlataform(sprite)
     if(sprite.isCollidingWithPlayer && player.physics.vy > 0)
     {
         //Si hay colisión reducimos las vida
-        // globals.life--;
+        globals.life--;
         let suelo = player.yPos;
         if(player.yPos > suelo - player.imageSet.ySize) //189
         {
@@ -417,3 +429,29 @@ function collisionPlataform(sprite)
     }
 }
 
+
+function movimientoHorizontal(sprite)
+{
+    // if(sprite.kontMovimiento < 30)
+    // {
+    //     sprite.kontMovimiento2 = 0;
+    //     sprite.kontMovimiento++;
+    //     sprite.physics.vx = sprite.physics.vLimit;
+    //     // sprite.xPos += sprite.physics.vx * globals.deltaTime;
+    // }
+    // else
+    // {
+    //     if(sprite.kontMovimiento2 < 30)
+    //     {
+    //         sprite.kontMovimiento2++;
+    //         sprite.physics.vx = -sprite.physics.vLimit;
+    //         // sprite.xPos += sprite.physics.vx * globals.deltaTime;
+    //     }
+    //     else sprite.kontMovimiento = 0;
+    // }
+
+    // sprite.xPos += sprite.physics.vx * globals.deltaTime;
+}
+
+//cuando el conejo salta en plataformas que están estáticas, si hay algunas más en movimiento, cuando el xPos de la plataforma que se mueve y el xPos del conejo coinciden justo antes de revotar en la plataforma estática, ocurre un bug, y el conejo traspasa la plataforma
+//Actualizo: el bug pasa aunue todas las plataformas estén quietas

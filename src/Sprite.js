@@ -29,6 +29,8 @@ export class Plataformas extends Sprite
         super(id, state, xPos, yPos, imageSet, frames, physics, hitBox);
         this.isCollidingWithPlayer  = false;
         this.platType               = platType;
+        this.kontMovimiento         = 0;
+        this.kontMovimiento2        = 0;
     }
 }
 
