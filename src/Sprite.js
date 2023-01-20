@@ -13,6 +13,7 @@ export default class Sprite
         this.hitBox                             = hitBox;           //datos del hitbox
         this.hitBox2                            = hitBox2;          //segunda hitBox para resto de colisiones (que no sean plataformas)
         this.isCollidingWithPlayer              = false;            //Variable que indica si ha habido colisión con el player
+        this.isCollidingWithPlayer2             = false;       //para la segunda hitbox de player
         this.isCollidingWithObstacleOnTop       = false;            //Indica si ha habido colisión con un obstáculo hacia ARRIBA           
         this.isCollidingWithObstacleOnLeft      = false;            //Indica si ha habido colisión con un obstáculo hacia la IZQUIERDA
         this.isCollidingWithObstacleOnBottom    = false;            //Indica si ha habido colisión con un obstáculo hacia ABAJO

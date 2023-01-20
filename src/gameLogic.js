@@ -1,6 +1,6 @@
 import globals from "./globals.js";
 import { Game, State, SpriteID, GRAVITY} from "./constants.js";
-import detectCollisions from "./collisions.js";
+import callDetectCollisions from "./collisions.js";
 
 
 
@@ -42,12 +42,16 @@ function playGame()
     //actualización de la física de Sprites
     updateSprites();
 
-    //colisioes
-    detectCollisions();
+    //colisioNes de las plataformas y hitbox del player
+    // detectCollisions();
+
+    //colisiones; con el resto de objetos (sprites) y hitbox2 del player
+    // detectCollisions2();
+
+    callDetectCollisions();
 
     //actualización de la lógica del juego
     updateLevelTime();
-    updateLife();
 }
 
 function updateSprites()
@@ -294,6 +298,7 @@ function updateArrow(sprite)
         // sprite.xPos = -30;
         // sprite.yPos =  Math.floor(Math.random() * 150+40);
     }
+    updateLife(sprite);
 }
 
 //función que actualiza  las plataformas
@@ -382,17 +387,13 @@ function readKeyboardAndAssignState(sprite){
                     
 }
 
-function updateLife()
-{
-    for(let i = 1; i < globals.sprites.length; ++i)
-    {
-        const sprite = globals.sprites[i];
+function updateLife(sprite){
+    const player = globals.sprites[0];
 
-        if(sprite.isCollidingWithPlayer)
-        {
-            //Si hay colisión reducimos las vida
-            // globals.life--;
-        }
+    if(sprite.isCollidingWithPlayer)
+    {
+        //Si hay colisión reducimos las vida
+        globals.life--;
     }
 }
 
@@ -403,7 +404,7 @@ function collisionPlataform(sprite)
     if(sprite.isCollidingWithPlayer && player.physics.vy > 0)
     {
         //Si hay colisión reducimos las vida
-        globals.life--;
+        // globals.life--;
         let suelo = player.yPos;
         if(player.yPos > suelo - player.imageSet.ySize) //189
         {
@@ -415,3 +416,4 @@ function collisionPlataform(sprite)
         }
     }
 }
+
