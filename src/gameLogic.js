@@ -413,7 +413,7 @@ function collisionPlataform(sprite)
 {
     const player = globals.sprites[0];
 
-    if(sprite.isCollidingWithPlayer && player.physics.vy > 0)
+    if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
     {
         //Si hay colisión reducimos las vida
         globals.life--;
