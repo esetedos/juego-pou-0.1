@@ -113,7 +113,7 @@ function initPlataformsMoviento(){
         const physics = new Physics(40, 40, 0); //velocidad de las plataformas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-        const hitBox = new HitBox(30, 1, 0, 0)
+        const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
         const plataforma = new Plataformas(SpriteID.PLATAFORMMOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), 150, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
@@ -135,7 +135,7 @@ function initPlataformsN(){
         const physics = new Physics(40); //velocidad de las plataformas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-        const hitBox = new HitBox(30, 1, 0, 0)
+        const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
         const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, 20, imageSet, frames, physics, 2, 5, hitBox);
@@ -200,7 +200,7 @@ function initPlataforms(){
         const physics = new Physics(40, 40, 0); //velocidad de las plataformas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-        const hitBox = new HitBox(30, 1, 0, 0)
+        const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
         const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 135, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);

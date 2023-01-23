@@ -432,25 +432,25 @@ function collisionPlataform(sprite)
 
 function movimientoHorizontal(sprite)
 {
-    // if(sprite.kontMovimiento < 30)
-    // {
-    //     sprite.kontMovimiento2 = 0;
-    //     sprite.kontMovimiento++;
-    //     sprite.physics.vx = sprite.physics.vLimit;
-    //     // sprite.xPos += sprite.physics.vx * globals.deltaTime;
-    // }
-    // else
-    // {
-    //     if(sprite.kontMovimiento2 < 30)
-    //     {
-    //         sprite.kontMovimiento2++;
-    //         sprite.physics.vx = -sprite.physics.vLimit;
-    //         // sprite.xPos += sprite.physics.vx * globals.deltaTime;
-    //     }
-    //     else sprite.kontMovimiento = 0;
-    // }
+    if(sprite.kontMovimiento < 30)
+    {
+        sprite.kontMovimiento2 = 0;
+        sprite.kontMovimiento++;
+        sprite.physics.vx = sprite.physics.vLimit;
+        // sprite.xPos += sprite.physics.vx * globals.deltaTime;
+    }
+    else
+    {
+        if(sprite.kontMovimiento2 < 30)
+        {
+            sprite.kontMovimiento2++;
+            sprite.physics.vx = -sprite.physics.vLimit;
+            // sprite.xPos += sprite.physics.vx * globals.deltaTime;
+        }
+        else sprite.kontMovimiento = 0;
+    }
 
-    // sprite.xPos += sprite.physics.vx * globals.deltaTime;
+    sprite.xPos += sprite.physics.vx * globals.deltaTime;
 }
 
 //cuando el conejo salta en plataformas que están estáticas, si hay algunas más en movimiento, cuando el xPos de la plataforma que se mueve y el xPos del conejo coinciden justo antes de revotar en la plataforma estática, ocurre un bug, y el conejo traspasa la plataforma
