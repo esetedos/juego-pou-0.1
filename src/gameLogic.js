@@ -322,10 +322,10 @@ function updatePlataform(sprite)
     //sprite.xPos = sprite.xInitPosition;
     //sprite.yPos = 0;
 
-    sprite.state = State.SOLID;
+    sprite.state = State.SOLID; 
 
     //esto mantiene las tres plataformas con la misma imagen siempre
-    //sprite.frames.frameCounter = sprite.platType;  
+    //sprite.frames.frameCounter = sprite.platType;  ´ñ
 /*
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
