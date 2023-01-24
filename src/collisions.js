@@ -5,6 +5,7 @@ export default function callDetectCollisions()
 {
     detectCollisions();
     collisionWBorders();
+    gameMovement();
 }
 
 //función  que calcula si 2 rectángulos interseccionan
@@ -126,9 +127,9 @@ function collisionWBorders()
     const w = player.xPos + player.hitBox2.xSize; //punto derecho del player
     const h = player.hitBox2.ySize; //punto bajo del player
 
-    if(x < 0)       player.xPos=256;
-    if(y < 0)       player.yPos+=5;
-    if(w > globals.canvas.width)     player.xPos-=5;
+    if(x < 0)       player.xPos+=2;
+    if(y < 0)       player.yPos+=2;
+    if(w > globals.canvas.width)     player.xPos-=2;
     // if(h > 200)
     
     //sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
@@ -136,7 +137,21 @@ function collisionWBorders()
 }
 
 
+function gameMovement()
+{
+    const player = globals.sprites[0];
 
+    if(player.yPos < 70)
+    {
+        player.yPos+=2;
+        for(let i = 1; i < globals.sprites.length; ++i)
+        {
+            const sprite = globals.sprites[i];
+            sprite.yPos+=2;
+        }
+    }
+    
+}
 
 
 

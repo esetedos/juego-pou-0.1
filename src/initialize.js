@@ -116,7 +116,7 @@ function initPlataformsMoviento(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORMMOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), 150, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
+        const plataforma = new Plataformas(SpriteID.PLATAFORMMOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), 30, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -125,6 +125,7 @@ function initPlataformsMoviento(){
 }
 
 function initPlataformsN(){
+    for(let i = 0; i < 2; ++i){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
         const imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
@@ -138,10 +139,11 @@ function initPlataformsN(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, 90, imageSet, frames, physics, 2, 5, hitBox);
+        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, Math.floor(Math.random()*150+30), 90, imageSet, frames, physics, 2, 5, hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataformaN);
+    }
 
 }
 
