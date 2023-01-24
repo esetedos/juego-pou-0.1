@@ -24,12 +24,12 @@ export default class Sprite
 
 export class Plataformas extends Sprite
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox, kontMovimiento)
     {
         super(id, state, xPos, yPos, imageSet, frames, physics, hitBox);
         this.isCollidingWithPlayer  = false;
         this.platType               = platType;
-        this.kontMovimiento         = 0;
+        this.kontMovimiento         = kontMovimiento;
         this.kontMovimiento2        = 0;
     }
 }

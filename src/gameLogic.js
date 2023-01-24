@@ -252,6 +252,7 @@ function updatePlataformMovimiento(sprite)
     sprite.frames.frameCounter = 1;
 
     collisionPlataform(sprite);
+    movimientoHorizontal(sprite);
 }
 
 function updatePlataformN(sprite)
@@ -325,7 +326,7 @@ function updatePlataform(sprite)
     sprite.state = State.SOLID; 
 
     //esto mantiene las tres plataformas con la misma imagen siempre
-    //sprite.frames.frameCounter = sprite.platType;  ´ñ
+    //sprite.frames.frameCounter = sprite.platType;  
 /*
     sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
@@ -339,10 +340,7 @@ function updatePlataform(sprite)
     //updateAnimationFrame(sprite);
 
     collisionPlataform(sprite);
-    //colisión entre plataforma y jugador
-
-    movimientoHorizontal(sprite);
-    
+    //colisión entre plataforma y jugador    
 }
 
 function updateLevelTime()
@@ -409,22 +407,25 @@ function updateLife(sprite)
     }
 }
 
-function collisionPlataform(sprite)
+function collisionPlataform(sprite) //colisión entre jugador y plataforma
 {
     const player = globals.sprites[0];
 
-    if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
-    {
-        //Si hay colisión reducimos las vida
-        globals.life--;
-        let suelo = player.yPos;
-        if(player.yPos > suelo - player.imageSet.ySize) //189
+    if(player.xPos+player.hitBox.xOffset > sprite.xPos+sprite.hitBox.xOffset && player.xPos+player.hitBox.xOffset+player.hitBox.xSize < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize){
+
+        if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
-            player.physics.isOnGround = true;
-            player.yPos = suelo - player.imageSet.ySize;
-            player.physics.vy = 0;
-            player.frames.frameCounter=0;
-            globals.saltoKop++;
+            //Si hay colisión reducimos las vida
+            globals.life--;
+            let suelo = player.yPos;
+            if(player.yPos > suelo - player.imageSet.ySize) //189
+            {
+                player.physics.isOnGround = true;
+                player.yPos = suelo - player.imageSet.ySize;
+                player.physics.vy = 0;
+                player.frames.frameCounter=0;
+                globals.saltoKop++;
+            }
         }
     }
 }
@@ -453,5 +454,3 @@ function movimientoHorizontal(sprite)
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
 }
 
-//cuando el conejo salta en plataformas que están estáticas, si hay algunas más en movimiento, cuando el xPos de la plataforma que se mueve y el xPos del conejo coinciden justo antes de revotar en la plataforma estática, ocurre un bug, y el conejo traspasa la plataforma
-//Actualizo: el bug pasa aunue todas las plataformas estén quietas

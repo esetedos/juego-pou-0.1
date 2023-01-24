@@ -28,7 +28,7 @@ function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2)
 //Exportaremos dicha función.
 function detectCollisions()
 {
-    //clculamos colision del player con cada uno de los sprites
+    //calculamos colision del player con cada uno de los sprites
     for(let i = 1; i < globals.sprites.length; ++i)
     {
         const sprite = globals.sprites[i];
