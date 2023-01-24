@@ -4,7 +4,7 @@ import {Block, State} from "./constants.js";
 export default function callDetectCollisions()
 {
     detectCollisions();
-    detectCollisions2();
+    collisionWBorders();
 }
 
 //función  que calcula si 2 rectángulos interseccionan
@@ -33,6 +33,7 @@ function detectCollisions()
     {
         const sprite = globals.sprites[i];
         detectCollisionBetweenPlayerAndSprite(sprite);
+        detectCollisionBetweenPlayerAndSprite2(sprite);
     }
 
     //Calculamos colision de player con los obstaculos del mapa
@@ -81,38 +82,6 @@ function detectCollisionBetweenPlayerAndSprite(sprite)
 //-------------------------------------------------------------------------------------------
 // HHITBOX2 (PARA LAS COLISIOES CON EL CONEJO ENTERO)
 
-//función  que calcula si 2 rectángulos interseccionan
-function rectIntersect2(x1, y1, w1, h1, x2, y2, w2, h2)
-{
-    let isOverlap;
-
-    //Check x and y for overlap
-    if(x2 > w1 + x1 || x1 > w2 + x2 || y2 > h1 + y1 || y1 > h2 + y2)
-    {
-        isOverlap = false;
-    }
-    else
-        isOverlap = true;
-
-    return isOverlap;
-}
-
-
-//Se encargará de llamar a todas las funciones para el cálculo de colisiones. 
-//Exportaremos dicha función.
-function detectCollisions2()
-{
-    //clculamos colision del player con cada uno de los sprites
-    for(let i = 1; i < globals.sprites.length; ++i)
-    {
-        const sprite = globals.sprites[i];
-        detectCollisionBetweenPlayerAndSprite2(sprite);
-    }
-
-    //Calculamos colision de player con los obstaculos del mapa
-    //detectCollisionBetweenPlayerAndMapObstacles(); no va
-}
-
 
 //Calculará si existe colisión entre el player y uno de los sprites, 
 //que recibirá como argumento. Si existe colisión, pondrá la variable 
@@ -136,7 +105,7 @@ function detectCollisionBetweenPlayerAndSprite2(sprite)
     const w2 = sprite.hitBox.xSize;
     const h2 = sprite.hitBox.ySize;
 
-    const isOverlap = rectIntersect2(x1, y1, w1, h1, x2, y2, w2, h2)
+    const isOverlap = rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2)
     if(isOverlap)
     {
         //Existe colisión
@@ -146,6 +115,38 @@ function detectCollisionBetweenPlayerAndSprite2(sprite)
 
 
 //-------------------------------------------------------------------------------------------
+// COLISIONES CON LOS LÍMITES DEL MAPA
+
+function collisionWBorders()
+{
+    const player = globals.sprites[0];
+
+    const x = player.xPos + player.hitBox2.xOffset; //punto izquiero del player
+    const y = player.yPos + player.hitBox2.yOffset; //punto alto del player
+    const w = player.xPos + player.hitBox2.xSize; //punto derecho del player
+    const h = player.hitBox2.ySize; //punto bajo del player
+
+    if(x < 0)       player.xPos=256;
+    if(y < 0)       player.yPos+=5;
+    if(w > globals.canvas.width)     player.xPos-=5;
+    // if(h > 200)
+    
+    //sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------------
+// COLISIONES CON EL TILESET
 
 //Devuelve el id del tile del mapa para una posición (xPos, yPos) determinada.
 function getMapTileId(xPos, yPos)

@@ -454,6 +454,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
 
 function movimientoHorizontal(sprite)
 {
+    
     if(sprite.kontMovimiento < 30)
     {
         sprite.kontMovimiento2 = 0;
@@ -471,6 +472,8 @@ function movimientoHorizontal(sprite)
         }
         else sprite.kontMovimiento = 0;
     }
+    if(sprite.xPos > globals.canvas.width)  sprite.xPos-=2;
+    if(sprite.xPos < 0)                     sprite.xPos+=2;
 
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
 }

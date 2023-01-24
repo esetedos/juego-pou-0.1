@@ -59,7 +59,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/sprites7.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/sprites8.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -104,7 +104,7 @@ function initSprites()//////////////////////////////////////////////////////////
 function initPlataformsMoviento(){
     for(let i = 0; i < 2 ; i++){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(4, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(2, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1, 5);
@@ -126,7 +126,7 @@ function initPlataformsMoviento(){
 
 function initPlataformsN(){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(4, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1, 5);
@@ -148,7 +148,7 @@ function initPlataformsN(){
 function initCarrot()
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(6, 0, 10, 6, 10, 24, 0, 8);
+    const imageSet = new ImageSet(4, 0, 10, 6, 10, 24, 0, 2);
 
     //creamos los datos de la animacion. 8 frames / state
     const frames = new Frames(1); //en teoría debería ser (0, 5)
@@ -169,7 +169,7 @@ function initCarrot()
 //algo
 function initArrow(){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(5, 0, 40, 8, 40, 24, 0, 12); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1);
@@ -191,7 +191,7 @@ function initArrow(){
 function initPlataforms(){
     for(let i = 0; i < 3 ; i++){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(4, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1, 5);
