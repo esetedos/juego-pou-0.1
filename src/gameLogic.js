@@ -411,7 +411,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
 {
     const player = globals.sprites[0];
 
-    if(player.xPos+player.hitBox.xOffset > sprite.xPos+sprite.hitBox.xOffset && player.xPos+player.hitBox.xOffset+player.hitBox.xSize < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize){
+    if(player.xPos+player.hitBox.xOffset+(player.hitBox.xSize/2) < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize && player.xPos+player.hitBox.xOffset > sprite.xPos+sprite.hitBox.xOffset || player.xPos+player.hitBox.xOffset+player.hitBox.xSize/2 > sprite.xPos+sprite.hitBox.xOffset && player.xPos+player.hitBox.xOffset+player.hitBox.xSize < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize){
 
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
