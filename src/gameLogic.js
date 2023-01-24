@@ -50,7 +50,7 @@ function playGame()
 
     callDetectCollisions();
 
-    //actualización de la lógica del juego
+    // actualización de la lógica del juego
     updateLevelTime();
 }
 
@@ -426,7 +426,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
         {
             if(sprite.id == SpriteID.PLATAFORMMOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORMMOVIMIENTO)
             {
-                sprite.kontMovimiento = globals.levelTime.value + sprite.physics.vLimit;
+                sprite.kontMovimiento = globals.levelTime.value;
                 sprite.disappear = true;
                 
             }
@@ -478,12 +478,18 @@ function movimientoHorizontal(sprite)
 
 function disappearPlataformN(sprite)
 {
-    if(globals.levelTime.value == sprite.kontMovimiento)
+    if(globals.levelTime.value == sprite.kontMovimiento + sprite.physics.vLimit)
     {
-        //  globals.life = 0; 
-         sprite.state = State.BROKE_4;
-         sprite.frames.frameCounter = -100;
+        sprite.frames.frameCounter = 1;
     }
+        if(globals.levelTime.value >= sprite.kontMovimiento + sprite.physics.vLimit * 2)
+        {
+            //  globals.life = 0; 
+            sprite.state = State.BROKE_4;
+            sprite.frames.frameCounter = -100;
+        }
+    
+    
 
     
 

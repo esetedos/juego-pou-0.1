@@ -59,7 +59,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/sprites6.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/sprites7.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -132,7 +132,7 @@ function initPlataformsN(){
         const frames = new Frames(1, 5);
 
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
-        const physics = new Physics(5, 0); //velocidad de las plataformas
+        const physics = new Physics(1, 0); //velocidad de las plataformas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
         const hitBox = new HitBox(30, 4, 0, 0)
