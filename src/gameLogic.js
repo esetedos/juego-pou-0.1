@@ -65,8 +65,8 @@ function updateSprites()
         //poner esto --> sprite.splice(i,1)
         
         if(sprite.state == -1){ //aquí iría el splice (para eliminar el objeto)
-            // delete globals.sprites[i];   //sprite.splice(i,1) me da "splice is not a function"
-            // i--;
+            globals.sprites.splice(i,1); 
+            i--;
             // globals.life = 234567;
         }
         
