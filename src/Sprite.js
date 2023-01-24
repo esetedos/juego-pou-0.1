@@ -41,6 +41,8 @@ export class PlataformasN extends Plataformas
         super(id, state, xPos, yPos, imageSet, frames, physics, platType, hitBox);
         this.isCollidingWithPlayer  = false;
         this.tiempoDDesap           = tiempoDDesap; //tiempo para que las plataformas tipo nube desaparezcan después del salto
+        this.kontMovimiento         = 0;
+        this.disappear              = false;
     }
 }
 

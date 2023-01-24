@@ -104,13 +104,13 @@ function initSprites()//////////////////////////////////////////////////////////
 function initPlataformsMoviento(){
     for(let i = 0; i < 2 ; i++){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(4, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(4, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1, 5);
 
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
-        const physics = new Physics(40, 40, 0); //velocidad de las plataformas
+        const physics = new Physics(20, 0, 0); //velocidad de las plataformas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
         const hitBox = new HitBox(30, 4, 0, 0)
@@ -126,19 +126,19 @@ function initPlataformsMoviento(){
 
 function initPlataformsN(){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(4, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+        const imageSet = new ImageSet(4, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
         //creamos los datos de la animacion. 8 framesn / state
         const frames = new Frames(1, 5);
 
         //creamos nuestro objeto physics con vLimit = 40 pixels/second
-        const physics = new Physics(40); //velocidad de las plataformas
+        const physics = new Physics(5, 0); //velocidad de las plataformas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, 20, imageSet, frames, physics, 2, 5, hitBox);
+        const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 30, 90, imageSet, frames, physics, 2, 5, hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataformaN);

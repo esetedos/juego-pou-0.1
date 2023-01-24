@@ -63,11 +63,14 @@ function updateSprites()
         //la eliminación de sprites en off. cuando se borra el 4º, el que era 5º pasa a ser el 4º. poner i-- para que no salga error
         //poner aqui en un if que si está en estado off/block, entonces que entre con el splice
         //poner esto --> sprite.splice(i,1)
-        /*
-        if(sprite.state == State.BROKE){ //aquí iría el splice (para eliminar el objeto)
-
+        
+        if(sprite.state == -1){ //aquí iría el splice (para eliminar el objeto)
+            // delete globals.sprites[i];   //sprite.splice(i,1) me da "splice is not a function"
+            // i--;
+            // globals.life = 234567;
         }
-        */
+        
+        
         
         updateSprite(sprite);
     }
@@ -249,7 +252,7 @@ else sprite.physics.ax = 0;
 
 function updatePlataformMovimiento(sprite)
 {
-    sprite.frames.frameCounter = 1;
+    // sprite.frames.frameCounter = 1;
 
     collisionPlataform(sprite);
     movimientoHorizontal(sprite);
@@ -257,10 +260,10 @@ function updatePlataformMovimiento(sprite)
 
 function updatePlataformN(sprite)
 { 
-    sprite.frames.frameCounter = 2; 
+    // sprite.frames.frameCounter = 2; 
     sprite.physics.vy = sprite.physics.vLimit;
 
-    sprite.state = State.SOLID_4;
+    // sprite.state = State.SOLID_4;
 
     //esto mantiene las tres plataformas con la misma imagen siempre
     //sprite.frames.frameCounter = sprite.platType;  
@@ -276,6 +279,11 @@ function updatePlataformN(sprite)
     }
 */
     collisionPlataform(sprite);
+    if(sprite.disappear == true)
+    {
+        disappearPlataformN(sprite);
+    }
+    
 
     //updateAnimationFrame(sprite);
 }
@@ -407,6 +415,7 @@ function updateLife(sprite)
     }
 }
 
+//pasar a collisions
 function collisionPlataform(sprite) //colisión entre jugador y plataforma
 {
     const player = globals.sprites[0];
@@ -415,6 +424,13 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
 
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
+            if(sprite.id == SpriteID.PLATAFORMMOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORMMOVIMIENTO)
+            {
+                sprite.kontMovimiento = globals.levelTime.value + sprite.physics.vLimit;
+                sprite.disappear = true;
+                
+            }
+
             player.yPos = sprite.yPos - sprite.imageSet.ySize;
 
             //Si hay colisión reducimos las vida
@@ -428,8 +444,11 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
                 player.frames.frameCounter=0;
                 globals.saltoKop++;
             }
+
+            
         }
     }
+
 }
 
 
@@ -456,3 +475,16 @@ function movimientoHorizontal(sprite)
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
 }
 
+
+function disappearPlataformN(sprite)
+{
+    if(globals.levelTime.value == sprite.kontMovimiento)
+    {
+        //  globals.life = 0; 
+         sprite.state = State.BROKE_4;
+         sprite.frames.frameCounter = -100;
+    }
+
+    
+
+}
