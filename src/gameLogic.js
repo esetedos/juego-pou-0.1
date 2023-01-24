@@ -415,6 +415,8 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
 
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
+            player.yPos = sprite.yPos - sprite.imageSet.ySize;
+
             //Si hay colisión reducimos las vida
             globals.life--;
             let suelo = player.yPos;
