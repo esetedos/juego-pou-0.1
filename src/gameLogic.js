@@ -491,9 +491,4 @@ function disappearPlataformN(sprite)
             sprite.state = State.BROKE_4;
             sprite.frames.frameCounter = -100;
         }
-    
-    
-
-    
-
 }

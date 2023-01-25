@@ -123,15 +123,27 @@ function collisionWBorders()
 {
     const player = globals.sprites[0];
 
-    const x = player.xPos + player.hitBox2.xOffset; //punto izquiero del player
-    const y = player.yPos + player.hitBox2.yOffset; //punto alto del player
-    const w = player.xPos + player.hitBox2.xSize; //punto derecho del player
+    const x = player.xPos; //punto izquiero del player
+    const y = player.yPos; //punto alto del player
+    const w = player.xPos + player.imageSet.xSize; //punto derecho del player
     const h = player.hitBox2.ySize; //punto bajo del player
 
-    if(x < 0)       player.xPos+=2;
-    if(y < 0)       player.yPos+=2;
-    if(w > globals.canvas.width)     player.xPos-=2;
-    // if(h > 200)
+    if(x < 0)
+    {
+        player.physics.vx = 0;
+        player.xPos = 0;
+    }       
+    if(y < 0)
+    {
+        player.physics.vx = 0;
+        player.yPos = 0;
+    }      
+    if(w > globals.canvas.width)
+    {
+        player.physics.vx = 0;
+        player.xPos = globals.canvas.width - player.imageSet.xSize;
+    }     
+    //if(h > 200)
     
     //sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
 
