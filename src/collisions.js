@@ -6,6 +6,7 @@ export default function callDetectCollisions()
     detectCollisions();
     collisionWBorders();
     gameMovement();
+    eliminaciónDePlataformas();
 }
 
 //función  que calcula si 2 rectángulos interseccionan
@@ -141,16 +142,28 @@ function gameMovement()
 {
     const player = globals.sprites[0];
 
-    if(player.yPos < 70)
+    if(player.yPos < 90)
     {
-        player.yPos+=2;
-        for(let i = 1; i < globals.sprites.length; ++i)
+        globals.metroak++;
+        // player.yPos+= 60 * globals.deltaTime;
+        for(let i = 0; i < globals.sprites.length; ++i)
         {
             const sprite = globals.sprites[i];
-            sprite.yPos+=2;
+            sprite.yPos+=50 * globals.deltaTime;
         }
     }
-    
+}
+
+function eliminaciónDePlataformas()
+{
+    for(let i = 1; i < globals.sprites.length; ++i)
+        {
+            const sprite = globals.sprites[i];
+
+            if(sprite.yPos > globals.canvas.height){
+                sprite.state = -1;
+            }
+        }
 }
 
 

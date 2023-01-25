@@ -164,15 +164,15 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
 
     //Draw high score
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("HIGH SCORE", 90, 8);
+    globals.ctxHUD.fillText("HIGH SCORE", 80, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
     globals.ctxHUD.fillText(" " + globals.saltoKop, 100, 16);
 
-    //Draw life
-    // globals.ctxHUD.fillStyle = 'lightgreen';
+    // Draw life
+    globals.ctxHUD.fillStyle = 'lightgreen';
     // globals.ctxHUD.fillText("BIZITZA", 168, 8);
-    // globals.ctxHUD.fillStyle = 'lightgray';
-    // globals.ctxHUD.fillRect(168, 9, life, 8);
+    globals.ctxHUD.fillStyle = 'lightgray';
+    globals.ctxHUD.fillText(" " + globals.metroak, 150, 16);
 
     //round corners. (remove 1 pixel per corner)
     globals.ctxHUD.fillStyle = 'black';

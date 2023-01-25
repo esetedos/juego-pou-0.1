@@ -46,5 +46,7 @@ export default {
 
     life: 0,
 
-    saltoKop: 0
+    saltoKop: 0,
+
+    metroak: 0
 };
