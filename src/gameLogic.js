@@ -1,6 +1,11 @@
 import globals from "./globals.js";
 import { Game, State, SpriteID, GRAVITY} from "./constants.js";
 import callDetectCollisions from "./collisions.js";
+import { Plataformas} from "./Sprite.js";
+import ImageSet from "./ImageSet.js";
+import Frames from "./Frames.js";
+import Physics from "./Physics.js";
+import HitBox from "./HitBox.js";
 
 
 
@@ -52,6 +57,8 @@ function playGame()
 
     // actualización de la lógica del juego
     updateLevelTime();
+
+    createPlataforms();
 }
 
 function updateSprites()
@@ -491,4 +498,31 @@ function disappearPlataformN(sprite)
             sprite.state = State.BROKE_4;
             sprite.frames.frameCounter = -100;
         }
+}
+
+function createPlataforms()
+{
+    if(globals.crearNuevasPlataf == true)
+    {
+        for(let i = 0; i < 3 ; i++){
+            //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+            const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+    
+            //creamos los datos de la animacion. 8 framesn / state
+            const frames = new Frames(1, 5);
+    
+            //creamos nuestro objeto physics con vLimit = 40 pixels/second
+            const physics = new Physics(40, 40, 0); //velocidad de las plataformas
+    
+            //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+            const hitBox = new HitBox(30, 4, 0, 0)
+    
+            //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+            const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+    
+            //añadimos el pirate al array de sprites
+            globals.sprites.push(plataforma);
+        }
+        globals.crearNuevasPlataf = false;
+    }
 }

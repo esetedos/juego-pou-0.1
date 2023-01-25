@@ -1,5 +1,6 @@
 import globals from "./globals.js";
-import {Block, State} from "./constants.js";
+import {Block, State, SpriteID} from "./constants.js";
+import { Plataformas } from "./Sprite.js";
 
 export default function callDetectCollisions()
 {
@@ -174,6 +175,8 @@ function eliminaciónDePlataformas()
 
             if(sprite.yPos > globals.canvas.height){
                 sprite.state = -1;
+                if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORMMOVIMIENTO)
+                globals.crearNuevasPlataf = true;
             }
         }
 }

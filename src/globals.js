@@ -48,5 +48,7 @@ export default {
 
     saltoKop: 0,
 
-    metroak: 0
+    metroak: 0,
+
+    crearNuevasPlataf: false
 };
