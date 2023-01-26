@@ -1,6 +1,7 @@
 import globals from "./globals.js";
 import {Block, State, SpriteID} from "./constants.js";
 import { Plataformas } from "./Sprite.js";
+import Physics from "./Physics.js";
 
 export default function callDetectCollisions()
 {
@@ -8,6 +9,9 @@ export default function callDetectCollisions()
     collisionWBorders();
     gameMovement();
     eliminaciónDePlataformas();
+
+    //calculamos colision del player con los obstáculos del mapa
+    detectCollisionBetweenPlayerAndMapObstacles();
 }
 
 //función  que calcula si 2 rectángulos interseccionan
@@ -227,6 +231,9 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 {
     const player = globals.sprites[0];
 
+    //Reset collision state
+    player.isCollidingWithObstacleOnTheRight = false;
+
     let xPos;
     let yPos;
     let isCollidingOnPos1;
@@ -263,19 +270,21 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
             if(isColliding)
             {
+                // player.vx = 0;
+                // player.ax = 0;
                 //Existe colisión a la derecha
                 player.isCollidingWithObstacleOnTheRight = true;
 
                 //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
-                overlap = Math.floor(xPos) % xBrickSize + 1;
-                player.xPos -= overlap;
+                overlap = Math.floor(yPos) % yBrickSize +1;
+                player.yPos -= overlap;
             }
 
             break;
 
             case State.LEFT:
                 //Primera colisión en (xPos + xSize - 1, yPos)
-                xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1;
+                xPos = player.xPos + player.hitBox.xOffset  - 1;
                 yPos = player.yPos + player.hitBox.yOffset;
                 isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
     
@@ -292,16 +301,18 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     
                 if(isColliding)
                 {
+                    // player.vx = 0;
+                    player.physics.isOnGround = true;
                     //Existe colisión a la derecha
                     player.isCollidingWithObstacleOnTheRight = true;
     
                     //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
-                    overlap = Math.floor(xPos) % xBrickSize + 1;
-                    player.xPos -= overlap;
+                    overlap = Math.floor(yPos) % xBrickSize + 1;
+                    player.yPos -= overlap+10;
+                    
+                    
                 }
-    
                 break;
-
         default:
             //Resto de estados. A rellenar
             break;
