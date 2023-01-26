@@ -69,6 +69,11 @@ function loadAssets()
     tileSet.src = "./images/fondo18.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
+
+    new_game = new Image();
+    new_game.addEventListener("load", loadHandler, false);
+    new_game.src = "./images/fondo15.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.assetsToLoad.push(new_game);
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
@@ -87,18 +92,18 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.PLAYING;
+        globals.gameState = Game.NEW_GAME;
     }
 }
 
 function initSprites()///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     initPlayer();
-    // initPlataforms();
-    // initArrow();
-    // initCarrot();
-    // initPlataformsN();
-    // initPlataformsMoviento();
+    initPlataforms();
+    initArrow();
+    initCarrot();
+    initPlataformsN();
+    initPlataformsMoviento();
 }
 
 function initPlataformsMoviento(){

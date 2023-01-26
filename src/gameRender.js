@@ -12,10 +12,18 @@ export default function render()
         case Game.LOADING:
             //Draw loading spinner
             break;
+
+        case Game.NEW_GAME:
+            renderNewGame();
+            break;
         
         case Game.PLAYING:
             drawGame();
             break;
+
+        case Game.GAME_OVER:
+
+        break;
         
         default:
             console.error("Error: Game State invalid");
@@ -32,11 +40,17 @@ function drawGame()
     globals.ctx.fillText("FPS: " + 1 / globals.deltaTime, 30, 30);
     */
 
+    //Movemos la cámara
+    // moveCamera();
+
     //dibujamos el mapa (nivel)
     renderMap();
 
     //dibujamos los elementos
     renderSprites(); //antes ponía drawSprites
+
+    //restauramos la cámara
+    // restoreCamera();
 
     //dibujamos el HUD
     renderHUD();
@@ -186,4 +200,20 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillText("DENBORA", 190, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
     globals.ctxHUD.fillText(time, 215, 16);
+}
+
+function moveCamera() //Función que nos desplazará el origen de coordenadas a la posición nueva. Se llamará antes de dibujar los elementos en el canvas
+{
+    globals.ctx.translate(-50, -50);
+}
+
+function restoreCamera() //Función que restaurará la cámara (el origen de coordenadas) a su posición inicial, para dejarla lista para el siguiente ciclo de ejecución.
+{
+    globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
+}
+
+function renderNewGame()
+{
+    
+    globals.ctx.drawImage(new_game,0,0);
 }

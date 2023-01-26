@@ -21,8 +21,16 @@ export default function update()
             console.log("Loading assets...");
             break;
         
+        case Game.NEW_GAME:
+            pantalla();
+            break;
+
         case Game.PLAYING:
             playGame();
+            break;
+
+        case Game.GAME_OVER:
+    
             break;
         
         default:
@@ -59,6 +67,8 @@ function playGame()
     updateLevelTime();
 
     createPlataforms();
+
+  
 }
 
 function updateSprites()
@@ -526,5 +536,15 @@ function createPlataforms()
             globals.sprites.push(plataforma);
         }
         globals.crearNuevasPlataf = false;
+    }
+}
+
+
+
+function pantalla()
+{
+    if (globals.action.jump === true)
+    {
+        globals.gameState = State.PLAYING;
     }
 }
