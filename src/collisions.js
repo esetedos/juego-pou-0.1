@@ -198,12 +198,11 @@ function eliminaciónDePlataformas()
 //Devuelve el id del tile del mapa para una posición (xPos, yPos) determinada.
 function getMapTileId(xPos, yPos)
 {
-    const yBrickSize = globals.level.imageSet.yGridSize;
-    const xBrickSize = globals.level.imageSet.xGridSize;
+    const brickSize = globals.level.imageSet.yGridSize;
     const levelData = globals.level.data;
 
-    const fil = Math.floor(yPos / yBrickSize);
-    const col = Math.floor(xPos / xBrickSize);
+    const fil = Math.floor(yPos / brickSize);
+    const col = Math.floor(xPos / brickSize);
 
     return levelData[fil][col];
 }
@@ -232,91 +231,137 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     const player = globals.sprites[0];
 
     //Reset collision state
-    player.isCollidingWithObstacleOnTheRight = false;
+    player.isCollidingWithObstacleOnTop = false;
 
     let xPos;
     let yPos;
     let isCollidingOnPos1;
-    //let isCollidingOnPos2;
+    let isCollidingOnPos2;
     let isCollidingOnPos3;
     let isColliding;
     let overlap;
 
-    const xBrickSize = globals.level.imageSet.xGridSize;
-    const yBrickSize = globals.level.imageSet.yGridSize;
+    const brickSize = globals.level.imageSet.xGridSize;
     const direction = player.state;
 
     //ID del obstáculo
     const obstacleId = Block.WOOD;
 
+//COLISIÓN ÚNICA AL TILESET (POR ARRIBA)
+
+    //Primera colisión en (xPos + xSize - 1, yPos)
+    xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1;
+    // yPos = player.yPos + player.hitBox.yOffset;
+    yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
+    // isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+
+    //punto medio del player
+    xPos = player.xPos + Math.floor(player.hitBox.xOffset/2 + player.hitBox.xSize/2) - 1;
+    isCollidingOnPos2 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+
+    //Última colisión en (xPos + xSize - 1, yPos + ySize - 1)
+    xPos = player.xPos + player.hitBox.xOffset  - 1;
+    isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+
+    //Habrá colisión si toca alguno de los 3 bloques
+    isColliding = isCollidingOnPos2;
+
+    if(isColliding)
+    {
+        // overlap = Math.floor(yPos) % brickSize +1;
+        // player.yPos -= overlap; 
+        player.physics.isOnGround = true;
+        // player.vx = 0;
+        // player.ax = 0;
+        //Existe colisión a la derecha
+        player.isCollidingWithObstacleOnTop = true;
+
+        //al poner esto, el conejo da un pequeño saltito, antes de saltar
+        //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
+         
+    }
+
+
+
+
+
+/*
+
     switch(direction)
     {
         case State.RIGHT:
-            //Primera colisión en (xPos + xSize - 1, yPos)
+            // Primera colisión en (xPos + xSize - 1, yPos)
             xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1;
             yPos = player.yPos + player.hitBox.yOffset;
             isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
-            //Segunda colisión en (xPos + xSize - 1, yPos + brickSize)
-            // yPos = player.yPos + player.hitBox.yOffset + brickSize;
-            // isCollidingOnPos2 = isCOllidingWithObstacleAt(xPos, yPos, obstacleId);
+            // Segunda colisión en (xPos + xSize - 1, yPos + brickSize)
+            // yPos = player.yPos + player.hitBox.yOffset + yBrickSize;
+            // isCollidingOnPos2 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
             //Última colisión en (xPos + xSize - 1, yPos + ySize - 1)
-            yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
-            isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+            // yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
+            // isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
             
             //Habrá colisión si toca alguno de los 3 bloques
-            isColliding = isCollidingOnPos1 || isCollidingOnPos3; // || isCollidingOnPos2;
+            isColliding = isCollidingOnPos1; //|| isCollidingOnPos3; // || isCollidingOnPos3;
 
             if(isColliding)
             {
-                // player.vx = 0;
-                // player.ax = 0;
-                //Existe colisión a la derecha
+                // player.physics.isOnGround = false;
+                // // player.vx = 0;
+                // // player.ax = 0;
+                // //Existe colisión a la derecha
                 player.isCollidingWithObstacleOnTheRight = true;
 
-                //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
-                overlap = Math.floor(yPos) % yBrickSize +1;
+                // //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
+                overlap = Math.floor(yPos) % brickSize +1;
                 player.yPos -= overlap;
+
+                
             }
+            
 
             break;
 
-            case State.LEFT:
-                //Primera colisión en (xPos + xSize - 1, yPos)
-                xPos = player.xPos + player.hitBox.xOffset  - 1;
-                yPos = player.yPos + player.hitBox.yOffset;
-                isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+            // case State.LEFT:
+            //     //Primera colisión en (xPos + xSize - 1, yPos)
+            //     xPos = player.xPos + player.hitBox.xOffset  - 1;
+            //     yPos = player.yPos + player.hitBox.yOffset;
+            //     isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
     
-                //Segunda colisión en (xPos + xSize - 1, yPos + brickSize)
-                // yPos = player.yPos + player.hitBox.yOffset + brickSize;
-                // isCollidingOnPos2 = isCOllidingWithObstacleAt(xPos, yPos, obstacleId);
+            //     //Segunda colisión en (xPos + xSize - 1, yPos + brickSize)
+            //     // yPos = player.yPos + player.hitBox.yOffset + brickSize;
+            //     // isCollidingOnPos2 = isCOllidingWithObstacleAt(xPos, yPos, obstacleId);
     
-                //Última colisión en (xPos + xSize - 1, yPos + ySize - 1)
-                yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
-                isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+            //     //Última colisión en (xPos + xSize - 1, yPos + ySize - 1)
+            //     yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
+            //     isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
                 
-                //Habrá colisión si toca alguno de los 3 bloques
-                isColliding = isCollidingOnPos1 || isCollidingOnPos3; // || isCollidingOnPos2;
+            //     //Habrá colisión si toca alguno de los 3 bloques
+            //     isColliding = isCollidingOnPos1 || isCollidingOnPos3; // || isCollidingOnPos2;
     
-                if(isColliding)
-                {
-                    // player.vx = 0;
-                    player.physics.isOnGround = true;
-                    //Existe colisión a la derecha
-                    player.isCollidingWithObstacleOnTheRight = true;
+            //     if(isColliding)
+            //     {
+            //         // player.vx = 0;
+            //         player.physics.isOnGround = true;
+            //         //Existe colisión a la derecha
+            //         player.isCollidingWithObstacleOnTheRight = true;
     
-                    //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
-                    overlap = Math.floor(yPos) % xBrickSize + 1;
-                    player.yPos -= overlap+10;
+            //         //al poner esto, el conejo da un pequeño saltito, antes de saltar
+            //         //AJUSTE: Calculamos soplamiento (overlap) y lo eliminamos moviendo el personaje tantos písxeles como overlap a la izquierda
+            //         // overlap = Math.floor(yPos) % xBrickSize + 1;
+            //         // player.yPos -= overlap;
                     
-                    
-                }
-                break;
+            //     }
+                
+
+            //     break;
         default:
             //Resto de estados. A rellenar
             break;
 
 
     }
+*/
 }

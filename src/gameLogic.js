@@ -199,7 +199,7 @@ else sprite.physics.ax = 0;
         //calculamos velocidad en Y (V = V + at)
         sprite.physics.vy += sprite.physics.ay * globals.deltaTime;
     }
-    else //estamos en el juego
+    else //estamos en el suelo
     {
         if(true) //globals.action.jump) //pulsamos la tecla de salto
         {
@@ -234,12 +234,14 @@ else sprite.physics.ax = 0;
     // COLISION CON EL SUELO (PASAREMOS LUEGO A COLISIONS)
     //-----------------------------------------
 
-    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize) //189
+    //el  -2 es porqeu si el hitbox del player baja más abajo, surge un probleema porque (enn la parte de colisions) no hay ningun tileset más abajo, y da error
+    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize - 2) //189
     {
         sprite.physics.isOnGround = true;
-        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
+        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize -2;
         sprite.physics.vy = 0;
         sprite.frames.frameCounter=0;
+        // sprite.yPos = globals.canvas.height - sprite.imageSet
     }
 
     //Actualizamos la animación
