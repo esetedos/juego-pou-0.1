@@ -94,11 +94,11 @@ function loadHandler(){
 function initSprites()///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     initPlayer();
-    initPlataforms();
-    initArrow();
-    initCarrot();
-    initPlataformsN();
-    initPlataformsMoviento();
+    // initPlataforms();
+    // initArrow();
+    // initCarrot();
+    // initPlataformsN();
+    // initPlataformsMoviento();
 }
 
 function initPlataformsMoviento(){
