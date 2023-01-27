@@ -243,10 +243,10 @@ else sprite.physics.ax = 0;
     //-----------------------------------------
 
     //el  -2 es porqeu si el hitbox del player baja más abajo, surge un probleema porque (enn la parte de colisions) no hay ningun tileset más abajo, y da error
-    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize) //189
+    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize-2) //189
     {
         sprite.physics.isOnGround = true;
-        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
+        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize-2;
         sprite.physics.vy = 0;
         sprite.frames.frameCounter=0;
         // sprite.yPos = globals.canvas.height - sprite.imageSet
@@ -548,6 +548,7 @@ function createPlataforms()
 
 function pantalla()
 {
+    console.log("entra");
     if (globals.action.jump === true)
     {
         globals.gameState = Game.PLAYING;

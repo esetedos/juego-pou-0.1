@@ -215,6 +215,13 @@ function restoreCamera() //Función que restaurará la cámara (el origen de coo
 
 function renderNewGame()
 {
-    
-    globals.ctx.drawImage(new_game,0,0);
+    // globals.ctx.drawImage(new_game,0,0);
+    globals.ctx.drawImage(
+        globals.tileMap[0],
+        0, 0,                       //the source x and y position
+        256, globals.canvas.width,               //the source height and width
+        0, 0,                         //the destination x and y position
+        256, globals.canvas.width                     //the destination height and width
+                    
+    );
 }

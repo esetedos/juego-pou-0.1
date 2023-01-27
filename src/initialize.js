@@ -38,7 +38,7 @@ function initVars()
     globals.frameTimeObj =        1 / FPS; //Frame time in seconds
 
     //Inicializamos el estado del juego
-    globals.gameState = Game.PLAYING;
+    globals.gameState = Game.NEW_GAME;
 
     //Inicializamos los estado sde las acciones
     globals.action = {
@@ -73,8 +73,8 @@ function loadAssets()
 
     new_game = new Image();
     new_game.addEventListener("load", loadHandler, false);
-    new_game.src = "./images/GAME_OVER.png";  //Ojo que la ruta es relativa al HTML, no al JS
-    globals.tileSets.push(new_game);
+    new_game.src = "./images/pantalla_inicio.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileMap.push(new_game);
     globals.assetsToLoad.push(new_game);
 }
 
@@ -94,7 +94,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.PLAYING;
+        globals.gameState = Game.NEW_GAME;
     }
 }
 

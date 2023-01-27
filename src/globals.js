@@ -50,5 +50,7 @@ export default {
 
     metroak: 0,
 
-    crearNuevasPlataf: false
+    crearNuevasPlataf: false,
+
+    tileMap: []
 };
