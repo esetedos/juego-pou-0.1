@@ -15,7 +15,7 @@ export default function render()
             break;
 
         case Game.NEW_GAME:
-            // renderNewGame();
+            renderNewGame();
             break;
         
         case Game.PLAYING:
@@ -165,7 +165,7 @@ function renderMap()
 function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
 {
     //TEST: datos metidos en bruto
-    const score = 1500;
+    const score = Math.floor(globals.metroak/10)*10;
     const highScore = 130000;
     const life = 40;
     const time = globals.levelTime.value;
@@ -187,7 +187,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillStyle = 'lightgreen';
     // globals.ctxHUD.fillText("BIZITZA", 168, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + globals.metroak, 150, 16);
+    globals.ctxHUD.fillText(" " + score, 150, 16);
 
     //round corners. (remove 1 pixel per corner)
     globals.ctxHUD.fillStyle = 'black';

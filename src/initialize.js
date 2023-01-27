@@ -74,6 +74,7 @@ function loadAssets()
     new_game = new Image();
     new_game.addEventListener("load", loadHandler, false);
     new_game.src = "./images/GAME_OVER.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileSets.push(new_game);
     globals.assetsToLoad.push(new_game);
 }
 
@@ -85,7 +86,7 @@ function loadHandler(){
     if(globals.assetsLoaded === globals.assetsToLoad.length)
     {
         //UPDATE. remove the load event listener
-        for(let i = 0; i < globals.tileSets ; ++i)
+        for(let i = 0; i < globals.tileSets; ++i)
         {
             globals.tileSets[i].removeEventListener("load", loadHandler, false);
         }
@@ -214,7 +215,7 @@ function initArrow(){
         const hitBox = new HitBox(30, 4, 8, 2)
 
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, physics, hitBox);
+        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, 150, imageSet, frames, physics, hitBox);
 
          //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);

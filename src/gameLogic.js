@@ -147,14 +147,12 @@ function updatePlayer(sprite)
     switch(sprite.state)
     {
         case State.RIGHT:
-        case State.RIGHT:
             //si se mueve a la derecha ax (+)
             sprite.physics.ax = sprite.physics.aLimit;
             // sprite.physics.vy = 0;
             //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
             break;
 
-        case State.LEFT:
         case State.LEFT:
             //si se mueve a la izquierda asignamos ax (-)
             sprite.physics.ax = -sprite.physics.aLimit;
@@ -245,10 +243,10 @@ else sprite.physics.ax = 0;
     //-----------------------------------------
 
     //el  -2 es porqeu si el hitbox del player baja más abajo, surge un probleema porque (enn la parte de colisions) no hay ningun tileset más abajo, y da error
-    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize - 2) //189
+    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize) //189
     {
         sprite.physics.isOnGround = true;
-        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize -2;
+        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
         sprite.physics.vy = 0;
         sprite.frames.frameCounter=0;
         // sprite.yPos = globals.canvas.height - sprite.imageSet
@@ -430,7 +428,14 @@ function updateLife(sprite)
     if(sprite.isCollidingWithPlayer2)
     {
         //Si hay colisión reducimos las vida
-        globals.life--;
+        
+        sprite.state = -1;
+        //GAME_OVER (pero sólo se le quita una vida)
+        //luego (fuera de aquí) se pondría que si las vidas son 0, GAME_OVER
+    }
+    if(sprite.state == -1)
+    {
+        globals.life = Math.round(globals.life - 0.5); //quita dos de vida
     }
 }
 
@@ -545,6 +550,6 @@ function pantalla()
 {
     if (globals.action.jump === true)
     {
-        globals.gameState = State.PLAYING;
+        globals.gameState = Game.PLAYING;
     }
 }
