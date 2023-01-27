@@ -572,7 +572,7 @@ function gameEnd()
 
 function updateGame_over()
 {
-    if (globals.action.jump === true)
+    if (globals.action.H === true)
     {
         globals.gameState = Game.NEW_GAME;
     }
