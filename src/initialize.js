@@ -55,6 +55,7 @@ function initVars()
 function loadAssets()
 {
     let tileSet;
+    let new_game;
 
     //load the spritesheet image
     tileSet = new Image();
@@ -92,7 +93,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.NEW_GAME;
+        globals.gameState = Game.PLAYING;
     }
 }
 
