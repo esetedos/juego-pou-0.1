@@ -434,6 +434,7 @@ function updateLife(sprite)
     }
     if(sprite.state == -1)
     {
+        const player = globals.sprites[0];
 
         player.state = State.LEFT;
         player.physics.vy = 0;
@@ -572,6 +573,7 @@ function gameEnd()
 
 function updateGame_over()
 {
+    globals.life = 3;
     if (globals.action.H === true)
     {
         globals.gameState = Game.NEW_GAME;
