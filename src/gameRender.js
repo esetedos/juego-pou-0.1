@@ -3,6 +3,7 @@ import { Game } from "./constants.js";
 import {Tile} from "./constants.js";
 import Timer from "./Timer.js"; //lo he puesto yo (no está en los tutoriales)
 
+
 //Función que renderiza los gráficos
 export default function render()
 {
@@ -14,7 +15,7 @@ export default function render()
             break;
 
         case Game.NEW_GAME:
-            renderNewGame();
+            // renderNewGame();
             break;
         
         case Game.PLAYING:

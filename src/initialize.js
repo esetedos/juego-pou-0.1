@@ -73,7 +73,7 @@ function loadAssets()
 
     new_game = new Image();
     new_game.addEventListener("load", loadHandler, false);
-    new_game.src = "./images/fondo15.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    new_game.src = "./images/GAME_OVER.png";  //Ojo que la ruta es relativa al HTML, no al JS
     globals.assetsToLoad.push(new_game);
 }
 
@@ -100,11 +100,11 @@ function loadHandler(){
 function initSprites()///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     initPlayer();
-    // initPlataforms();
-    // initArrow();
-    // initCarrot();
-    // initPlataformsN();
-    // initPlataformsMoviento();
+    initPlataforms();
+    initArrow();
+    initCarrot();
+    initPlataformsN();
+    initPlataformsMoviento();
 }
 
 function initPlataformsMoviento(){
@@ -246,6 +246,23 @@ function initPlataforms(){
         }
         b = 148;
     }
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+    const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+
+    //creamos los datos de la animacion. 8 framesn / state
+    const frames = new Frames(1, 5);
+
+    //creamos nuestro objeto physics con vLimit = 40 pixels/second
+    const physics = new Physics(40, 40, 0); //velocidad de las plataformas
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(30, 4, 0, 0)
+
+    //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+    const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, 170, 148, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+
+    //añadimos el pirate al array de sprites
+    globals.sprites.push(plataforma);
 }
 
 function initPlayer()
@@ -267,7 +284,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.RIGHT, 50, 160, imageSet, frames, physics, hitBox, hitBox2);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 230, 130, imageSet, frames, physics, hitBox, hitBox2);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

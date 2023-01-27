@@ -26,7 +26,7 @@ export default function update()
             break;
 
         case Game.PLAYING:
-            playGame();
+            playGame(); //120 segundos de demo
             break;
 
         case Game.GAME_OVER:

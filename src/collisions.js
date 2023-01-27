@@ -351,8 +351,8 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
         //PUNTO 3
         //vemos si hay colision en (xPos + xSize -1, yPos)
-        xPos = player.xPos + player.hitBox.xSize - 1;
-        yPos = player.yPos + player.hitBox.ySize - 1;
+        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1;
+        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
         isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
         if(isCollidingOnPos3) //hay colisión en punto 3
