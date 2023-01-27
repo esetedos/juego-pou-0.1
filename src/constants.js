@@ -18,7 +18,7 @@ export const SpriteID = {
     PLAYER: 0,
     PLATAFORM: 1,
     ARROW: 2,
-    CARROT: 3,
+    // CARROT: 3,
     PLATAFORMN: 4,
     PLATAFORMMOVIMIENTO:    5
 }
@@ -37,9 +37,7 @@ export const State = {
     BROKE_2: -1,
     SOLID_2: 0, //para la flecha también
 
-    //Estados de CARROT
-    BROKE_3: -1,
-    SOLID_3: 0,
+    
 
     //estados PLATAFORMASN
     BROKE_4: -1,
@@ -73,7 +71,8 @@ export const Block = {
 export const Key = {
     RIGHT:  39,
     LEFT:   37,
-    JUMP:   32
+    JUMP:   32,
+    H:      72
 }
 
 //aceleración

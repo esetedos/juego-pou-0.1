@@ -1,7 +1,7 @@
 //clase gestora de los sprites
 export default class Sprite
 {
-    constructor(id, state, xPos, yPos, imageSet, frames, physics, hitBox, hitBox2)
+    constructor(id, state, xPos, yPos, imageSet, frames, physics, hitBox, hitBox2, life)
     {
         this.id                                 = id;               //Tipo de sprite
         this.state                              = state;            //estado de animacion del sprite
@@ -18,6 +18,7 @@ export default class Sprite
         this.isCollidingWithObstacleOnLeft      = false;            //Indica si ha habido colisión con un obstáculo hacia la IZQUIERDA
         this.isCollidingWithObstacleOnBottom    = false;            //Indica si ha habido colisión con un obstáculo hacia ABAJO
         this.isCollidingWithObstacleOnRight     = false;            //Indica si ha habido colisión con un obstáculo hacia la DERECHA
+        this.life                               = life;
         //los últimos 4 no se usan(?)
     }
 }

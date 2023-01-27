@@ -44,7 +44,8 @@ function initVars()
     globals.action = {
         moveLeft:   false,
         moveRight:  false,
-        jump:       false
+        jump:       false,
+        H:          false
     }
 
     //Variables logica juego
@@ -56,6 +57,7 @@ function loadAssets()
 {
     let tileSet;
     let new_game;
+    let game_over;
 
     //load the spritesheet image
     tileSet = new Image();
@@ -76,6 +78,14 @@ function loadAssets()
     new_game.src = "./images/pantalla_inicio.png";  //Ojo que la ruta es relativa al HTML, no al JS
     globals.tileMap.push(new_game);
     globals.assetsToLoad.push(new_game);
+
+    game_over = new Image();
+    game_over.addEventListener("load", loadHandler, false);
+    game_over.src = "./images/GAME_OVER.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileMap.push(game_over);
+    globals.assetsToLoad.push(game_over);
+
+
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
@@ -103,9 +113,9 @@ function initSprites()//////////////////////////////////////////////////////////
     initPlayer();
     initPlataforms();
     initArrow();
-    initCarrot();
     initPlataformsN();
     initPlataformsMoviento();
+   
 }
 
 function initPlataformsMoviento(){
@@ -179,26 +189,7 @@ function initPlataformsN(){
 
 }
 
-function initCarrot()
-{
-    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(4, 0, 10, 6, 10, 24, 0, 2);
 
-    //creamos los datos de la animacion. 8 frames / state
-    const frames = new Frames(1); //en teoría debería ser (0, 5)
-
-    //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
-    const physics = new Physics(40);
-
-    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-    const hitBox = new HitBox(6, 2, 2, 2)
-
-    //creamos nuestro sprite
-    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 150, 60, imageSet, frames, physics, hitBox);
-
-    //añadimos el player al array de sprites
-    globals.sprites.push(carrot);
-}
 
 //algo
 function initArrow(){
@@ -215,7 +206,7 @@ function initArrow(){
         const hitBox = new HitBox(30, 4, 8, 2)
 
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, 150, imageSet, frames, physics, hitBox);
+        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, physics, hitBox);
 
          //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
@@ -314,7 +305,6 @@ function initEvents()
     window.addEventListener("keydown", keydownHandler, false);
     window.addEventListener("keyup", keyupHandler, false);
 }
-
 
 
 

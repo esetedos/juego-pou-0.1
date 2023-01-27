@@ -23,7 +23,7 @@ export default function render()
             break;
 
         case Game.GAME_OVER:
-
+            renderGameOver();
         break;
         
         default:
@@ -218,6 +218,18 @@ function renderNewGame()
     // globals.ctx.drawImage(new_game,0,0);
     globals.ctx.drawImage(
         globals.tileMap[0],
+        0, 0,                       //the source x and y position
+        256, globals.canvas.width,               //the source height and width
+        0, 0,                         //the destination x and y position
+        256, globals.canvas.width                     //the destination height and width
+                    
+    );
+}
+
+function renderGameOver()
+{
+    globals.ctx.drawImage(
+        globals.tileMap[1],
         0, 0,                       //the source x and y position
         256, globals.canvas.width,               //the source height and width
         0, 0,                         //the destination x and y position

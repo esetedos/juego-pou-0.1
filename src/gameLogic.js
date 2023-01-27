@@ -30,7 +30,7 @@ export default function update()
             break;
 
         case Game.GAME_OVER:
-    
+            updateGame_over();
             break;
         
         default:
@@ -68,6 +68,7 @@ function playGame()
 
     createPlataforms();
 
+    gameEnd();
   
 }
 
@@ -112,10 +113,6 @@ function updateSprite(sprite)
         //case de la flecha
         case SpriteID.ARROW:
             updateArrow(sprite);
-            break;
-
-        case SpriteID.CARROT:
-            updateCarrot(sprite);
             break;
 
         case SpriteID.PLATAFORMN:
@@ -319,18 +316,6 @@ function updatePlataformN(sprite)
     //updateAnimationFrame(sprite);
 }
 
-function updateCarrot(sprite)
-{
-    if(globals.action.jump) //pulsamos la tecla de salto
-    {
-        if(sprite.state === State.SOLID_3)
-        {
-            sprite.state === State.BROKE_3;
-            sprite.frames.frameCounter=1;
-            // sprite.state === State.BROKE; //no funciona así, a ver cómo lo hago
-        }
-    }  
-}
 
 function updateArrow(sprite)
 {
@@ -449,6 +434,14 @@ function updateLife(sprite)
     }
     if(sprite.state == -1)
     {
+
+        player.state = State.LEFT;
+        player.physics.vy = 0;
+        player.physics.vx = 0;
+        player.frames.frameCounter=0;
+       
+        player.xPos = 235;
+        player.yPos = 130;
         globals.life = globals.life - 0.5; //quita dos de vida
     }
 }
@@ -566,5 +559,21 @@ function updateNew_Game()
     if (globals.action.jump === true)
     {
         globals.gameState = Game.PLAYING;
+    }
+}
+
+function gameEnd()
+{
+    if(globals.life <= 0)
+    {
+        globals.gameState = Game.GAME_OVER; 
+    }
+}
+
+function updateGame_over()
+{
+    if (globals.action.jump === true)
+    {
+        globals.gameState = Game.NEW_GAME;
     }
 }
