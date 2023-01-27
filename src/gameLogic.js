@@ -22,7 +22,7 @@ export default function update()
             break;
         
         case Game.NEW_GAME:
-            pantalla();
+            updateNew_Game();
             break;
 
         case Game.PLAYING:
@@ -245,10 +245,24 @@ else sprite.physics.ax = 0;
     //el  -2 es porqeu si el hitbox del player baja más abajo, surge un probleema porque (enn la parte de colisions) no hay ningun tileset más abajo, y da error
     if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize-2) //189
     {
-        sprite.physics.isOnGround = true;
-        sprite.yPos = globals.canvas.height - sprite.imageSet.ySize-2;
+        //230x, 130y
+        sprite.state = State.LEFT;
         sprite.physics.vy = 0;
+        sprite.physics.vx = 0;
         sprite.frames.frameCounter=0;
+       
+        sprite.xPos = 235;
+        sprite.yPos = 130;
+        
+        globals.life--; //quita dos de vida
+   
+
+
+
+        // sprite.physics.isOnGround = true;
+        // sprite.yPos = globals.canvas.height - sprite.imageSet.ySize-2;
+        // sprite.physics.vy = 0;
+        // sprite.frames.frameCounter=0;
         // sprite.yPos = globals.canvas.height - sprite.imageSet
     }
 
@@ -435,7 +449,7 @@ function updateLife(sprite)
     }
     if(sprite.state == -1)
     {
-        globals.life = Math.round(globals.life - 0.5); //quita dos de vida
+        globals.life = globals.life - 0.5; //quita dos de vida
     }
 }
 
@@ -458,7 +472,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
             player.yPos = sprite.yPos - sprite.imageSet.ySize;
 
             //Si hay colisión reducimos las vida
-            globals.life--;
+            // globals.life--;
             let suelo = player.yPos;
             if(player.yPos > suelo - player.imageSet.ySize) //189
             {
@@ -546,7 +560,7 @@ function createPlataforms()
 
 
 
-function pantalla()
+function updateNew_Game()
 {
     console.log("entra");
     if (globals.action.jump === true)

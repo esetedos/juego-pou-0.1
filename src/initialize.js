@@ -48,7 +48,7 @@ function initVars()
     }
 
     //Variables logica juego
-    globals.life = 400;
+    globals.life = 3;
     globals.saltoKop = 0;
 }
 
