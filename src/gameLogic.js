@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import { Game, State, SpriteID, GRAVITY} from "./constants.js";
+import { Game, State, SpriteID, GRAVITY, ParticleState, ParticleID} from "./constants.js";
 import callDetectCollisions from "./collisions.js";
 import { Plataformas} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
@@ -54,6 +54,9 @@ function playGame()
 {
     //actualización de la física de Sprites
     updateSprites();
+
+    //pa' las partículas
+    updateParticles();
 
     //colisioNes de las plataformas y hitbox del player
     // detectCollisions();
@@ -579,4 +582,68 @@ function updateGame_over()
     {
         globals.gameState = Game.NEW_GAME;
     }
+}
+
+
+
+
+function updateParticles()
+{
+    for(let i = 0; i < globals.particles.length; ++i)
+    {
+        //console.log("Entra: " + i)
+        const particle = globals.particles[i];
+        updateParticle(particle);
+    }
+}
+
+function updateParticle(particle)
+{
+    const type = particle.id;
+    switch (type)
+    {
+        //caso del jugador
+        case ParticleID.EXPLOSION:
+            updateExplosionParticle(particle);
+            break;
+
+        //caso del enemigo  (en mi caso, no)
+        default:
+            break;
+    }
+}
+
+function updateExplosionParticle(particle)
+{
+    particle.fadeCounter += globals.deltaTime;
+
+    //Cogemos las velocidades de los arrays
+    switch (particle.state)
+    {
+        case ParticleState.ON:
+            if(particle.fadeCounter > particle.timeToFade)
+            {
+                particle.fadeCounter = 0;
+                particle.state = ParticleState.FADE;
+            }
+            break;
+
+        case ParticleState.FADE:
+            particle.alpha -= 0.01;
+
+            if (particle.alpha <= 0)
+            {
+                particle.state = ParticleState.OFF;
+            }
+            break;
+
+        case ParticleState.OFF:
+            break;
+
+        default:
+            //Por completar (?)
+    }
+
+    particle.xPos += particle.physics.vx * globals.deltaTime;
+    particle.yPos += particle.physics.vy * globals.deltaTime;
 }
