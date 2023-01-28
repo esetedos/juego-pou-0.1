@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import {Game, SpriteID, State, FPS} from "./constants.js";
+import {Game, SpriteID, State, FPS, ParticleState, ParticleID} from "./constants.js";
 import Sprite, { Plataformas, PlataformasN} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
@@ -8,6 +8,8 @@ import Timer from "./Timer.js";
 import Physics from "./Physics.js";
 import { keydownHandler, keyupHandler } from "./events.js";
 import HitBox from "./HitBox.js";
+import ExplosionParticles from "./Particle.js";
+import ExplosionParticle from "./Particle.js";
 
 //Función que inicializa los elementos HTML
 function initHTMLelements()
@@ -306,6 +308,48 @@ function initEvents()
     window.addEventListener("keyup", keyupHandler, false);
 }
 
+function initParticles()
+{
+    initExplosion();
+}
+
+function initExplosion()
+{
+    const numParticles = 300;
+    const xInit = 100;
+    const yInit = 100;
+    const radius = 2.5;
+    const timeToFadeMAx = 5;
+    const alpha = 1.0;
+
+    for(let i = 0; i < numParticles; ++i)
+    {
+        const velocity = Math.random() * 15 + 5;
+        const physics = new Physics(velocity);
+
+        const timeToFade = timeToFadeMAx * Math.random() + 1;
+        const particle = new ExplosionParticle(ParticleID.EXPLOSION, ParticleState.ON, xInit, yInit, radius, alpha, physics, timeToFade);
+
+        //Asignamos velocidades según el ángulo aleatorio
+        const randomAngle = Math.random() * 2 * Math.PI;
+        particle.physics.vx = particle.physics.vLimit * Math.cos(randomAngle);
+        particle.physics.vy = particle.physics.vLimit * Math.sin(randomAngle);
+
+        globals.particles.push(particle);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -320,5 +364,6 @@ export {
     initSprites,
     initLevel,
     initTimers,
-    initEvents
+    initEvents,
+    initParticles
 }

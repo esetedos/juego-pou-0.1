@@ -52,5 +52,7 @@ export default {
 
     crearNuevasPlataf: false,
 
-    tileMap: []
+    tileMap: [],
+    
+    particles: []
 };

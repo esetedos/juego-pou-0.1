@@ -1,6 +1,5 @@
 import globals from "./globals.js";
-import { Game } from "./constants.js";
-import {Tile} from "./constants.js";
+import { Game, ParticleState, Tile, ParticleID } from "./constants.js";
 import Timer from "./Timer.js"; //lo he puesto yo (no está en los tutoriales)
 
 
@@ -52,6 +51,9 @@ function drawGame()
 
     //restauramos la cámara
     // restoreCamera();
+
+    //dibujamos las partículas
+    renderParticles();
 
     //dibujamos el HUD
     renderHUD();
@@ -236,4 +238,46 @@ function renderGameOver()
         256, globals.canvas.width                     //the destination height and width
                     
     );
+}
+
+
+function renderParticles()
+{
+    for(let i = 0; i < globals.particles.length; ++i)
+    {
+        const particle = globals.particles[i];
+        renderParticle(particle);
+    }
+}
+
+function renderParticle(particle)
+{
+    const type = particle.id;
+    switch (type)
+    {
+        //caso del jugador
+        case ParticleID.EXPLOSION:
+            renderExplosionParticle(particle);
+            break;
+
+        case ParticleID.FIRE:   //esto creo que sobra
+            renderFireParticle(particle); 
+            break;
+
+        default:
+            break;
+    }
+}
+
+function renderExplosionParticle(particle)
+{
+    if(particle.state != ParticleState.OFF)
+    {
+        globals.ctx.fillStyle = 'green';
+        globals.ctx.globalAlpha = particle.alpha; // Set alpha
+        globals.ctx.beginPath();
+        globals.ctx.arc(particle.xPos, particle.yPos, particle.radius, 0, 2 * Math.PI);
+        globals.ctx.fill();
+        globals.ctx.globalAlpha = 1.0; //Restore alpha
+    }
 }
