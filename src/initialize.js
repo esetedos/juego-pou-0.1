@@ -104,7 +104,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.NEW_GAME;
+        globals.gameState = Game.PLAYING;
     }
 }
 

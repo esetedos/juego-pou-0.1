@@ -565,10 +565,11 @@ function updateNew_Game()
 
 function gameEnd()
 {
-    if(globals.life <= 0)
+    if(globals.life <= 0 || globals.levelTime.value == 240) //porque el tiempo va a x0.5, asi q para que sean 120s, pues serían 240 aquí
     {
         globals.gameState = Game.GAME_OVER; 
     }
+    
 }
 
 function updateGame_over()
