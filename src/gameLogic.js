@@ -6,6 +6,7 @@ import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import Physics from "./Physics.js";
 import HitBox from "./HitBox.js";
+import { initParticles } from "./initialize.js";
 
 
 
@@ -206,13 +207,15 @@ else sprite.physics.ax = 0;
     {   
         //calculamos velocidad en Y (V = V + at)
         sprite.physics.vy += sprite.physics.ay * globals.deltaTime;
+        
     }
     else //estamos en el suelo
     {
+        
         if(true) //globals.action.jump) //pulsamos la tecla de salto
         {
             sprite.physics.isOnGround = false;
-
+            
             //asignamos velocidad inicial al salto
             sprite.physics.vy += sprite.physics.jumpForce;
         }
@@ -446,7 +449,7 @@ function updateLife(sprite)
        
         player.xPos = 235;
         player.yPos = 130;
-        globals.life = globals.life - 0.5; //quita dos de vida
+        globals.life --; //quita dos de vida
     }
 }
 
@@ -474,6 +477,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
             if(player.yPos > suelo - player.imageSet.ySize) //189
             {
                 player.physics.isOnGround = true;
+                initParticles();
                 player.yPos = suelo - player.imageSet.ySize;
                 player.physics.vy = 0;
                 player.frames.frameCounter=0;
@@ -559,7 +563,7 @@ function createPlataforms()
 
 function updateNew_Game()
 {
-    console.log("entra");
+    // console.log("entra");
     if (globals.action.jump === true)
     {
         globals.gameState = Game.PLAYING;
@@ -588,39 +592,64 @@ function updateGame_over()
 
 
 function updateParticles()
-{
-    for(let i = 0; i < globals.particles.length; ++i)
-    {
-        //console.log("Entra: " + i)
-        const particle = globals.particles[i];
-        updateParticle(particle);
-    }
+{   
+    // 
+        for(let i = 0; i < globals.particles.length; ++i)
+        {
+            //console.log("Entra: " + i)
+            const particle = globals.particles[i];
+            // if(globals.sprites[0].physics.isOnGround === true)
+            // {
+            //     globals.startParticles = true;
+            //     particle.state = ParticleState.ON;
+            // }
+            updateParticle(particle);
+        }
+
+    
+    
 }
 
 function updateParticle(particle)
-{
-    const type = particle.id;
-    switch (type)
-    {
-        //caso del jugador
-        case ParticleID.EXPLOSION:
-            updateExplosionParticle(particle);
-            break;
+{ 
+    
+    
+        const type = particle.id;
+        switch (type)
+        {
+            //caso del jugador
+            case ParticleID.EXPLOSION:
+                updateExplosionParticle(particle);
+                break;
 
-        //caso del enemigo  (en mi caso, no)
-        default:
-            break;
-    }
+            //caso del enemigo  (en mi caso, no)
+            default:
+                break;
+        }
+    
 }
 
 function updateExplosionParticle(particle)
 {
     particle.fadeCounter += globals.deltaTime;
 
+    let xPos  = 100;
+    let yPos = 100 ;
+    
+
+    if(globals.sprites[0].physics.isOnGround === true)
+    {
+        // xPos = globals.sprites[0].xPos + (globals.sprites[0].imageSet.xSize/2);
+        // yPos = globals.sprites[0].yPos + globals.sprites[0].imageSet.ySize;
+    }
+
+
     //Cogemos las velocidades de los arrays
     switch (particle.state)
     {
         case ParticleState.ON:
+            particle.xPos = xPos;
+            particle.yPos = yPos;
             if(particle.fadeCounter > particle.timeToFade)
             {
                 particle.fadeCounter = 0;
@@ -638,6 +667,11 @@ function updateExplosionParticle(particle)
             break;
 
         case ParticleState.OFF:
+    //         xInit = 100;
+    // const yInit = 100;
+                
+                // particle.state = ParticleState.ON;
+            
             break;
 
         default:

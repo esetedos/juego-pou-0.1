@@ -54,5 +54,7 @@ export default {
 
     tileMap: [],
     
-    particles: []
+    particles: [],
+
+    startParticles: false
 };

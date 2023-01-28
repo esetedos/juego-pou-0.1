@@ -2,12 +2,11 @@
 
 //Estados del juego
 export const Game = {
-    INVALID: -1,
-    LOADING:  0,
-    PLAYING:  1,
+    INVALID:    -1,
+    LOADING:    0,
+    PLAYING:    1,
     NEW_GAME:   2,
-    GAME_OVER:  3,
-    OVER:     4
+    GAME_OVER:  3
 };
 
 //Velocidad del juego
@@ -15,11 +14,11 @@ export const FPS = 30;
 
 //Identificador de tipo de sprite (ID)
 export const SpriteID = {
-    PLAYER: 0,
-    PLATAFORM: 1,
-    ARROW: 2,
+    PLAYER:                 0,
+    PLATAFORM:              1,
+    ARROW:                  2,
     // CARROT: 3,
-    PLATAFORMN: 4,
+    PLATAFORMN:             4,
     PLATAFORMMOVIMIENTO:    5
 }
 
@@ -34,8 +33,8 @@ export const State = {
     SOLID:    0,
 
     //Estados FLECHA (ARROW)
-    BROKE_2: -1,
-    SOLID_2: 0, //para la flecha también
+    BROKE_2:    -1,
+    SOLID_2:    0, //para la flecha también
 
     
 

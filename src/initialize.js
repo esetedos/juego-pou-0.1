@@ -106,7 +106,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.PLAYING;
+        globals.gameState = Game.NEW_GAME;
     }
 }
 
@@ -278,7 +278,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 230, 130, imageSet, frames, physics, hitBox, hitBox2);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 180, 130, imageSet, frames, physics, hitBox, hitBox2);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
@@ -315,23 +315,23 @@ function initParticles()
 
 function initExplosion()
 {
-    const numParticles = 300;
+    const numParticles = 100;
     const xInit = 100;
     const yInit = 100;
-    const radius = 2.5;
+    const radius = 0.5;
     const timeToFadeMAx = 5;
     const alpha = 1.0;
 
     for(let i = 0; i < numParticles; ++i)
     {
-        const velocity = Math.random() * 15 + 5;
+        const velocity = Math.random() * 25 + 5;
         const physics = new Physics(velocity);
 
-        const timeToFade = timeToFadeMAx * Math.random() + 1;
+        const timeToFade = timeToFadeMAx * Math.random() +1;
         const particle = new ExplosionParticle(ParticleID.EXPLOSION, ParticleState.ON, xInit, yInit, radius, alpha, physics, timeToFade);
 
         //Asignamos velocidades según el ángulo aleatorio
-        const randomAngle = Math.random() * 2 * Math.PI;
+        const randomAngle = Math.random() * 2 * Math.PI ;
         particle.physics.vx = particle.physics.vLimit * Math.cos(randomAngle);
         particle.physics.vy = particle.physics.vLimit * Math.sin(randomAngle);
 
