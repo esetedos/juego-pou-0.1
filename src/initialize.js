@@ -71,7 +71,7 @@ function loadAssets()
     //load the bricks image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/fondo18.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/fondo19.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -316,7 +316,7 @@ function initParticles()
 function initExplosion()
 {
     const numParticles = 100;
-    const xInit = 100;
+    const xInit = globals.sprites[0].physics.xPos + globals.sprites[0].imageSet.xSize/2;
     const yInit = 100;
     const radius = 0.5;
     const timeToFadeMAx = 5;
@@ -331,9 +331,9 @@ function initExplosion()
         const particle = new ExplosionParticle(ParticleID.EXPLOSION, ParticleState.ON, xInit, yInit, radius, alpha, physics, timeToFade);
 
         //Asignamos velocidades según el ángulo aleatorio
-        const randomAngle = Math.random() * 2 * Math.PI ;
-        particle.physics.vx = particle.physics.vLimit * Math.cos(randomAngle);
-        particle.physics.vy = particle.physics.vLimit * Math.sin(randomAngle);
+        const randomAngle = (Math.random() * 2) * Math.PI ;
+        particle.physics.vx = particle.physics.vLimit * Math.cos(randomAngle) +10;
+        particle.physics.vy = particle.physics.vLimit * Math.sin(randomAngle)+10;
 
         globals.particles.push(particle);
     }

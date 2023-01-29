@@ -273,7 +273,7 @@ function renderExplosionParticle(particle)
 {
     if(particle.state != ParticleState.OFF)
     {
-        globals.ctx.fillStyle = 'green';
+        globals.ctx.fillStyle = 'brown';
         globals.ctx.globalAlpha = particle.alpha; // Set alpha
         globals.ctx.beginPath();
         globals.ctx.arc(particle.xPos, particle.yPos, particle.radius, 0, 2 * Math.PI);

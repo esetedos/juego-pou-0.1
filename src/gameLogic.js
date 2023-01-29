@@ -633,14 +633,15 @@ function updateExplosionParticle(particle)
 {
     particle.fadeCounter += globals.deltaTime;
 
-    let xPos  = 100;
+
+    let xPos  ;
     let yPos = 100 ;
     
 
     if(globals.sprites[0].physics.isOnGround === true)
     {
-        // xPos = globals.sprites[0].xPos + (globals.sprites[0].imageSet.xSize/2);
-        // yPos = globals.sprites[0].yPos + globals.sprites[0].imageSet.ySize;
+        xPos = globals.sprites[0].xPos + (globals.sprites[0].imageSet.xSize/2);
+        yPos = globals.sprites[0].yPos + globals.sprites[0].imageSet.ySize;
     }
 
 
