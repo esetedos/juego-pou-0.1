@@ -196,6 +196,8 @@ function initPlataformsN(){
 
 //algo
 function initArrow(){
+    for(let i = 0; i < 3; ++i)
+    {
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
         const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
@@ -203,16 +205,18 @@ function initArrow(){
         const frames = new Frames(1);
         
         //creamos los datos de la animacion. 8 framesn / state
-        const physics = new Physics(10);    //velocidad de la flecha, velocidad de las flechas
+        const physics = new Physics(20);    //velocidad de la flecha, velocidad de las flechas
 
         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
         const hitBox = new HitBox(30, 4, 8, 2)
 
         //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, -30, Math.floor(Math.random() * 150+40), imageSet, frames, physics, hitBox);
+        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, Math.floor(Math.random() * (-30)+(-70)), Math.floor(Math.random() * 150+(0)), imageSet, frames, physics, hitBox);
 
          //añadimos el pirate al array de sprites
         globals.sprites.push(flecha);
+    }
+        
 
 }
 
