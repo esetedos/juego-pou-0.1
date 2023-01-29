@@ -20,6 +20,14 @@ export function keydownHandler(event)
         case Key.H:
             globals.action.H = true;
             break;
+
+        case Key.B:
+            globals.action.B = true;
+            break;
+
+        case Key.G:
+            globals.action.G = true;
+            break;
     }   
 }
 
@@ -41,6 +49,14 @@ export function keyupHandler(event)
 
         case Key.H:
             globals.action.H = false;
+            break;
+
+        case Key.B:
+            globals.action.B = false;
+            break;
+
+        case Key.G:
+            globals.action.G = false;
             break;
     }
 }

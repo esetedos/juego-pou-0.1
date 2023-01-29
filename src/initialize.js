@@ -47,7 +47,9 @@ function initVars()
         moveLeft:   false,
         moveRight:  false,
         jump:       false,
-        H:          false
+        H:          false,
+        B:          false,
+        G:          false
     }
 
     //Variables logica juego
@@ -58,8 +60,7 @@ function initVars()
 function loadAssets()
 {
     let tileSet;
-    let new_game;
-    let game_over;
+    let tileMap;
 
     //load the spritesheet image
     tileSet = new Image();
@@ -75,18 +76,29 @@ function loadAssets()
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
-    new_game = new Image();
-    new_game.addEventListener("load", loadHandler, false);
-    new_game.src = "./images/NEW_GAME.png";  //Ojo que la ruta es relativa al HTML, no al JS
-    globals.tileMap.push(new_game);
-    globals.assetsToLoad.push(new_game);
+    tileMap = new Image();
+    tileMap.addEventListener("load", loadHandler, false);
+    tileMap.src = "./images/NEW_GAME.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileMap.push(tileMap);
+    globals.assetsToLoad.push(tileMap);
 
-    game_over = new Image();
-    game_over.addEventListener("load", loadHandler, false);
-    game_over.src = "./images/GAME_OVER.png";  //Ojo que la ruta es relativa al HTML, no al JS
-    globals.tileMap.push(game_over);
-    globals.assetsToLoad.push(game_over);
+    tileMap = new Image();
+    tileMap.addEventListener("load", loadHandler, false);
+    tileMap.src = "./images/GAME_OVER.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileMap.push(tileMap);
+    globals.assetsToLoad.push(tileMap);
 
+    tileMap = new Image();
+    tileMap.addEventListener("load", loadHandler, false);
+    tileMap.src = "./images/HIGH_SCORE.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileMap.push(tileMap);
+    globals.assetsToLoad.push(tileMap);
+
+    tileMap = new Image();
+    tileMap.addEventListener("load", loadHandler, false);
+    tileMap.src = "./images/HISTORIA&KONTROLAK.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    globals.tileMap.push(tileMap);
+    globals.assetsToLoad.push(tileMap);
 
 }
 
@@ -323,7 +335,7 @@ function initExplosion()
 {
     const numParticles = 100;
     const xInit = globals.sprites[0].physics.xPos + globals.sprites[0].imageSet.xSize/2;
-    const yInit = 100;
+    const yInit = globals.sprites[0].physics.yPos + globals.sprites[0].imageSet.ySize+20;
     const radius = 0.5;
     const timeToFadeMAx = 5;
     const alpha = 1.0;

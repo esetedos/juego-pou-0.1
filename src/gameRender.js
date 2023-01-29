@@ -23,7 +23,15 @@ export default function render()
 
         case Game.GAME_OVER:
             renderGameOver();
-        break;
+            break;
+
+        case Game.HIGH_SCORE:
+            renderHigh_Score();
+            break;
+
+        case Game.HISTORY:
+            renderHistory();
+            break;
         
         default:
             console.error("Error: Game State invalid");
@@ -92,10 +100,10 @@ function renderSprites() //o drawSprites (que era como estaba)
         //TEST: DIbuja un rectangulo alrededor del sprite
         // drawSpriteRectangle(sprite);     
         renderSprite(sprite);
-        drawHitBox(sprite);
+        // drawHitBox(sprite);
        
     }
-    drawHitBox2(globals.sprites[0]); //dibujo de la segunda HitBox del player n
+    // drawHitBox2(globals.sprites[0]); //dibujo de la segunda HitBox del player n
 }
 
 function drawSpriteRectangle(sprite)
@@ -236,6 +244,30 @@ function renderGameOver()
 {
     globals.ctx.drawImage(
         globals.tileMap[1],
+        0, 0,                       //the source x and y position
+        256, globals.canvas.width,               //the source height and width
+        0, 0,                         //the destination x and y position
+        256, globals.canvas.width                     //the destination height and width
+                    
+    );
+}
+
+function renderHigh_Score()
+{
+    globals.ctx.drawImage(
+        globals.tileMap[2],
+        0, 0,                       //the source x and y position
+        256, globals.canvas.width,               //the source height and width
+        0, 0,                         //the destination x and y position
+        256, globals.canvas.width                     //the destination height and width
+                    
+    );
+}
+
+function renderHistory()
+{
+    globals.ctx.drawImage(
+        globals.tileMap[3],
         0, 0,                       //the source x and y position
         256, globals.canvas.width,               //the source height and width
         0, 0,                         //the destination x and y position

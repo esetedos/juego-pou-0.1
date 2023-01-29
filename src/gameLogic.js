@@ -31,7 +31,15 @@ export default function update()
             break;
 
         case Game.GAME_OVER:
-            updateGame_over();
+            updateGame_over4High_Score4History();
+            break;
+
+        case Game.HIGH_SCORE:
+            updateGame_over4High_Score4History();
+            break;
+
+        case Game.HISTORY:
+            updateGame_over4High_Score4History();
             break;
         
         default:
@@ -440,9 +448,7 @@ function updateLife(sprite)
         sprite.state = -1;
         //GAME_OVER (pero sólo se le quita una vida)
         //luego (fuera de aquí) se pondría que si las vidas son 0, GAME_OVER
-    }
-    if(sprite.state == -1)
-    {
+   
         const player = globals.sprites[0];
 
         player.state = State.LEFT;
@@ -569,8 +575,20 @@ function updateNew_Game()
     // console.log("entra");
     if (globals.action.jump === true)
     {
+        globals.metroak = 0;
+        globals.life = 3;
+        globals.levelTime.value = 0;
         globals.gameState = Game.PLAYING;
     }
+    if (globals.action.G === true)
+    {
+        globals.gameState = Game.HIGH_SCORE;
+    }
+    if (globals.action.H === true)
+    {
+        globals.gameState = Game.HISTORY;
+    }
+
 }
 
 function gameEnd()
@@ -582,11 +600,10 @@ function gameEnd()
     
 }
 
-function updateGame_over()
+function updateGame_over4High_Score4History()
 {   
-    globals.metroak = 0;
-    globals.life = 3;
-    if (globals.action.H === true)
+    
+    if (globals.action.B === true)
     {
         globals.gameState = Game.NEW_GAME;
     }
@@ -694,3 +711,4 @@ function actualiceHighScore()
         globals.highScore = Math.floor(globals.metroak/10)*10;
     }
 }
+

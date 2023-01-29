@@ -6,7 +6,10 @@ export const Game = {
     LOADING:    0,
     PLAYING:    1,
     NEW_GAME:   2,
-    GAME_OVER:  3
+    GAME_OVER:  3,
+    HIGH_SCORE: 4,
+    HISTORY:    5
+
 };
 
 //Velocidad del juego
@@ -71,7 +74,12 @@ export const Key = {
     RIGHT:  39,
     LEFT:   37,
     JUMP:   32,
+    B:      66,
+    G:      71,
     H:      72
+    
+    
+    
 }
 
 //aceleración

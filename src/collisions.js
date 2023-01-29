@@ -135,8 +135,8 @@ function collisionWBorders()
 
     if(x < 0)
     {
-        player.physics.vx = 0;
-        player.xPos = 0;
+        // player.physics.vx = 0;
+        player.xPos = globals.canvas.width - player.imageSet.xSize;
     }       
     if(y < 0)
     {
@@ -145,8 +145,8 @@ function collisionWBorders()
     }      
     if(w > globals.canvas.width)
     {
-        player.physics.vx = 0;
-        player.xPos = globals.canvas.width - player.imageSet.xSize;
+        // player.physics.vx = 0;
+        player.xPos = 0;
     }     
     //if(h > 200)
     
