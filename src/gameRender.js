@@ -168,28 +168,32 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
 {
     //TEST: datos metidos en bruto
     const score = Math.floor(globals.metroak/10)*10;
-    const highScore = 130000;
-    const life = 40;
+    const highScore = globals.highScore;
+    const life = globals.life;
     const time = globals.levelTime.value;
 
     //Draw score
     globals.ctxHUD.font = '8px emulogic';
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("METROAK", 8, 8);
+    globals.ctxHUD.fillText("METERS", 4, 8);
+    globals.ctxHUD.fillText("|", 56, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + globals.life, 8, 16);
+    globals.ctxHUD.fillText("  " + score, 8, 16);
 
     //Draw high score
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("HIGH SCORE", 80, 8);
+    globals.ctxHUD.fillText("HIGH", 67, 8);
+    globals.ctxHUD.fillText("SCORE", 104, 8);
+    globals.ctxHUD.fillText("|", 148, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + globals.saltoKop, 100, 16);
+    globals.ctxHUD.fillText(" " + highScore, 90, 16);
 
     // Draw life
     globals.ctxHUD.fillStyle = 'lightgreen';
-    // globals.ctxHUD.fillText("BIZITZA", 168, 8);
+    globals.ctxHUD.fillText("Life", 159, 8);
+    globals.ctxHUD.fillText("|", 195, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + score, 150, 16);
+    globals.ctxHUD.fillText(" " + life, 160, 16);
 
     //round corners. (remove 1 pixel per corner)
     globals.ctxHUD.fillStyle = 'black';
@@ -200,7 +204,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
 
     //draw time
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("DENBORA", 190, 8);
+    globals.ctxHUD.fillText("TIME", 205, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
     globals.ctxHUD.fillText(time, 215, 16);
 }

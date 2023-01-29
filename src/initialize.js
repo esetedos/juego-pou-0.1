@@ -40,7 +40,7 @@ function initVars()
     globals.frameTimeObj =        1 / FPS; //Frame time in seconds
 
     //Inicializamos el estado del juego
-    globals.gameState = Game.NEW_GAME;
+    globals.gameState = Game.PLAYING;
 
     //Inicializamos los estado sde las acciones
     globals.action = {
@@ -93,7 +93,7 @@ function loadAssets()
 //UPDATE. funcion que se llama cada vez que se carga un archivo
 function loadHandler(){
     globals.assetsLoaded++;
-
+   
     //una vez se han cargado todos los activos pasamos
     if(globals.assetsLoaded === globals.assetsToLoad.length)
     {
@@ -106,7 +106,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.NEW_GAME;
+        globals.gameState = Game.PLAYING;
     }
 }
 
@@ -117,6 +117,7 @@ function initSprites()//////////////////////////////////////////////////////////
     initArrow();
     initPlataformsN();
     initPlataformsMoviento();
+    
    
 }
 
@@ -261,6 +262,7 @@ function initPlataforms(){
 
 function initPlayer()
 {
+    
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
     const imageSet = new ImageSet(0, 0, 15, 15, 27, 27, 6, 6);
 
@@ -278,7 +280,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 180, 130, imageSet, frames, physics, hitBox, hitBox2);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 180, 130, imageSet, frames, physics, hitBox, hitBox2, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

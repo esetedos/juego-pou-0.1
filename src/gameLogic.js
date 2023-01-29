@@ -73,6 +73,8 @@ function playGame()
     createPlataforms();
 
     gameEnd();
+
+    actualiceHighScore();
   
 }
 
@@ -107,6 +109,7 @@ function updateSprite(sprite)
         //caso del jugador
         case SpriteID.PLAYER:
             updatePlayer(sprite)
+
             break;
 
          //case de la(s) plataforma(s)
@@ -580,7 +583,8 @@ function gameEnd()
 }
 
 function updateGame_over()
-{
+{   
+    globals.metroak = 0;
     globals.life = 3;
     if (globals.action.H === true)
     {
@@ -681,4 +685,12 @@ function updateExplosionParticle(particle)
 
     particle.xPos += particle.physics.vx * globals.deltaTime;
     particle.yPos += particle.physics.vy * globals.deltaTime;
+}
+
+function actualiceHighScore()
+{
+    if(Math.floor(globals.metroak/10)*10 > globals.highScore)
+    {
+        globals.highScore = Math.floor(globals.metroak/10)*10;
+    }
 }

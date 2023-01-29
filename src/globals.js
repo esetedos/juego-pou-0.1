@@ -56,5 +56,7 @@ export default {
     
     particles: [],
 
-    startParticles: false
+    startParticles: false,
+
+    highScore: 0
 };
