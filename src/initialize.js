@@ -65,7 +65,7 @@ function loadAssets()
     //load the spritesheet image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/sprites8.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/sprites9.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
