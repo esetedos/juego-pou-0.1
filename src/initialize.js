@@ -77,7 +77,7 @@ function loadAssets()
 
     new_game = new Image();
     new_game.addEventListener("load", loadHandler, false);
-    new_game.src = "./images/pantalla_inicio.png";  //Ojo que la ruta es relativa al HTML, no al JS
+    new_game.src = "./images/NEW_GAME.png";  //Ojo que la ruta es relativa al HTML, no al JS
     globals.tileMap.push(new_game);
     globals.assetsToLoad.push(new_game);
 
@@ -106,7 +106,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.PLAYING;
+        globals.gameState = Game.NEW_GAME;
     }
 }
 
@@ -284,7 +284,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 180, 130, imageSet, frames, physics, hitBox, hitBox2, 0);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, 130, imageSet, frames, physics, hitBox, hitBox2, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
