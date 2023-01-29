@@ -10,7 +10,7 @@ import { initParticles } from "./initialize.js";
 
 
 
-let contadorPrueba = 0; //?
+let contadorPrueba = 0; //? h
 let suelo = globals.canvas.height;
 
 export default function update()
