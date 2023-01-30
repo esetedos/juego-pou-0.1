@@ -6,7 +6,7 @@ import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import Physics from "./Physics.js";
 import HitBox from "./HitBox.js";
-import { initParticles } from "./initialize.js";
+import { initParticles, initSprites } from "./initialize.js";
 
 
 
@@ -595,9 +595,16 @@ function gameEnd()
 {
     if(globals.life <= 0 || globals.levelTime.value == 240) //porque el tiempo va a x0.5, asi q para que sean 120s, pues serían 240 aquí
     {
-        globals.gameState = Game.GAME_OVER; 
+        for (let i = 0; i < globals.sprites.length; ++i)
+        {
+            const sprite = globals.sprites[i];
+                globals.sprites.splice(i,1); 
+                i--; 
+        }
+
+        initSprites();
+        globals.gameState = Game.GAME_OVER;   
     }
-    
 }
 
 function updateGame_over4High_Score4History()
