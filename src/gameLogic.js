@@ -593,15 +593,9 @@ function updateNew_Game()
 
 function gameEnd()
 {
-    if(globals.life <= 0 || globals.levelTime.value == 240) //porque el tiempo va a x0.5, asi q para que sean 120s, pues serían 240 aquí
-    {
-        for (let i = 0; i < globals.sprites.length; ++i)
-        {
-            const sprite = globals.sprites[i];
-                globals.sprites.splice(i,1); 
-                i--; 
-        }
-
+    if(globals.life <= 0 || globals.levelTime.value == 120) //porque el tiempo va a x0.5, asi q para que sean 120s, pues serían 240 aquí
+    {     
+        globals.sprites.splice(0); 
         initSprites();
         globals.gameState = Game.GAME_OVER;   
     }
