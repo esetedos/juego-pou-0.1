@@ -22,7 +22,7 @@ export const SpriteID = {
     ARROW:                  2,
     // CARROT: 3,
     PLATAFORMN:             4,
-    PLATAFORMMOVIMIENTO:    5
+    PLATAFORM_MOVIMIENTO:    5
 }
 
 //identificador de estado de sprite (direccion)

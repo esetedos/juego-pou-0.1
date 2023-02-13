@@ -179,7 +179,7 @@ function eliminaciónDePlataformas() // to do pasar a game logic // update event
 
             if(sprite.yPos > globals.canvas.height - 5){
                 sprite.state = -1;
-                if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORMMOVIMIENTO)
+                if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
                 globals.crearNuevasPlataf = true;
             }
         }

@@ -149,7 +149,7 @@ function initPlataformsMoviento(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORMMOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), 35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), 35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);

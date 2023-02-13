@@ -139,7 +139,7 @@ function updateSprite(sprite)
             updatePlataformN(sprite);
             break;
 
-        case SpriteID.PLATAFORMMOVIMIENTO:
+        case SpriteID.PLATAFORM_MOVIMIENTO:
             updatePlataformMovimiento(sprite);
             break;
     
@@ -476,7 +476,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
 
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
-            if(sprite.id == SpriteID.PLATAFORMMOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORMMOVIMIENTO)
+            if(sprite.id == SpriteID.PLATAFORM_MOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORM_MOVIMIENTO)
             {   //TO Do: poner los nombres con _
                 sprite.kontMovimiento = globals.levelTime.value;
                 sprite.disappear = true;
@@ -534,11 +534,11 @@ function movimientoHorizontal(sprite)
 
 function disappearPlataformN(sprite)
 {
-    if(globals.levelTime.value == sprite.kontMovimiento + sprite.physics.vLimit)
+    if(globals.levelTime.value == sprite.kontMovimiento) //+ sprite.physics.vLimit-1)
     {
         sprite.frames.frameCounter = 1;
     }
-        if(globals.levelTime.value >= sprite.kontMovimiento + sprite.physics.vLimit * 2)
+        if(globals.levelTime.value >= sprite.kontMovimiento + sprite.physics.vLimit)
         {
             //  globals.life = 0; 
             sprite.state = State.BROKE_4;
@@ -723,6 +723,6 @@ function updateCamera()
     //Centramos la cámara en el player
     const player = globals.sprites[0];
 
-    globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
+    // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
     globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
 }
