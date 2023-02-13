@@ -279,28 +279,17 @@ else sprite.physics.ax = 0;
         
         globals.life--; //quita dos de vida
    
-
-
-
-        // sprite.physics.isOnGround = true;
-        // sprite.yPos = globals.canvas.height - sprite.imageSet.ySize-2;
-        // sprite.physics.vy = 0;
-        // sprite.frames.frameCounter=0;
-        // sprite.yPos = globals.canvas.height - sprite.imageSet
     }
 
     //Actualizamos la animación
     updateAnimationFrame(sprite);
     
 
-/*
-    //Aqui actualizaremos el estado de las variables del player
-    sprite.xPos = 10;
-    sprite.yPos = 50;
 
-     sprite.frames.frameCounter = 0;
-*/
-     //sprite.state = State.LEFT;
+
+     //cuando hace colisión con una plataforma:
+     if(player.isCollidingWithObstacleOnTheBottom = true)
+        player.physics.isOnGround = true;
 }
 
 
@@ -322,16 +311,7 @@ function updatePlataformN(sprite)
     //esto mantiene las tres plataformas con la misma imagen siempre
     //sprite.frames.frameCounter = sprite.platType;  
 
-    /*
-    sprite.yPos += sprite.physics.vy * globals.deltaTime;
-
-    //esto es para que cuando lleguen abajo, vuelvan arriba en un sitio aleatorio y qeu tengan un dibujo aleatorio
-    if(sprite.yPos > 190){
-        sprite.yPos = 0;
-        // sprite.xPos =  Math.floor(Math.random() * 200);
-       
-    }
-*/
+  
     collisionPlataform(sprite);
     if(sprite.disappear == true)
     {
