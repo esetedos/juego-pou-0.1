@@ -1,7 +1,7 @@
 import globals from "./globals.js";
 
 //importamos loadAssets
-import {initHTMLelements, loadAssets, initSprites, initVars, initLevel, initTimers, initEvents, initParticles} from "./initialize.js";
+import {initHTMLelements, loadAssets, initSprites, initVars, initLevel, initTimers, initEvents, initParticles, initCamera} from "./initialize.js";
 
 import update from "./gameLogic.js";
 import render from "./gameRender.js";
@@ -38,6 +38,9 @@ function init()
     initEvents();
 
     initParticles();
+
+    //inicializamos a cámara
+    initCamera();
 }
 
 //GAME EXECUTE

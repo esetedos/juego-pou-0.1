@@ -10,6 +10,7 @@ import { keydownHandler, keyupHandler } from "./events.js";
 import HitBox from "./HitBox.js";
 import ExplosionParticles from "./Particle.js";
 import ExplosionParticle from "./Particle.js";
+import Camera from "./Camera.js";
 
 //Función que inicializa los elementos HTML
 function initHTMLelements()
@@ -118,7 +119,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.NEW_GAME;
+        globals.gameState = Game.PLAYING;
     }
 }
 
@@ -357,6 +358,10 @@ function initExplosion()
     }
 }
 
+function initCamera()
+{
+    globals.camera = new Camera(0, 0);
+}
 
 
 
@@ -383,5 +388,6 @@ export {
     initLevel,
     initTimers,
     initEvents,
-    initParticles
+    initParticles,
+    initCamera
 }

@@ -38,7 +38,7 @@ export default function render()
     }
 }
 
-function drawGame()
+function  drawGame()
 {
     //Borramos la pantalla entera
     globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
@@ -49,7 +49,7 @@ function drawGame()
     */
 
     //Movemos la cámara
-    // moveCamera();
+    moveCamera();
 
     //dibujamos el mapa (nivel)
     renderMap();
@@ -57,11 +57,11 @@ function drawGame()
     //dibujamos los elementos
     renderSprites(); //antes ponía drawSprites
 
-    //restauramos la cámara
-    // restoreCamera();
-
     //dibujamos las partículas
     renderParticles();
+
+    //restauramos la cámara
+    restoreCamera();
 
     //dibujamos el HUD
     renderHUD();
@@ -217,15 +217,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillText(time, 215, 16);
 }
 
-function moveCamera() //Función que nos desplazará el origen de coordenadas a la posición nueva. Se llamará antes de dibujar los elementos en el canvas
-{
-    globals.ctx.translate(-50, -50);
-}
 
-function restoreCamera() //Función que restaurará la cámara (el origen de coordenadas) a su posición inicial, para dejarla lista para el siguiente ciclo de ejecución.
-{
-    globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
-}
 
 function renderNewGame()
 {
@@ -316,4 +308,17 @@ function renderExplosionParticle(particle)
         globals.ctx.fill();
         globals.ctx.globalAlpha = 1.0; //Restore alpha
     }
+}
+
+function moveCamera() //Función que nos desplazará el origen de coordenadas a la posición nueva. Se llamará antes de dibujar los elementos en el canvas
+{
+    const xTranslation = -globals.camera.x;
+    const yTranslation = -globals.camera.y;
+
+    globals.ctx.translate(xTranslation, yTranslation);
+}
+
+function restoreCamera() //Función que restaurará la cámara (el origen de coordenadas) a su posición inicial, para dejarla lista para el siguiente ciclo de ejecución.
+{
+    globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
 }

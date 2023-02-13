@@ -155,7 +155,7 @@ function collisionWBorders()
 }
 
 
-function gameMovement()
+function gameMovement()//To do: mover a game logic ( xq son consecuencias de la colision)
 {
     const player = globals.sprites[0];
 
@@ -171,13 +171,13 @@ function gameMovement()
     }
 }
 
-function eliminaciónDePlataformas()
+function eliminaciónDePlataformas() // to do pasar a game logic // update eventsque llame a todos estas funcioes que van fuera
 {
     for(let i = 1; i < globals.sprites.length; ++i)
         {
             const sprite = globals.sprites[i];
 
-            if(sprite.yPos > globals.canvas.height){
+            if(sprite.yPos > globals.canvas.height - 5){
                 sprite.state = -1;
                 if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORMMOVIMIENTO)
                 globals.crearNuevasPlataf = true;
@@ -305,7 +305,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
             //Colisión en eje Y
             player.yPos -= overlapY;
             player.isCollidingWithObstacleOnTheBottom = true;
-            player.physics.vy = 0;
+            player.physics.vy = 0; ///to do quitar
             player.physics.isOnGround = true;
         }
 
@@ -337,7 +337,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
                 if(player.physics.vy > 0)
                 {
                     player.yPos -= overlapY;
-                    player.isCollidingWithObstacleOnTheBottom = true;
+                    player.isCollidingWithObstacleOnTheBottom = true; //to do: en game logic, if (isCollidingWithObstacleOnBottom) es true, entonces poner physics.isOnGrount = true; (porque lo de isOnGroun no puede ir aqui, va en game logic)
                     player.physics.isOnGround = true;
                 }
                 else

@@ -23,7 +23,7 @@ export default function update()
             break;
         
         case Game.NEW_GAME:
-            updateNew_Game();
+            updateNew_Game(); //to do guión bajo sobra
             break;
 
         case Game.PLAYING:
@@ -75,6 +75,8 @@ function playGame()
 
     callDetectCollisions();
 
+    updateCamera();
+
     // actualización de la lógica del juego
     updateLevelTime();
 
@@ -83,6 +85,9 @@ function playGame()
     gameEnd();
 
     actualiceHighScore();
+
+   //actualización de la cámara
+   
   
 }
 
@@ -380,7 +385,7 @@ function updatePlataform(sprite)
 */
     //updateAnimationFrame(sprite);
 
-    collisionPlataform(sprite);
+    collisionPlataform(sprite); 
     //colisión entre plataforma y jugador    
 }
 
@@ -439,7 +444,7 @@ function readKeyboardAndAssignState(sprite){
                     
 }
 
-function updateLife(sprite)
+function updateLife(sprite) //TO DO: llamar desde playGame. Esat funcion solo controla la vida, el resto lo tiene que llevar otra función
 {
     if(sprite.isCollidingWithPlayer2)
     {
@@ -464,7 +469,7 @@ function updateLife(sprite)
 
 //pasar a collisions
 function collisionPlataform(sprite) //colisión entre jugador y plataforma
-{
+{ //to do pasar a colisiones
     const player = globals.sprites[0];
 
     if(player.xPos+player.hitBox.xOffset+(player.hitBox.xSize/2) < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize && player.xPos+player.hitBox.xOffset > sprite.xPos+sprite.hitBox.xOffset || player.xPos+player.hitBox.xOffset+player.hitBox.xSize/2 > sprite.xPos+sprite.hitBox.xOffset && player.xPos+player.hitBox.xOffset+player.hitBox.xSize < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize){
@@ -472,7 +477,7 @@ function collisionPlataform(sprite) //colisión entre jugador y plataforma
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
             if(sprite.id == SpriteID.PLATAFORMMOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORMMOVIMIENTO)
-            {
+            {   //TO Do: poner los nombres con _
                 sprite.kontMovimiento = globals.levelTime.value;
                 sprite.disappear = true;
                 
@@ -545,7 +550,7 @@ function createPlataforms()
 {
     if(globals.crearNuevasPlataf == true)
     {
-        for(let i = 0; i < 3 ; i++){
+        for(let i = 0; i < 3 ; i++){ //TO DO: hacer una funcion que las cree y llamarla desde aqui
             //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
             const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
     
@@ -573,13 +578,13 @@ function createPlataforms()
 function updateNew_Game()
 {
     // console.log("entra");
-    if (globals.action.jump === true)
-    {
+    // if (globals.action.jump === true) //to do quitar el if, que lo haga directamente (son las cosas que van a inicializar)
+    
         globals.metroak = 0;
         globals.life = 3;
         globals.levelTime.value = 0;
         globals.gameState = Game.PLAYING;
-    }
+    
     if (globals.action.G === true)
     {
         globals.gameState = Game.HIGH_SCORE;
@@ -713,3 +718,11 @@ function actualiceHighScore()
     }
 }
 
+function updateCamera()
+{
+    //Centramos la cámara en el player
+    const player = globals.sprites[0];
+
+    globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
+    globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
+}
