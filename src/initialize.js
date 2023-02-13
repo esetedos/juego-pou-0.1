@@ -24,6 +24,7 @@ function initHTMLelements()
     //canvas, context HUD
     globals.canvasHUD = document.getElementById('gameHUD');
     globals.ctxHUD = globals.canvasHUD.getContext('2d');
+    globals.ctxHUDHS = globals.canvasHUD.getContext('2d');
 
     //Eliminación del Anti-Aliasing
     globals.ctx.imageSmoothingEnabled = false;
@@ -44,7 +45,7 @@ function initVars()
 
 
     //Inicializamos el estado del juego
-    globals.gameState = Game.PLAYING;
+    globals.gameState = Game.HIGH_SCORE;
 
     //Inicializamos los estado sde las acciones
     globals.action = {
@@ -122,7 +123,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.PLAYING;
+        globals.gameState = Game.HIGH_SCORE;
     }
 }
 

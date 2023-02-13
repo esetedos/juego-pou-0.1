@@ -2,6 +2,8 @@ import globals from "./globals.js";
 import {Block, State, SpriteID} from "./constants.js";
 import { Plataformas } from "./Sprite.js";
 import Physics from "./Physics.js";
+import { initParticles } from "./initialize.js";
+import { gameMovement, eliminaciónDePlataformas } from "./gameLogic.js";
 
 export default function callDetectCollisions()
 {
@@ -155,41 +157,9 @@ function collisionWBorders()
 }
 
 
-function gameMovement()//To do: mover a game logic ( xq son consecuencias de la colision)
-{
-    const player = globals.sprites[0];
 
-    if(player.yPos < globals.camera.y+50)  //70)
-    {
-        globals.metroak++;
-        // player.yPos+= 60 * globals.deltaTime;
-        for(let i = 0; i < globals.sprites.length; ++i)
-        {
-            const sprite = globals.sprites[i];
-            sprite.yPos+=40 * globals.deltaTime;
-            // if(player.yPos < globals.camera.y)
-            // {
-            //     sprite.yPos+=10 * globals.deltaTime;
-            // }
-        }
-        //aquí añadir que la pantalla baje
-        // globals.camera.y -=30* globals.deltaTime;
-    }
-}
 
-function eliminaciónDePlataformas() // to do pasar a game logic // update eventsque llame a todos estas funcioes que van fuera
-{
-    for(let i = 1; i < globals.sprites.length; ++i)
-        {
-            const sprite = globals.sprites[i];
 
-            if(sprite.yPos > globals.camera.y+globals.canvas.height - 5){
-                sprite.state = -1;
-                if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
-                globals.crearNuevasPlataf = true;
-            }
-        }
-}
 
 
 
@@ -311,7 +281,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
             //Colisión en eje Y
             player.yPos -= overlapY;
             player.isCollidingWithObstacleOnTheBottom = true;
-            player.physics.vy = 0; ///to do quitar
+           
             player.physics.isOnGround = true;
         }
 
@@ -637,4 +607,41 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
     }
 */
+}
+
+
+export function collisionPlataform(sprite) //colisión entre jugador y plataforma
+{ 
+    const player = globals.sprites[0];
+
+    if(player.xPos+player.hitBox.xOffset+(player.hitBox.xSize/2) < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize && player.xPos+player.hitBox.xOffset > sprite.xPos+sprite.hitBox.xOffset || player.xPos+player.hitBox.xOffset+player.hitBox.xSize/2 > sprite.xPos+sprite.hitBox.xOffset && player.xPos+player.hitBox.xOffset+player.hitBox.xSize < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize){
+
+        if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
+        {
+            if(sprite.id == SpriteID.PLATAFORM_MOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORM_MOVIMIENTO)
+            {   //TO Do: poner los nombres con _
+                sprite.kontMovimiento = globals.levelTime.value;
+                sprite.disappear = true;
+                
+            }
+
+            player.yPos = sprite.yPos - sprite.imageSet.ySize;
+
+            //Si hay colisión reducimos las vida
+            // globals.life--;
+            let suelo = player.yPos;
+            if(player.yPos > suelo - player.imageSet.ySize) //189
+            {
+                player.physics.isOnGround = true;
+                initParticles();
+                player.yPos = suelo - player.imageSet.ySize;
+                player.physics.vy = 0;
+                player.frames.frameCounter=0;
+                globals.saltoKop++;
+            }
+
+            
+        }
+    }
+
 }

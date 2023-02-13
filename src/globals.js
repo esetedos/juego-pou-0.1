@@ -8,6 +8,7 @@ export default {
     ctx:    {},
     canvasHUD: {},
     ctxHUD: {},
+    ctxHUDHS:   {},
 
     //Estado del juego. Inicializamos o INVALID
     gameState: Game.INVALID,
@@ -58,5 +59,7 @@ export default {
 
     startParticles: false,
 
-    highScore: 0
+    highScore: 0,
+
+    arrayBD:  []
 };

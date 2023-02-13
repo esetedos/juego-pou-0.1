@@ -5,6 +5,7 @@ import {initHTMLelements, loadAssets, initSprites, initVars, initLevel, initTime
 
 import update from "./gameLogic.js";
 import render from "./gameRender.js";
+// import { initBaseDeDatos } from "./events.js";
 
 
 
@@ -41,6 +42,8 @@ function init()
 
     //inicializamos a cámara
     initCamera();
+
+    // initBaseDeDatos();
 }
 
 //GAME EXECUTE

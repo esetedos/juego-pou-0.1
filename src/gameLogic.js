@@ -8,6 +8,8 @@ import Physics from "./Physics.js";
 import HitBox from "./HitBox.js";
 import { initParticles, initSprites } from "./initialize.js";
 import { Level, level1 } from "./Level.js";
+import {collisionPlataform} from "./collisions.js";
+
 
 
 
@@ -37,6 +39,7 @@ export default function update()
 
         case Game.HIGH_SCORE:
             updateGame_over4High_Score4History();
+         
             break;
 
         case Game.HISTORY:
@@ -468,42 +471,7 @@ function updateLife(sprite) //TO DO: llamar desde playGame. Esat funcion solo co
     }
 }
 
-//pasar a collisions
-function collisionPlataform(sprite) //colisión entre jugador y plataforma
-{ //to do pasar a colisiones
-    const player = globals.sprites[0];
 
-    if(player.xPos+player.hitBox.xOffset+(player.hitBox.xSize/2) < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize && player.xPos+player.hitBox.xOffset > sprite.xPos+sprite.hitBox.xOffset || player.xPos+player.hitBox.xOffset+player.hitBox.xSize/2 > sprite.xPos+sprite.hitBox.xOffset && player.xPos+player.hitBox.xOffset+player.hitBox.xSize < sprite.xPos+sprite.hitBox.xOffset+sprite.hitBox.xSize){
-
-        if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
-        {
-            if(sprite.id == SpriteID.PLATAFORM_MOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORM_MOVIMIENTO)
-            {   //TO Do: poner los nombres con _
-                sprite.kontMovimiento = globals.levelTime.value;
-                sprite.disappear = true;
-                
-            }
-
-            player.yPos = sprite.yPos - sprite.imageSet.ySize;
-
-            //Si hay colisión reducimos las vida
-            // globals.life--;
-            let suelo = player.yPos;
-            if(player.yPos > suelo - player.imageSet.ySize) //189
-            {
-                player.physics.isOnGround = true;
-                initParticles();
-                player.yPos = suelo - player.imageSet.ySize;
-                player.physics.vy = 0;
-                player.frames.frameCounter=0;
-                globals.saltoKop++;
-            }
-
-            
-        }
-    }
-
-}
 
 
 function movimientoHorizontal(sprite)
@@ -582,7 +550,7 @@ function updateNewGame()
     // if (globals.action.jump === true) //to do quitar el if, que lo haga directamente (son las cosas que van a inicializar)
     
         globals.metroak = 0;
-        globals.life = 3;
+        globals.life = 4;
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
         initSprites;
@@ -730,4 +698,40 @@ function updateCamera()
     globals.camera.y -=10* globals.deltaTime;
     // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
     // globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
+}
+
+export function gameMovement()
+{
+    const player = globals.sprites[0];
+
+    if(player.yPos < globals.camera.y+50)  //70)
+    {
+        globals.metroak++;
+        // player.yPos+= 60 * globals.deltaTime;
+        for(let i = 0; i < globals.sprites.length; ++i)
+        {
+            const sprite = globals.sprites[i];
+            sprite.yPos+=40 * globals.deltaTime;
+            // if(player.yPos < globals.camera.y)
+            // {
+            //     sprite.yPos+=10 * globals.deltaTime;
+            // }
+        }
+        //aquí añadir que la pantalla baje
+        // globals.camera.y -=30* globals.deltaTime;
+    }
+}
+
+export function eliminaciónDePlataformas() 
+{
+    for(let i = 1; i < globals.sprites.length; ++i)
+        {
+            const sprite = globals.sprites[i];
+
+            if(sprite.yPos > globals.camera.y+globals.canvas.height - 5){
+                sprite.state = -1;
+                if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
+                globals.crearNuevasPlataf = true;
+            }
+        }
 }

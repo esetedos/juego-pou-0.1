@@ -60,3 +60,46 @@ export function keyupHandler(event)
             break;
     }
 }
+
+export function initBaseDeDatos()
+{
+
+
+//get
+    //ruta o absoluta o relativa al fichero que hace la petición (html)
+    const url = "http://localhost/BookCardExample/server/routes/getAllClassic.php";
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function()
+    {
+        if(this.readyState == 4)
+        {
+            //console.log( this.status);
+            if (this.status == 200)
+            {
+                console.log(this.responseText)
+                // console.log(this.responseText === null);
+                if(this.responseText != null)
+                {
+                    // console.log(this.responseText);
+                    const resultJSON = JSON.parse(this.responseText);
+                    // console.log(resultJSON);
+                    // console.log(this.responseText);
+
+                    ///Inicializamos los datos del juego
+                    // initGame(resultJSON);
+                    globals.arrayBD = resultJSON;
+                }
+                else
+                    alert("Communication error: No data recived");
+            }
+            else 
+                alert("Communication error: " + this.statusText);
+        }
+    }
+
+    request.open('GET', url, true);
+    request.responseType = "text";
+    request.send();
+
+}

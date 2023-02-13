@@ -44,6 +44,7 @@ function  drawGame()
     globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctxHUD.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
 
+
     /*//Pintamos los FPS en pantalla
     globals.ctx.fillText("FPS: " + 1 / globals.deltaTime, 30, 30);
     */
@@ -246,6 +247,7 @@ function renderGameOver()
 
 function renderHigh_Score()
 {
+    renderHudHighScore();
     globals.ctx.drawImage(
         globals.tileMap[2],
         0, 0,                       //the source x and y position
@@ -321,4 +323,18 @@ function moveCamera() //Función que nos desplazará el origen de coordenadas a 
 function restoreCamera() //Función que restaurará la cámara (el origen de coordenadas) a su posición inicial, para dejarla lista para el siguiente ciclo de ejecución.
 {
     globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
+}
+
+function renderHudHighScore()
+{
+    globals.ctxHUDHS.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
+    globals.ctxHUDHS.font = '8px emulogic';
+    globals.ctxHUDHS.fillStyle = 'white';
+    globals.ctxHUDHS.fillText("HIGH SCORES", 85, 10);
+    // globals.ctxHUDHS.fillText("|", 56, 8);
+    // globals.ctxHUDHS.fillStyle = 'lightgray';
+    // globals.ctxHUDHS.fillText("  " + 677777, 8, 16);
+
+    
+
 }
