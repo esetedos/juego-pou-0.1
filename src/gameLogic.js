@@ -7,6 +7,7 @@ import Frames from "./Frames.js";
 import Physics from "./Physics.js";
 import HitBox from "./HitBox.js";
 import { initParticles, initSprites } from "./initialize.js";
+import { Level, level1 } from "./Level.js";
 
 
 
@@ -23,7 +24,7 @@ export default function update()
             break;
         
         case Game.NEW_GAME:
-            updateNew_Game(); //to do guión bajo sobra
+            updateNewGame(); 
             break;
 
         case Game.PLAYING:
@@ -262,7 +263,7 @@ else sprite.physics.ax = 0;
     //-----------------------------------------
 
     //el  -2 es porqeu si el hitbox del player baja más abajo, surge un probleema porque (enn la parte de colisions) no hay ningun tileset más abajo, y da error
-    if(sprite.yPos > globals.canvas.height - sprite.imageSet.ySize-2) //189
+    if(sprite.yPos > globals.camera.y+globals.canvas.height - sprite.imageSet.ySize-2) //189
     {
         //230x, 130y
         sprite.state = State.LEFT;
@@ -270,8 +271,8 @@ else sprite.physics.ax = 0;
         sprite.physics.vx = 0;
         sprite.frames.frameCounter=0;
        
-        sprite.xPos = 235;
-        sprite.yPos = 130;
+        sprite.xPos = 180; //235;
+        sprite.yPos = globals.camera.y+71;
         
         globals.life--; //quita dos de vida
    
@@ -461,8 +462,8 @@ function updateLife(sprite) //TO DO: llamar desde playGame. Esat funcion solo co
         player.physics.vx = 0;
         player.frames.frameCounter=0;
        
-        player.xPos = 235;
-        player.yPos = 130;
+        player.xPos = 180; //235;
+        player.yPos = globals.camera.y+71;
         globals.life --; //quita dos de vida
     }
 }
@@ -564,7 +565,7 @@ function createPlataforms()
             const hitBox = new HitBox(30, 4, 0, 0)
     
             //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), 0, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+            const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
     
             //añadimos el pirate al array de sprites
             globals.sprites.push(plataforma);
@@ -575,7 +576,7 @@ function createPlataforms()
 
 
 
-function updateNew_Game()
+function updateNewGame()
 {
     // console.log("entra");
     // if (globals.action.jump === true) //to do quitar el if, que lo haga directamente (son las cosas que van a inicializar)
@@ -583,6 +584,10 @@ function updateNew_Game()
         globals.metroak = 0;
         globals.life = 3;
         globals.levelTime.value = 0;
+        globals.camera.y = (level1.length-6)*32;
+        initSprites;
+
+    if(globals.action.jump)
         globals.gameState = Game.PLAYING;
     
     if (globals.action.G === true)
@@ -721,8 +726,8 @@ function actualiceHighScore()
 function updateCamera()
 {
     //Centramos la cámara en el player
-    const player = globals.sprites[0];
-
+    // const player = globals.sprites[0];
+    globals.camera.y -=10* globals.deltaTime;
     // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
-    globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
+    // globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
 }

@@ -159,15 +159,21 @@ function gameMovement()//To do: mover a game logic ( xq son consecuencias de la 
 {
     const player = globals.sprites[0];
 
-    if(player.yPos < 70)
+    if(player.yPos < globals.camera.y+50)  //70)
     {
         globals.metroak++;
         // player.yPos+= 60 * globals.deltaTime;
         for(let i = 0; i < globals.sprites.length; ++i)
         {
             const sprite = globals.sprites[i];
-            sprite.yPos+=50 * globals.deltaTime;
+            sprite.yPos+=40 * globals.deltaTime;
+            // if(player.yPos < globals.camera.y)
+            // {
+            //     sprite.yPos+=10 * globals.deltaTime;
+            // }
         }
+        //aquí añadir que la pantalla baje
+        // globals.camera.y -=30* globals.deltaTime;
     }
 }
 
@@ -177,7 +183,7 @@ function eliminaciónDePlataformas() // to do pasar a game logic // update event
         {
             const sprite = globals.sprites[i];
 
-            if(sprite.yPos > globals.canvas.height - 5){
+            if(sprite.yPos > globals.camera.y+globals.canvas.height - 5){
                 sprite.state = -1;
                 if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
                 globals.crearNuevasPlataf = true;

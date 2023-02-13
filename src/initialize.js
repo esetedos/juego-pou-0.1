@@ -39,6 +39,9 @@ function initVars()
     globals.previousCycleMilliseconds = 0;
     globals.deltaTime =                 0;
     globals.frameTimeObj =        1 / FPS; //Frame time in seconds
+    //para poner el fondo en su sitio al inicio
+    // globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
+
 
     //Inicializamos el estado del juego
     globals.gameState = Game.PLAYING;
@@ -127,7 +130,7 @@ function initSprites()//////////////////////////////////////////////////////////
 {
     initPlayer();
     initPlataforms();
-    initArrow();
+    // initArrow();
     initPlataformsN();
     initPlataformsMoviento();
     
@@ -149,7 +152,7 @@ function initPlataformsMoviento(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), 35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), (level1.length-6)*32+35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -175,7 +178,7 @@ function initPlataformsN(){
             const hitBox = new HitBox(30, 4, 0, 0)
 
             //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, Math.floor(Math.random()*150+30), b, imageSet, frames, physics, 2, 5, hitBox);
+            const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, Math.floor(Math.random()*150+30), (level1.length-6)*32+b, imageSet, frames, physics, 2, 5, hitBox);
 
             //añadimos el pirate al array de sprites
             globals.sprites.push(plataformaN);
@@ -195,7 +198,7 @@ function initPlataformsN(){
             const hitBox = new HitBox(30, 4, 0, 0)
 
             //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 300, b, imageSet, frames, physics, 2, 5, hitBox);
+            const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 300, (level1.length-6)*32+b, imageSet, frames, physics, 2, 5, hitBox);
 
             //añadimos el pirate al array de sprites
             globals.sprites.push(plataformaN);
@@ -251,7 +254,7 @@ function initPlataforms(){
             const hitBox = new HitBox(30, 4, 0, 0)
 
             //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), b, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+            const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+b, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
             //añadimos el pirate al array de sprites
             globals.sprites.push(plataforma);
@@ -271,7 +274,7 @@ function initPlataforms(){
     const hitBox = new HitBox(30, 4, 0, 0)
 
     //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-    const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, 170, 148, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+    const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, 170, (level1.length-6)*32+148, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
     //añadimos el pirate al array de sprites
     globals.sprites.push(plataforma);
@@ -296,8 +299,8 @@ function initPlayer()
     //Segunda hitBox para la colisión con los objetos (arrow y carrot)
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
-    //creamos nuestro sprite
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, 130, imageSet, frames, physics, hitBox, hitBox2, 0);
+    //creamos nuestro sprite                                235
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, (level1.length-6)*32+130, imageSet, frames, physics, hitBox, hitBox2, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
@@ -360,7 +363,8 @@ function initExplosion()
 
 function initCamera()
 {
-    globals.camera = new Camera(0, 0);
+    const h = (level1.length-6)*32;
+    globals.camera = new Camera(0, h);
 }
 
 
@@ -384,10 +388,11 @@ export {
     initHTMLelements,
     initVars,
     loadAssets,
+    initCamera,
     initSprites,
     initLevel,
     initTimers,
     initEvents,
-    initParticles,
-    initCamera
+    initParticles
+    
 }
