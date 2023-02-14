@@ -1,7 +1,7 @@
 import globals from "./globals.js";
 import { Game, State, SpriteID, GRAVITY, ParticleState, ParticleID} from "./constants.js";
 import callDetectCollisions from "./collisions.js";
-import { Plataformas} from "./Sprite.js";
+import { Plataformas, PlataformasN} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import Physics from "./Physics.js";
@@ -79,6 +79,7 @@ function playGame()
 
     callDetectCollisions();
 
+//actualización de la cámara
     updateCamera();
 
     // actualización de la lógica del juego
@@ -90,8 +91,8 @@ function playGame()
 
     actualiceHighScore();
 
-   //actualización de la cámara
-  
+    minutes();
+
    
   
 }
@@ -501,8 +502,56 @@ function createPlataforms()
 {
     if(globals.crearNuevasPlataf == true)
     {
-        for(let i = 0; i < 3 ; i++){ 
-           createRegularPlataforms();
+        let a = 3;
+        for(let i = 0; i < a ; i++){
+            let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
+            if(globals.twoMinute == true) //para qeu se creen 2 plataformas por fila en vez de tres
+            {
+                a = 2;
+            }
+            if(globals.oneMinute == true)       
+            {
+                if(globals.threeMinute == true)   //cuando pasen dos minutos
+                {
+                    if(globals.fourMinute == true)
+                    {
+                        //flechas
+                        
+                    }
+                
+                    if(option<15){
+                        //create plataformas de movimiento
+                        createMovingPlataforms();
+                    }   
+                    else if(option<30)
+                    {
+                        //create plataformas que desaparecen
+                        createDisappearPlataforms();
+                    }
+                    else{
+                        createRegularPlataforms();
+                    }
+                    
+                }
+                else //cuando pase un minuto
+                {                   
+                    if(option<20){
+                        //create plataformas de movimiento
+                        createMovingPlataforms();
+                    }   
+                    else{
+                        createRegularPlataforms();
+                    }
+                }
+                
+                
+            }
+            else
+                createRegularPlataforms();            
+
+
+
+
         }
         globals.crearNuevasPlataf = false;
     }
@@ -529,18 +578,66 @@ function createRegularPlataforms()
      globals.sprites.push(plataforma);
 }
 
+function createMovingPlataforms()
+{
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+    const imageSet = new ImageSet(2, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+
+    //creamos los datos de la animacion. 8 framesn / state
+    const frames = new Frames(1, 5);
+
+    //creamos nuestro objeto physics con vLimit = 40 pixels/second
+    const physics = new Physics(20, 0, 0); //velocidad de las plataformas
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(30, 4, 0, 0)
+
+    //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+    const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
+
+    //añadimos el pirate al array de sprites
+    globals.sprites.push(plataforma);
+}
+
+function createDisappearPlataforms()
+{
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+    const imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+
+    //creamos los datos de la animacion. 8 framesn / state
+    const frames = new Frames(1, 5);
+
+    //creamos nuestro objeto physics con vLimit = 40 pixels/second
+    const physics = new Physics(1, 0); //velocidad de las plataformas
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(30, 4, 0, 0)
+
+    //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+    const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, Math.floor(Math.random()*150+30), globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
+
+    //añadimos el pirate al array de sprites
+    globals.sprites.push(plataformaN);
+}
+
 
 
 function updateNewGame()
 {
     // console.log("entra");
     // if (globals.action.jump === true) //to do quitar el if, que lo haga directamente (son las cosas que van a inicializar)
-    
+    //reiniciamos valores
         globals.metroak = 0;
         globals.life = 4;
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
+        globals.oneMinute = false;
+        globals.twoMinute = false;
+        globals.threeMinute = false;
+        globals.fourMinute = false;
+        globals.fiveMinute = false;
         initSprites;
+        
 
     if(globals.action.jump)
         globals.gameState = Game.PLAYING;
@@ -558,7 +655,7 @@ function updateNewGame()
 
 function gameEnd()
 {
-    if(globals.life <= 0 || globals.levelTime.value == 120) //porque el tiempo va a x0.5, asi q para que sean 120s, pues serían 240 aquí
+    if(globals.life <= 0) // || globals.levelTime.value == 120) //porque el tiempo va a x0.5, asi q para que sean 120s, pues serían 240 aquí
     {     
         globals.sprites.splice(0); 
         initSprites();
@@ -682,6 +779,10 @@ function updateCamera()
 {
     //Centramos la cámara en el player
     // const player = globals.sprites[0];
+    if(globals.fiveMinute == true)
+    {
+        globals.camera.y -=2* globals.deltaTime;
+    }
     globals.camera.y -=10* globals.deltaTime;
     // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
     // globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
@@ -733,4 +834,24 @@ function updateCameraHS()
     //to do: aqui ponemos que al pulsar los botones de las flechas, sube o baja
     globals.cameraHS.y += 10* globals.deltaTime;
     console.log("high_scores camera dentro");
+}
+
+
+function minutes()
+{
+    if( globals.levelTime.value > 60)
+        globals.oneMinute = true;
+
+    if( globals.levelTime.value > 120)
+        globals.twoMinute = true;
+
+    if( globals.levelTime.value > 180)
+        globals.threeMinute = true;
+
+    if( globals.levelTime.value > 240)
+        globals.fourMinute = true;
+
+    if( globals.levelTime.value > 300)
+        globals.fiveMinute = true;
+    // globals.levelTime.value = 0;
 }

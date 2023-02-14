@@ -61,5 +61,11 @@ export default {
 
     highScore: 0,
 
-    arrayBD:  []
+    arrayBD:  [],
+
+    oneMinute: false,
+    twoMinute: false,
+    threeMinute: false,
+    fourMinute: false,
+    fiveMinute: false
 };
