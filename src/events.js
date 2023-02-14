@@ -67,17 +67,19 @@ export function initBaseDeDatos()
 
 //get
     //ruta o absoluta o relativa al fichero que hace la petición (html)
-    const url = "http://localhost/BookCardExample/server/routes/getAllClassic.php";
+    const url = "http://localhost:8080/juego/CarpetaDelJuego(git)/server/routes/getAllClassic.php/";    //   https://2223arcadetalde3.aegcloud.pro/serverEstitxu/server/routes/getAllClassic.php";
     const request = new XMLHttpRequest();
 
     request.onreadystatechange = function()
     {
+        
         if(this.readyState == 4)
         {
+            
             //console.log( this.status);
             if (this.status == 200)
-            {
-                console.log(this.responseText)
+            {console.log("entra");
+                console.log(this.responseText);
                 // console.log(this.responseText === null);
                 if(this.responseText != null)
                 {
@@ -89,6 +91,7 @@ export function initBaseDeDatos()
                     ///Inicializamos los datos del juego
                     // initGame(resultJSON);
                     globals.arrayBD = resultJSON;
+                    console.log(globals.arrayBD);
                 }
                 else
                     alert("Communication error: No data recived");

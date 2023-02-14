@@ -91,6 +91,7 @@ function playGame()
     actualiceHighScore();
 
    //actualización de la cámara
+  
    
   
 }
@@ -288,8 +289,9 @@ else sprite.physics.ax = 0;
 
 
      //cuando hace colisión con una plataforma:
-     if(player.isCollidingWithObstacleOnTheBottom = true)
-        player.physics.isOnGround = true;
+    //  const player = globals.sprites[0];
+     if(sprite.isCollidingWithObstacleOnTheBottom)
+        sprite.physics.isOnGround = true;
 }
 
 

@@ -45,7 +45,7 @@ function initVars()
 
 
     //Inicializamos el estado del juego
-    globals.gameState = Game.HIGH_SCORE;
+    globals.gameState = Game.NEW_GAME;
 
     //Inicializamos los estado sde las acciones
     globals.action = {
@@ -123,7 +123,7 @@ function loadHandler(){
         console.log("Assets finished loading");
 
         //Start the game
-        globals.gameState = Game.HIGH_SCORE;
+        globals.gameState = Game.NEW_GAME;
     }
 }
 

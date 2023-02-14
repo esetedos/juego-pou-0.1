@@ -5,7 +5,7 @@ import {initHTMLelements, loadAssets, initSprites, initVars, initLevel, initTime
 
 import update from "./gameLogic.js";
 import render from "./gameRender.js";
-// import { initBaseDeDatos } from "./events.js";
+import { initBaseDeDatos } from "./events.js";
 
 
 
@@ -16,6 +16,9 @@ window.onload = init;
 
 function init()
 {
+    //base de datos
+    initBaseDeDatos();
+
     //Inicializamos los elementos HTML: Canvas, Context, Caja de texto de pruebas
     initHTMLelements();
 
@@ -43,7 +46,7 @@ function init()
     //inicializamos a cámara
     initCamera();
 
-    // initBaseDeDatos();
+    
 }
 
 //GAME EXECUTE

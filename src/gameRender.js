@@ -330,11 +330,14 @@ function renderHudHighScore()
     globals.ctxHUDHS.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
     globals.ctxHUDHS.font = '8px emulogic';
     globals.ctxHUDHS.fillStyle = 'white';
-    globals.ctxHUDHS.fillText("HIGH SCORES", 85, 10);
+    // globals.ctxHUDHS.fillText("HIGH SCORES", 85, 10);
     // globals.ctxHUDHS.fillText("|", 56, 8);
     // globals.ctxHUDHS.fillStyle = 'lightgray';
     // globals.ctxHUDHS.fillText("  " + 677777, 8, 16);
-
+// for(let i = 0; i < globals.arrayBD.length; i++)
+// {
+    globals.ctxHUDHS.fillText(globals.arrayBD[1].score, 85, 10);
+// }
     
 
 }
