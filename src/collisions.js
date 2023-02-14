@@ -313,7 +313,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
                 if(player.physics.vy > 0)
                 {
                     player.yPos -= overlapY;
-                    player.isCollidingWithObstacleOnTheBottom = true; //to do: en game logic, if (isCollidingWithObstacleOnBottom) es true, entonces poner physics.isOnGrount = true; (porque lo de isOnGroun no puede ir aqui, va en game logic)
+                    player.isCollidingWithObstacleOnTheBottom = true; 
 
                 }
                 else
@@ -498,10 +498,9 @@ export function collisionPlataform(sprite) //colisión entre jugador y plataform
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
             if(sprite.id == SpriteID.PLATAFORM_MOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORM_MOVIMIENTO)
-            {   //TO Do: poner los nombres con _
+            {   
                 sprite.kontMovimiento = globals.levelTime.value;
                 sprite.disappear = true;
-                
             }
 
             player.yPos = sprite.yPos - sprite.imageSet.ySize;

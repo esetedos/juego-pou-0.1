@@ -340,7 +340,7 @@ function updateArrow(sprite)
         // sprite.xPos = -30;
         // sprite.yPos =  Math.floor(Math.random() * 150+40);
     }
-    updateLife(sprite);
+    updateValuesAfterCollision(sprite);
 }
 
 //función que actualiza  las plataformas
@@ -428,7 +428,7 @@ function readKeyboardAndAssignState(sprite){
                     
 }
 
-function updateLife(sprite) //TO DO: llamar desde playGame. Esat funcion solo controla la vida, el resto lo tiene que llevar otra función
+function updateValuesAfterCollision(sprite) 
 {
     if(sprite.isCollidingWithPlayer2)
     {
@@ -447,7 +447,7 @@ function updateLife(sprite) //TO DO: llamar desde playGame. Esat funcion solo co
        
         player.xPos = 180; //235;
         player.yPos = globals.camera.y+71;
-        globals.life --; //quita dos de vida
+        globals.life --; //quita dos de vida //updateLife
     }
 }
 
@@ -499,27 +499,32 @@ function createPlataforms()
 {
     if(globals.crearNuevasPlataf == true)
     {
-        for(let i = 0; i < 3 ; i++){ //TO DO: hacer una funcion que las cree y llamarla desde aqui
-            //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-            const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
-    
-            //creamos los datos de la animacion. 8 framesn / state
-            const frames = new Frames(1, 5);
-    
-            //creamos nuestro objeto physics con vLimit = 40 pixels/second
-            const physics = new Physics(40, 40, 0); //velocidad de las plataformas
-    
-            //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-            const hitBox = new HitBox(30, 4, 0, 0)
-    
-            //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
-    
-            //añadimos el pirate al array de sprites
-            globals.sprites.push(plataforma);
+        for(let i = 0; i < 3 ; i++){ 
+           createRegularPlataforms();
         }
         globals.crearNuevasPlataf = false;
     }
+}
+
+function createRegularPlataforms()
+{
+     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+     const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+    
+     //creamos los datos de la animacion. 8 framesn / state
+     const frames = new Frames(1, 5);
+
+     //creamos nuestro objeto physics con vLimit = 40 pixels/second
+     const physics = new Physics(40, 40, 0); //velocidad de las plataformas
+
+     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+     const hitBox = new HitBox(30, 4, 0, 0)
+
+     //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+     const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+
+     //añadimos el pirate al array de sprites
+     globals.sprites.push(plataforma);
 }
 
 
