@@ -39,7 +39,7 @@ export default function update()
 
         case Game.HIGH_SCORE:
             updateGame_over4High_Score4History();
-         
+            updateHighScore();
             break;
 
         case Game.HISTORY:
@@ -721,4 +721,16 @@ export function eliminaciónDePlataformas()
                 globals.crearNuevasPlataf = true;
             }
         }
+}
+
+function updateHighScore()
+{
+    updateCameraHS();
+}
+
+function updateCameraHS()
+{
+    //to do: aqui ponemos que al pulsar los botones de las flechas, sube o baja
+    globals.cameraHS.y += 10* globals.deltaTime;
+    console.log("high_scores camera dentro");
 }

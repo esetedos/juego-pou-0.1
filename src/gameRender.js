@@ -248,14 +248,7 @@ function renderGameOver()
 function renderHigh_Score()
 {
     renderHudHighScore();
-    globals.ctx.drawImage(
-        globals.tileMap[2],
-        0, 0,                       //the source x and y position
-        256, globals.canvas.width,               //the source height and width
-        0, 0,                         //the destination x and y position
-        256, globals.canvas.width                     //the destination height and width
-                    
-    );
+   
 }
 
 function renderHistory()
@@ -290,9 +283,9 @@ function renderParticle(particle)
             renderExplosionParticle(particle);
             break;
 
-        case ParticleID.FIRE:   //esto creo que sobra
-            renderFireParticle(particle); 
-            break;
+        // case ParticleID.FIRE:   //esto creo que sobra
+        //     renderFireParticle(particle); 
+        //     break;
 
         default:
             break;
@@ -327,17 +320,45 @@ function restoreCamera() //Función que restaurará la cámara (el origen de coo
 
 function renderHudHighScore()
 {
-    globals.ctxHUDHS.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
-    globals.ctxHUDHS.font = '8px emulogic';
-    globals.ctxHUDHS.fillStyle = 'white';
+   
+    globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
+    // globals.ctxHUDHS.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
+    globals.ctx.font = '8px emulogic';
+    globals.ctx.fillStyle = 'white';
     // globals.ctxHUDHS.fillText("HIGH SCORES", 85, 10);
     // globals.ctxHUDHS.fillText("|", 56, 8);
     // globals.ctxHUDHS.fillStyle = 'lightgray';
     // globals.ctxHUDHS.fillText("  " + 677777, 8, 16);
-// for(let i = 0; i < globals.arrayBD.length; i++)
-// {
-    globals.ctxHUDHS.fillText(globals.arrayBD[1].score, 85, 10);
-// }
     
+    for(let i = 0; i < globals.arrayBD.length; i++)
+    {
+        globals.ctx.fillText(i, 50, 60+i*17)
+        globals.ctx.fillText(globals.arrayBD[i].izena, 80, 60+i*17);
+        globals.ctx.fillText(globals.arrayBD[i].score, 150, 60+i*17);
+    }
+    
+    moveCameraHS();
+    restoreCameraHS();
+// globals.ctx.drawImage(
+//     globals.tileMap[2],
+//     0, 0,                       //the source x and y position
+//     256, globals.canvas.width,               //the source height and width
+//     0, 0,                         //the destination x and y position
+//     256, globals.canvas.width                     //the destination height and width
+                
+// );
+}
 
+
+function moveCameraHS()
+{
+    const xTranslation = -globals.cameraHS.x;
+    const yTranslation = -globals.cameraHS.y;
+
+    globals.ctx.translate(xTranslation, yTranslation);
+}
+
+function restoreCameraHS()
+{
+    globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
 }

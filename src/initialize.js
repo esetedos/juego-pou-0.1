@@ -366,6 +366,7 @@ function initCamera()
 {
     const h = (level1.length-6)*32;
     globals.camera = new Camera(0, h);
+    globals.cameraHS = new Camera(0, 0);
 }
 
 

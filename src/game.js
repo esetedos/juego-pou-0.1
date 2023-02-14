@@ -45,6 +45,7 @@ function init()
 
     //inicializamos a cámara
     initCamera();
+   
 
     
 }
