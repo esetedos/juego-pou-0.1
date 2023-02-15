@@ -67,5 +67,9 @@ export default {
     twoMinute: false,
     threeMinute: false,
     fourMinute: false,
-    fiveMinute: false
+    fiveMinute: false,
+
+    stopMoving: false,
+
+    kont: 0
 };

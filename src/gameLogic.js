@@ -38,7 +38,7 @@ export default function update()
             break;
 
         case Game.HIGH_SCORE:
-            updateGame_over4High_Score4History();
+            
             updateHighScore();
             break;
 
@@ -93,7 +93,7 @@ function playGame()
 
     minutes();
 
-   
+   restoreCamera();
   
 }
 
@@ -788,6 +788,20 @@ function updateCamera()
     // globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
 }
 
+function restoreCamera()
+{
+    if(globals.camera.y < 5){
+        // let a = (level1.length-6)*32-globals.camera.y;
+         globals.camera.y += (level1.length-6)*32-32;
+         for(let i = 0; i<globals.sprites.length; i++)
+         {
+            globals.sprites[i].yPos += (level1.length-6)*32-32;
+         }
+         
+    }
+   
+}
+
 export function gameMovement()
 {
     const player = globals.sprites[0];
@@ -827,6 +841,7 @@ export function eliminaciónDePlataformas()
 function updateHighScore()
 {
     updateCameraHS();
+    updateGame_over4High_Score4History();
 }
 
 function updateCameraHS()
