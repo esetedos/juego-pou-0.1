@@ -123,7 +123,7 @@ export function postHighScores()
 
     //Send data
     const objectToSend = {
-        izena:       globals.name,
+        izena:       globals.izena,
         score:       score
     }
 

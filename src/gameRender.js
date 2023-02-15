@@ -336,8 +336,8 @@ function renderHudHighScore()
     // {
 
 
-    if(60+globals.arrayBD.length*17-globals.cameraHS.y > 190)
-    {
+    // if(60+globals.arrayBD.length*17-globals.cameraHS.y > 190)
+    // {
             moveCameraHS(); 
         // }
     
@@ -368,7 +368,7 @@ function renderHudHighScore()
             // {
             restoreCameraHS();
             // }
-    }
+    // }
        
    
     

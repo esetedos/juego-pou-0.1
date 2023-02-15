@@ -629,8 +629,10 @@ function updateNewGame()
     // console.log("entra");
     // if (globals.action.jump === true) //to do quitar el if, que lo haga directamente (son las cosas que van a inicializar)
     //reiniciamos valores
+    //reinicio
         globals.metroak = 0;
         globals.life = 4;
+        globals.izena = "";
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
         globals.oneMinute = false;
@@ -884,20 +886,20 @@ function saveName()
 
 function typeName()
 {
-    
+    console.log(globals.asciCode);
     let insertchar = String.fromCharCode(globals.asciCode);
 
     if(globals.asciCode > 64 && globals.asciCode < 91)
     {
-        console.log("entra");
-        
-        console.log(globals.letterTimer.value);
+        // console.log("entra");
+        console.log(insertchar);
+        // console.log(globals.letterTimer.value);
 
         //meter un timer para que se mantenga pulsada la tecla
-        if(globals.letterTimer.value > 0)
+        if(globals.letterTimer.value > 1)
         {
             //aquí no entra
-            console.log("entra2");
+            // console.log("entra2");
             
             globals.izena += insertchar;
             globals.letterTimer.value = 0;
@@ -918,14 +920,16 @@ function typeName()
 
 function findScore (objectToSend)
 {
-    for(let i = 0; i < globals.arrayBD.length; i++)
-                {
-                    if(globals.score > globals.arrayBD[i])
-                    {
-                        globals.arrayBD.splice(i,0,objectToSend);
-                        i = globals.arrayBD.length;
-                    }
-                }
+    // for(let i = 0; i < globals.arrayBD.length; i++)
+    { 
+        // if(globals.score > globals.arrayBD[i].score)
+        {
+            console.log("entra14");
+            globals.arrayBD.splice(globals.arrayBD.length+1,0,objectToSend);
+            // i = globals.arrayBD.length;
+        }
+    }
+    console.log(globals.arrayBD);
 }
 
 function updateGame_over()

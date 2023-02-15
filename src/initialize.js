@@ -58,7 +58,7 @@ function initVars()
     }
 
     //Variables logica juego
-    globals.life = 3;
+    globals.life = 0;
     globals.saltoKop = 0;
 }
 
@@ -333,7 +333,7 @@ function initTimers()
 {
     //creamos timer de valor 200, con cambios cada 0.5 segundos
     globals.levelTime = new Timer(0, 1.33);
-    globals.letterTimer = new Timer(0, 1);
+    globals.letterTimer = new Timer(0, 0.1);
 }
 
 
