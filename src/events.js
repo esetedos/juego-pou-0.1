@@ -3,6 +3,8 @@ import globals from "./globals.js";
 
 export function keydownHandler(event)
 {
+    globals.asciCode = event.keyCode;
+
     switch(event.keyCode)
     {
         case Key.LEFT:
@@ -33,6 +35,8 @@ export function keydownHandler(event)
 
 export function keyupHandler(event)
 {
+    globals.asciCode= -1;
+
     switch(event.keyCode)
     {
         case Key.LEFT:
@@ -78,7 +82,8 @@ export function initBaseDeDatos()
             
             //console.log( this.status);
             if (this.status == 200)
-            {console.log("entra");
+            {
+                console.log("entra");
                 console.log(this.responseText);
                 // console.log(this.responseText === null);
                 if(this.responseText != null)
@@ -114,11 +119,11 @@ export function postHighScores()
     console.log("Add button pressed");
 
     //Generamos isbn aleatorio
-    const score = Math.floor(Math.random() * 20+10);
+    const score = Math.floor(globals.metroak/10)*10;
 
     //Send data
     const objectToSend = {
-        izena:       "IDK",
+        izena:       globals.name,
         score:       score
     }
 
@@ -164,6 +169,8 @@ export function postHighScores()
 
     request.responseType = "text";
     request.send(dataToSend);
+
+    return(objectToSend); //?????????
 }
 
 

@@ -187,7 +187,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillText("METERS", 4, 8);
     globals.ctxHUD.fillText("|", 56, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText("  " + score, 8, 16);
+    globals.ctxHUD.fillText("  " + globals.score, 8, 16);
 
     //Draw high score
     globals.ctxHUD.fillStyle = 'lightgreen';
@@ -243,6 +243,7 @@ function renderGameOver()
         256, globals.canvas.width                     //the destination height and width
                     
     );
+
 }
 
 function renderHigh_Score()
@@ -395,3 +396,5 @@ function restoreCameraHS()
 {
     globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
+
+

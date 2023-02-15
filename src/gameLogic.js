@@ -36,7 +36,7 @@ export default function update()
             break;
 
         case Game.GAME_OVER:
-            updateGame_over4High_Score4History();
+            updateGame_over();
             break;
 
         case Game.HIGH_SCORE:
@@ -772,6 +772,8 @@ function updateExplosionParticle(particle)
 
 function actualiceHighScore()
 {
+    globals.score=Math.floor(globals.metroak/10)*10;
+
     if(Math.floor(globals.metroak/10)*10 > globals.highScore)
     {
         globals.highScore = Math.floor(globals.metroak/10)*10;
@@ -809,6 +811,7 @@ export function gameMovement()
 {
     const player = globals.sprites[0];
 
+    globals.score = Math.floor(globals.metroak/10)*10;
     if(player.yPos < globals.camera.y+50)  //70)
     {
         globals.metroak++;
@@ -872,4 +875,77 @@ function minutes()
     if( globals.levelTime.value > 300)
         globals.fiveMinute = true;
     // globals.levelTime.value = 0;
+}
+
+function saveName()
+{
+// dfg
+}
+
+function typeName()
+{
+    
+    let insertchar = String.fromCharCode(globals.asciCode);
+
+    if(globals.asciCode > 64 && globals.asciCode < 91)
+    {
+        console.log("entra");
+        
+        console.log(globals.letterTimer.value);
+
+        //meter un timer para que se mantenga pulsada la tecla
+        if(globals.letterTimer.value > 0)
+        {
+            //aquí no entra
+            console.log("entra2");
+            
+            globals.izena += insertchar;
+            globals.letterTimer.value = 0;
+
+            if(globals.izena.length > 2)
+            {
+                const objectToSend = postHighScores();
+                findScore(objectToSend);
+                globals.gameState = Game.HIGH_SCORE;
+                
+            }
+        
+            // postHighScore();
+        }
+    }
+}
+
+
+function findScore (objectToSend)
+{
+    for(let i = 0; i < globals.arrayBD.length; i++)
+                {
+                    if(globals.score > globals.arrayBD[i])
+                    {
+                        globals.arrayBD.splice(i,0,objectToSend);
+                        i = globals.arrayBD.length;
+                    }
+                }
+}
+
+function updateGame_over()
+{
+    updateletterTimer();
+    typeName();
+
+}
+
+function updateletterTimer()
+{
+    //incrementamos el ocntador de cambio de valor
+    globals.letterTimer.timeChangeCounter += globals.deltaTime;
+
+    //Si ha pasado el tiempo necesario, cambiamos el valor del timer
+    if(globals.letterTimer.timeChangeCounter > globals.letterTimer.timeChangeValue){    // && globals.levelTime.value != 0){ //lo segundo es para que cuando llegue a 0, el tiempo no siga bajando
+        globals.letterTimer.value++;
+
+        //reseteamos timeChangeCounter
+        globals.letterTimer.timeChangeCounter = 0;
+    }
+    
 }

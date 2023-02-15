@@ -42,6 +42,8 @@ export default {
     //temporizacion nivel
     levelTime: {},
 
+    letterTimer: {},
+
     //Objeto que guarda el estado de la tecla pulsada
     action: {},
 
@@ -71,5 +73,13 @@ export default {
 
     stopMoving: false,
 
-    kont: 0
+    kont: 0,
+
+    izena: "",
+
+    score:  0,
+
+    asciCode: -1
+
+
 };
