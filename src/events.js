@@ -106,3 +106,74 @@ export function initBaseDeDatos()
     request.send();
 
 }
+
+
+//Post
+export function postHighScores()
+{
+    console.log("Add button pressed");
+
+    //Generamos isbn aleatorio
+    const score = Math.floor(Math.random() * 20+10);
+
+    //Send data
+    const objectToSend = {
+        izena:       "IDK",
+        score:       score
+    }
+
+    //String data to send
+    const dataToSend =  'izena=' + objectToSend.izena + 
+                        '&score=' + objectToSend.score;
+
+    // console.log(dataToSend);
+
+
+    //Ruta relativa al fichero que hace la petición (testAjax.php)
+    const url = "http://localhost:8080/juego/CarpetaDelJuego(git)/server/routes/postClassic.php/";
+    const request = new XMLHttpRequest();
+    request.open('POST', url, true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function()
+    {
+        // console.log(this.readyState);
+        if(this.readyState == 4)
+        {
+            if(this.status == 200)
+            {
+                if(this.responseText != null)
+                {
+                    console.log(this.responseText);
+                    // const resultJSON = JSON.parse(this.responseText);
+                    //console.log(resultJSON);
+
+                    //Metemos los datos en un array, ya que lo que nos devuelve la ruta es un Objeto.
+                    // const arrayResult = [resultJSON];
+
+                    //Iniciamos los datos
+                    // initGame(arrayResult);
+                }
+                else
+                    alert("Comunication error: No data recived");
+            }
+            else
+                alert("Comunication error: " + this.statusText);
+        }
+    }
+
+    request.responseType = "text";
+    request.send(dataToSend);
+}
+
+
+
+
+
+
+
+
+
+
+
+

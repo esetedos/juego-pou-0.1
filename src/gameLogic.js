@@ -9,6 +9,7 @@ import HitBox from "./HitBox.js";
 import { initParticles, initSprites } from "./initialize.js";
 import { Level, level1 } from "./Level.js";
 import {collisionPlataform} from "./collisions.js";
+import {postHighScores} from "./events.js";
 
 
 
@@ -23,6 +24,7 @@ export default function update()
     {
         case Game.LOADING:
             console.log("Loading assets...");
+
             break;
         
         case Game.NEW_GAME:
@@ -644,6 +646,7 @@ function updateNewGame()
     
     if (globals.action.G === true)
     {
+        postHighScores();
         globals.gameState = Game.HIGH_SCORE;
     }
     if (globals.action.H === true)
