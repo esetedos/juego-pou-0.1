@@ -24,6 +24,7 @@ export default function update()
     {
         case Game.LOADING:
             console.log("Loading assets...");
+            loadingScreenMenu();
 
             break;
         
@@ -952,4 +953,12 @@ function updateletterTimer()
         globals.letterTimer.timeChangeCounter = 0;
     }
     
+}
+
+function loadingScreenMenu()
+{
+    if(globals.action.B && globals.arrayBD !== null)
+    {
+        globals.gameState = Game.NEW_GAME;
+    }
 }

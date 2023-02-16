@@ -11,6 +11,7 @@ export default function render()
     {
         case Game.LOADING:
             //Draw loading spinner
+            renderTextAndBar();
             break;
 
         case Game.NEW_GAME:
@@ -398,3 +399,17 @@ function restoreCameraHS()
 }
 
 
+function renderTextAndBar()
+{
+    globals.ctx.fillStyle = 'white';
+
+    globals.ctx.fillRect(35, 100, globals.assetsLoaded *(180/globals.assetsToLoad.length), 16);
+
+    if(globals.assetsLoaded *(180/globals.assetsToLoad.length) === 180)
+    {
+        globals.ctx.font    = '12px emulogic';
+        globals.ctx.fillStyle   = 'white';
+        globals.ctx.fillText("B tekla sakatu", 40, 60);
+    }
+
+}
