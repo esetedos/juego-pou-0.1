@@ -44,6 +44,8 @@ export default {
 
     letterTimer: {},
 
+    timerProba: {},
+
     //Objeto que guarda el estado de la tecla pulsada
     action: {},
 
@@ -79,7 +81,9 @@ export default {
 
     score:  0,
 
-    asciCode: -1
+    asciCode: -1,
+
+    introducirDatosBD: false
 
 
 };

@@ -223,6 +223,7 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
 
 function renderNewGame()
 {
+    // reiniciaCameraHS(); //no va
     // globals.ctx.drawImage(new_game,0,0);
     globals.ctx.drawImage(
         globals.tileMap[0],
@@ -320,6 +321,8 @@ function restoreCamera() //Función que restaurará la cámara (el origen de coo
     globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
+
+
 function renderHudHighScore()
 {
     
@@ -370,10 +373,14 @@ function renderHudHighScore()
             restoreCameraHS();
             // }
     // }
-       
-   
+    //    console.log(globals.cameraHS.y);
+        console.log(100/globals.arrayBD.length);
+   if(globals.cameraHS.y > globals.arrayBD.length*8)
+   {
+        globals.cameraHS.y = 0;
+   }
     
-   
+  
     
 // globals.ctx.drawImage(
 //     globals.tileMap[2],
@@ -399,8 +406,10 @@ function restoreCameraHS()
 }
 
 
+
 function renderTextAndBar()
 {
+    globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctx.fillStyle = 'white';
 
     globals.ctx.fillRect(35, 100, globals.assetsLoaded *(180/globals.assetsToLoad.length), 16);

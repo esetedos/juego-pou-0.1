@@ -97,6 +97,10 @@ function playGame()
     minutes();
 
    restoreCamera();
+
+//    reiniciaCameraHS();
+
+   
   
 }
 
@@ -642,6 +646,8 @@ function updateNewGame()
         globals.fourMinute = false;
         globals.fiveMinute = false;
         initSprites;
+      
+        
         
 
     if(globals.action.jump)
@@ -649,7 +655,7 @@ function updateNewGame()
     
     if (globals.action.G === true)
     {
-        postHighScores();
+        // postHighScores();
         globals.gameState = Game.HIGH_SCORE;
     }
     if (globals.action.H === true)
@@ -849,16 +855,29 @@ export function eliminaciónDePlataformas()
 
 function updateHighScore()
 {
-    updateCameraHS();
+    updateCameraHS();  
     updateGame_over4High_Score4History();
+    updateTimerProba();
+    
+
+    if(globals.timerProba.value > 5)
+    {
+        // console.log("entra");
+        // reiniciaCameraHS(); 
+    }
 }
 
 function updateCameraHS()
 {
     //to do: aqui ponemos que al pulsar los botones de las flechas, sube o baja
     globals.cameraHS.y += 10* globals.deltaTime;
-    console.log("high_scores camera dentro");
+    // console.log("high_scores camera dentro");
 }
+
+// function reiniciaCameraHS()
+// {
+//     globals.cameraHS.y = 0;
+// }
 
 
 function minutes()
@@ -887,13 +906,13 @@ function saveName()
 
 function typeName()
 {
-    console.log(globals.asciCode);
+    // console.log(globals.asciCode);
     let insertchar = String.fromCharCode(globals.asciCode);
 
     if(globals.asciCode > 64 && globals.asciCode < 91)
     {
         // console.log("entra");
-        console.log(insertchar);
+        // console.log(insertchar);
         // console.log(globals.letterTimer.value);
 
         //meter un timer para que se mantenga pulsada la tecla
@@ -907,8 +926,8 @@ function typeName()
 
             if(globals.izena.length > 2)
             {
-                const objectToSend = postHighScores();
-                findScore(objectToSend);
+                postHighScores();
+                // findScore(objectToSend);
                 globals.gameState = Game.HIGH_SCORE;
                 
             }
@@ -925,8 +944,9 @@ function findScore (objectToSend)
     { 
         // if(globals.score > globals.arrayBD[i].score)
         {
-            console.log("entra14");
+            // console.log("entra14");
             globals.arrayBD.splice(globals.arrayBD.length+1,0,objectToSend);
+
             // i = globals.arrayBD.length;
         }
     }
@@ -937,7 +957,7 @@ function updateGame_over()
 {
     updateletterTimer();
     typeName();
-
+    
 }
 
 function updateletterTimer()
@@ -955,6 +975,22 @@ function updateletterTimer()
     
 }
 
+function updateTimerProba()
+{
+    //incrementamos el contador de cambio de valor
+    globals.timerProba.timeChangeCounter += globals.deltaTime;
+
+    // Si ha pasado el tiempo necesario, cambiamos el valor del timer
+    if(globals.timerProba.timeChangeCounter > globals.timerProba.timeChangeValue){    // && globals.levelTime.value != 0){ //lo segundo es para que cuando llegue a 0, el tiempo no siga bajando
+        globals.timerProba.value++;
+
+        //reseteamos timeChangeCounter
+        globals.timerProba.timeChangeCounter = 0;
+        // console.log(globals.timerProba.value);
+    }
+    
+}
+
 function loadingScreenMenu()
 {
     if(globals.action.B && globals.arrayBD !== null)
@@ -962,3 +998,4 @@ function loadingScreenMenu()
         globals.gameState = Game.NEW_GAME;
     }
 }
+

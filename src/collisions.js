@@ -257,7 +257,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
         if(isCollidingOnPos6) //Hay colision en punto 6
         {
-            console.log("6");
+            // console.log("6");
             //calculamos overlap sólo en Y
             overlapY = brickSize - Math.floor(yPos) % brickSize;
 
@@ -274,7 +274,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
         if(isCollidingOnPos4) //hay colision en punto 4
         {
-            console.log("4");
+            // console.log("4");
             //calculamos overap sólo en Y
             overlapY = Math.floor(yPos) % brickSize + 1;
 
@@ -295,7 +295,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
         if(isCollidingOnPos1) //hay colisión en punto 1
         {
-            console.log("1");
+            // console.log("1");
             //se trata de una esquina. Puede haber overlap en X y en Y
 
             //calculamos overlap en X y en Y con el player
@@ -333,7 +333,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
         if(isCollidingOnPos3) //hay colisión en punto 3
         {
-            console.log("3");
+            // console.log("3");
             //se trata de una esquina. Puede haber overlap en X y en Y
 
             //calculamos overlap en X y en Y con el player

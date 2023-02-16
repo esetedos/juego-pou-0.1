@@ -72,6 +72,7 @@ export function initBaseDeDatos()
 //get
     //ruta o absoluta o relativa al fichero que hace la petición (html)
     const url = "http://localhost:8080/juego/CarpetaDelJuego(git)/server/routes/getAllClassic.php/";    //   https://2223arcadetalde3.aegcloud.pro/serverEstitxu/server/routes/getAllClassic.php";
+    // const url = "https://2223arcadetalde3.aegcloud.pro/Arcade_Estitxu/server/routes/getAllClassic.php";
     const request = new XMLHttpRequest();
 
     request.onreadystatechange = function()
@@ -83,7 +84,7 @@ export function initBaseDeDatos()
             //console.log( this.status);
             if (this.status == 200)
             {
-                console.log("entra");
+                // console.log("entra");
                 console.log(this.responseText);
                 // console.log(this.responseText === null);
                 if(this.responseText != null)
@@ -92,10 +93,11 @@ export function initBaseDeDatos()
                     const resultJSON = JSON.parse(this.responseText);
                     // console.log(resultJSON);
                     // console.log(this.responseText);
-
+                    
                     ///Inicializamos los datos del juego
                     // initGame(resultJSON);
                     globals.arrayBD = resultJSON;
+                    globals.arrayBD.sort((x, y) => y.score - x.score);
                     console.log(globals.arrayBD);
                 }
                 else
@@ -119,12 +121,12 @@ export function postHighScores()
     console.log("Add button pressed");
 
     //Generamos isbn aleatorio
-    const score = Math.floor(globals.metroak/10)*10;
+    // const score = Math.floor(globals.metroak/10)*10;
 
     //Send data
     const objectToSend = {
         izena:       globals.izena,
-        score:       score
+        score:       globals.score
     }
 
     //String data to send
@@ -136,6 +138,7 @@ export function postHighScores()
 
     //Ruta relativa al fichero que hace la petición (testAjax.php)
     const url = "http://localhost:8080/juego/CarpetaDelJuego(git)/server/routes/postClassic.php/";
+    // const url = "https://2223arcadetalde3.aegcloud.pro/Arcade_Estitxu/server/routes/postClassic.php";
     const request = new XMLHttpRequest();
     request.open('POST', url, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -149,13 +152,14 @@ export function postHighScores()
             {
                 if(this.responseText != null)
                 {
-                    console.log(this.responseText);
-                    // const resultJSON = JSON.parse(this.responseText);
-                    //console.log(resultJSON);
+                    console.log(this.responseText); //objeto que se acaba de meter
+                    const resultJSON = JSON.parse(this.responseText);
+                    console.log(resultJSON);
 
                     //Metemos los datos en un array, ya que lo que nos devuelve la ruta es un Objeto.
                     // const arrayResult = [resultJSON];
 
+                    findScore2(resultJSON);
                     //Iniciamos los datos
                     // initGame(arrayResult);
                 }
@@ -175,7 +179,20 @@ export function postHighScores()
 
 
 
+function findScore2(resultJSON)
+{
+    // for(let i = 0; i < globals.arrayBD.length; i++)
+    { 
+        // if(globals.score > globals.arrayBD[i].score)
+        {
+            // console.log("entra14");
+            globals.arrayBD.splice(globals.arrayBD.length+1,0,resultJSON);
 
+            // i = globals.arrayBD.length;
+        }
+    }
+    console.log(globals.arrayBD);
+}
 
 
 
