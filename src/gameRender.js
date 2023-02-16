@@ -349,7 +349,7 @@ function renderHudHighScore()
         {
             let y = 60+i*17;
             //al principio 'y' es 60 y 'globals.cameraHS.y' es 0, asi que es 60 en total
-            if(y - globals.cameraHS.y >40 && y - globals.cameraHS.y <190)
+            if(y - globals.cameraHS.y >40 && y - globals.cameraHS.y <180)
             {
                 globals.ctx.fillText(i, 50, y)
                 globals.ctx.fillText(globals.arrayBD[i].izena, 80, y);
@@ -375,9 +375,9 @@ function renderHudHighScore()
     // }
     //    console.log(globals.cameraHS.y);
         console.log(100/globals.arrayBD.length);
-   if(globals.cameraHS.y > globals.arrayBD.length*8)
+   if(globals.cameraHS.y > globals.arrayBD.length*17) //8
    {
-        globals.cameraHS.y = 0;
+        globals.cameraHS.y = 70-globals.canvas.height;
    }
     
   

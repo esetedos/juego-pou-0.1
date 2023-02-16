@@ -24,7 +24,7 @@ export default function update()
     {
         case Game.LOADING:
             console.log("Loading assets...");
-            loadingScreenMenu();
+            inicioNEW_GAME();
 
             break;
         
@@ -991,9 +991,9 @@ function updateTimerProba()
     
 }
 
-function loadingScreenMenu()
+function inicioNEW_GAME()
 {
-    if(globals.action.B && globals.arrayBD !== null)
+    if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
     {
         globals.gameState = Game.NEW_GAME;
     }

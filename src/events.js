@@ -181,14 +181,14 @@ export function postHighScores()
 
 function findScore2(resultJSON)
 {
-    // for(let i = 0; i < globals.arrayBD.length; i++)
+    for(let i = 0; i < globals.arrayBD.length; i++)
     { 
-        // if(globals.score > globals.arrayBD[i].score)
+        if(globals.score >= globals.arrayBD[i].score)
         {
             // console.log("entra14");
-            globals.arrayBD.splice(globals.arrayBD.length+1,0,resultJSON);
+            globals.arrayBD.splice(i,0,resultJSON);
 
-            // i = globals.arrayBD.length;
+            i = globals.arrayBD.length;
         }
     }
     console.log(globals.arrayBD);
