@@ -45,7 +45,7 @@ function initVars()
 
 
     //Inicializamos el estado del juego
-    globals.gameState = Game.LOADING;
+    globals.gameState = Game.PL;
 
     //Inicializamos los estado sde las acciones
     globals.action = {
@@ -313,7 +313,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite                                235
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, (level1.length-6)*32+130, imageSet, frames, physics, hitBox, hitBox2, 0);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, (level1.length-6)*32+90, imageSet, frames, physics, hitBox, hitBox2, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
@@ -335,6 +335,7 @@ function initTimers()
     globals.levelTime = new Timer(0, 1.33);
     globals.letterTimer = new Timer(0, 0.1);
     globals.timerProba = new Timer(0, 1);
+    globals.timerSaltoKop = new Timer(0, 1);
 }
 
 

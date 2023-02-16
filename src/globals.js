@@ -46,6 +46,8 @@ export default {
 
     timerProba: {},
 
+    timerSaltoKop: {},
+
     //Objeto que guarda el estado de la tecla pulsada
     action: {},
 
@@ -83,7 +85,9 @@ export default {
 
     asciCode: -1,
 
-    introducirDatosBD: false
+    introducirDatosBD: false,
+
+    dificultad: 0
 
 
 };

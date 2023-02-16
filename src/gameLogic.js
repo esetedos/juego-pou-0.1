@@ -98,6 +98,8 @@ function playGame()
 
    restoreCamera();
 
+   updateTimerSaltoKop();
+
 //    reiniciaCameraHS();
 
    
@@ -625,6 +627,27 @@ function createDisappearPlataforms()
 
     //añadimos el pirate al array de sprites
     globals.sprites.push(plataformaN);
+
+    //and
+
+    //plataforma nube extra ;)
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+     imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+
+    //creamos los datos de la animacion. 8 framesn / state
+     frames = new Frames(1, 5);
+
+    //creamos nuestro objeto physics con vLimit = 40 pixels/second
+     physics = new Physics(1, 0); //velocidad de las plataformas
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+     hitBox = new HitBox(30, 4, 0, 0)
+
+    //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+     plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 400, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
+
+    //añadimos el pirate al array de sprites
+    globals.sprites.push(plataformaN);
 }
 
 
@@ -636,7 +659,7 @@ function updateNewGame()
     //reiniciamos valores
     //reinicio
         globals.metroak = 0;
-        globals.life = 4;
+        globals.life = 3;
         globals.izena = "";
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
@@ -650,7 +673,7 @@ function updateNewGame()
         
         
 
-    if(globals.action.jump)
+    // if(globals.action.jump)
         globals.gameState = Game.PLAYING;
     
     if (globals.action.G === true)
@@ -882,20 +905,27 @@ function updateCameraHS()
 
 function minutes()
 {
-    if( globals.levelTime.value > 60)
+    if( globals.levelTime.value > 60){
         globals.oneMinute = true;
-
-    if( globals.levelTime.value > 120)
+        globals.dificultad = 1;
+    }
+    if( globals.levelTime.value > 120){
         globals.twoMinute = true;
-
-    if( globals.levelTime.value > 180)
+        globals.dificultad = 2;
+    }
+    if( globals.levelTime.value > 180){
         globals.threeMinute = true;
-
-    if( globals.levelTime.value > 240)
+        globals.dificultad = 3;
+    }
+    if( globals.levelTime.value > 240){
         globals.fourMinute = true;
-
-    if( globals.levelTime.value > 300)
+        globals.dificultad = 4;
+    }
+    if( globals.levelTime.value > 300){
         globals.fiveMinute = true;
+        globals.dificultad = 5;
+    }
+        
     // globals.levelTime.value = 0;
 }
 
@@ -938,20 +968,20 @@ function typeName()
 }
 
 
-function findScore (objectToSend)
-{
-    // for(let i = 0; i < globals.arrayBD.length; i++)
-    { 
-        // if(globals.score > globals.arrayBD[i].score)
-        {
-            // console.log("entra14");
-            globals.arrayBD.splice(globals.arrayBD.length+1,0,objectToSend);
+// function findScore (objectToSend)
+// {
+//     // for(let i = 0; i < globals.arrayBD.length; i++)
+//     { 
+//         // if(globals.score > globals.arrayBD[i].score)
+//         {
+//             // console.log("entra14");
+//             globals.arrayBD.splice(globals.arrayBD.length+1,0,objectToSend);
 
-            // i = globals.arrayBD.length;
-        }
-    }
-    console.log(globals.arrayBD);
-}
+//             // i = globals.arrayBD.length;
+//         }
+//     }
+//     console.log(globals.arrayBD);
+// }
 
 function updateGame_over()
 {
@@ -991,9 +1021,25 @@ function updateTimerProba()
     
 }
 
+function updateTimerSaltoKop()
+{
+    //incrementamos el contador de cambio de valor
+    globals.timerSaltoKop.timeChangeCounter += globals.deltaTime;
+
+    // Si ha pasado el tiempo necesario, cambiamos el valor del timer
+    if(globals.timerSaltoKop.timeChangeCounter > globals.timerSaltoKop.timeChangeValue){    // && globals.levelTime.value != 0){ //lo segundo es para que cuando llegue a 0, el tiempo no siga bajando
+        globals.timerSaltoKop.value++;
+
+        //reseteamos timeChangeCounter
+        globals.timerSaltoKop.timeChangeCounter = 0;
+        // console.log(globals.timerProba.value);
+    }
+    
+}
+
 function inicioNEW_GAME()
 {
-    if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
+    // if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
     {
         globals.gameState = Game.NEW_GAME;
     }

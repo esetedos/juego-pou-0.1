@@ -185,26 +185,44 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     //Draw score
     globals.ctxHUD.font = '8px emulogic';
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("METERS", 4, 8);
-    globals.ctxHUD.fillText("|", 56, 8);
+    globals.ctxHUD.fillText("score", 5, 8);
+    globals.ctxHUD.fillText("|", 50, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText("  " + globals.score, 8, 16);
+    globals.ctxHUD.fillText( globals.score, 15, 16);
 
     //Draw high score
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("HIGH", 67, 8);
-    globals.ctxHUD.fillText("SCORE", 104, 8);
-    globals.ctxHUD.fillText("|", 148, 8);
+    globals.ctxHUD.fillText("jumps", 61, 8);
+    // globals.ctxHUD.fillText("SCORE", 104, 8);
+    globals.ctxHUD.fillText("|", 106, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + highScore, 90, 16);
+    globals.ctxHUD.fillText(" " + globals.saltoKop, 70, 16);
+    // globals.ctxHUD.fillText(" " + globals.timerSaltoKop.value, 120, 16);
 
     // Draw life
     globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("Life", 159, 8);
-    globals.ctxHUD.fillText("|", 195, 8);
+    globals.ctxHUD.fillText("Life", 118, 8);
+    globals.ctxHUD.fillText("|", 156, 8);
     globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(" " + life, 160, 16);
+    globals.ctxHUD.fillText(" " + life, 120, 16);
 
+    //ESTAS HACIENDO LO DE LAS PUNTUACIONES Y ASI PA Q SE VEA BONITO
+    //draw time
+    
+    globals.ctxHUD.fillStyle = 'lightgreen';
+    globals.ctxHUD.fillText("LEVEL", 168, 8);
+    globals.ctxHUD.fillText("|", 210, 8);
+    globals.ctxHUD.fillStyle = 'lightgray';
+    globals.ctxHUD.fillText(globals.dificultad, 185, 16);
+    
+    
+    globals.ctxHUD.fillStyle = 'lightgreen';
+    globals.ctxHUD.fillText("TIME", 220, 8);
+    globals.ctxHUD.fillStyle = 'lightgray';
+    globals.ctxHUD.fillText(time, 230, 16);
+    // globals.ctxHUD.fillText("|", 190, 8);
+    
+    
     //round corners. (remove 1 pixel per corner)
     globals.ctxHUD.fillStyle = 'black';
     globals.ctxHUD.fillRect(168, 9, 1, 1);
@@ -212,17 +230,13 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillRect(168 + life - 1, 9, 1, 1);
     globals.ctxHUD.fillRect(168 + life - 1, 15, 1, 1);
 
-    //draw time
-    globals.ctxHUD.fillStyle = 'lightgreen';
-    globals.ctxHUD.fillText("TIME", 205, 8);
-    globals.ctxHUD.fillStyle = 'lightgray';
-    globals.ctxHUD.fillText(time, 215, 16);
 }
 
 
 
 function renderNewGame()
 {
+    globals.ctxHUD.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     // reiniciaCameraHS(); //no va
     // globals.ctx.drawImage(new_game,0,0);
     globals.ctx.drawImage(
@@ -237,6 +251,7 @@ function renderNewGame()
 
 function renderGameOver()
 {
+    globals.ctxHUD.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctx.drawImage(
         globals.tileMap[1],
         0, 0,                       //the source x and y position
@@ -256,6 +271,7 @@ function renderHigh_Score()
 
 function renderHistory()
 {
+    globals.ctxHUD.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctx.drawImage(
         globals.tileMap[3],
         0, 0,                       //the source x and y position
@@ -325,7 +341,7 @@ function restoreCamera() //Función que restaurará la cámara (el origen de coo
 
 function renderHudHighScore()
 {
-    
+    globals.ctxHUD.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     // globals.ctxHUDHS.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
     globals.ctx.font = '16px emulogic';
