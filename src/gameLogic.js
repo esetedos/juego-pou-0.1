@@ -172,32 +172,34 @@ function updatePlayer(sprite)
 {
     //lectura de teclado. Asignamos dirección a tecla
     readKeyboardAndAssignState(sprite);
+    updateSaltoKop(sprite);
 
     const isLeftOrRightPressed = globals.action.moveLeft || globals.action.moveRight;
 
-    if(globals.action.moveLeft || globals.action.moveRight){
-    switch(sprite.state)
+    if(globals.action.moveLeft || globals.action.moveRight)
     {
-        case State.RIGHT:
-            //si se mueve a la derecha ax (+)
-            sprite.physics.ax = sprite.physics.aLimit;
-            // sprite.physics.vy = 0;
-            //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
-            break;
+        switch(sprite.state)
+        {
+            case State.RIGHT:
+                //si se mueve a la derecha ax (+)
+                sprite.physics.ax = sprite.physics.aLimit;
+                // sprite.physics.vy = 0;
+                //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
+                break;
 
-        case State.LEFT:
-            //si se mueve a la izquierda asignamos ax (-)
-            sprite.physics.ax = -sprite.physics.aLimit;
-            //  sprite.physics.vy = 0;
-            break;
+            case State.LEFT:
+                //si se mueve a la izquierda asignamos ax (-)
+                sprite.physics.ax = -sprite.physics.aLimit;
+                //  sprite.physics.vy = 0;
+                break;
 
-        default: //casos de estar parado
-            sprite.physics.ax = 0;
-            // sprite.physics.vy = 0;
-            // sprite.physics.vx = 0;
+            default: //casos de estar parado
+                sprite.physics.ax = 0;
+                // sprite.physics.vy = 0;
+                // sprite.physics.vx = 0;
+        }
     }
-}
-else sprite.physics.ax = 0;
+    else sprite.physics.ax = 0;
 
     //calculamos velocidad en X y en Y (V = V at)
     sprite.physics.vx += sprite.physics.ax * globals.deltaTime;
@@ -304,6 +306,14 @@ else sprite.physics.ax = 0;
         sprite.physics.isOnGround = true;
 }
 
+function updateSaltoKop(sprite)
+{
+    if(sprite.physics.isOnGround == true && globals.timerSaltoKop.value > 0)
+    {
+         globals.saltoKop++;
+         globals.timerSaltoKop.value = 0;
+    }
+}
 
 function updatePlataformMovimiento(sprite)
 {
