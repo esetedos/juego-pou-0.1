@@ -250,50 +250,61 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     //calculamos colisiones en los 6 puntos
 //calculamos unos puntos que vayan 1poco + arriba q los .'s de de abajo del todo del player (4 y 3), y que si estos también tocan esta id, entonces que NO salte
 //Recordar sobre player: y=15 & x=15
-    if(player.physics.vy>=0) //player.physics.vx > 0) //Movimiento derecha
+    if(player.physics.vy>0) //player.physics.vx > 0) //Movimiento derecha
     {
         //PUNTO 4
         //colision en (xPos, yPos + ySize - 1)
-        xPos = player.xPos + player.hitBox.xOffset +3;
+        xPos = player.xPos + player.hitBox.xOffset +2;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
         isCollidingOnPos4 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
         //PUNTO 3
-        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -3;
+        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -2;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
         isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
         //PUNTO 7
-        xPos = player.xPos + player.hitBox.xOffset +3;
-        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -3;
+        xPos = player.xPos + player.hitBox.xOffset +2;
+        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -5;
         isCollidingOnPos7 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
         //PUNTO 8
-        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -3;
-        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -3;
+        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -2;
+        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -5;
         isCollidingOnPos8 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
-        if((isCollidingOnPos4 || isCollidingOnPos3) && (isCollidingOnPos7 == false) && (isCollidingOnPos8 == false)) //hay colision en punto 4
+        // if(isCollidingOnPos4 || isCollidingOnPos3)
+        // {
+        //     player.physics.vy = 0;
+        // }
+
+        if((isCollidingOnPos4  && isCollidingOnPos7 == false) || (isCollidingOnPos3 && isCollidingOnPos8 == false)) //hay colision en punto 4
         {
             // console.log("4");
             //calculamos overap sólo en Y
             // player.physics.vy= 0;
-            overlapY = Math.floor(yPos) % brickSize + 1;
+            overlapY = 1; //Math.floor(yPos) % (brickSize) + 1;
 
             //Colisión en eje Y
             player.yPos -= overlapY;
-            player.isCollidingWithObstacleOnTheBottom = true;
+            // player.isCollidingWithObstacleOnTheBottom = true;
            
             globals.saltoDeNuevo = true;
-            
-            
+            player.physics.isOnGround = true;
+            console.log(globals.saltoDeNuevo);
+            console.log("salto");
+            console.log("4: " + isCollidingOnPos4);
+            console.log("3: " + isCollidingOnPos3);
+            console.log("7: " + isCollidingOnPos7);
+            console.log("8: " + isCollidingOnPos8);
+           
         }
-        else if(globals.saltoDeNuevo)
+        // else if(globals.saltoDeNuevo)
         {
             // player.physics.vy= 0;
-            player.isCollidingWithPlayer = true;
-            player.physics.isOnGround = true;
-            globals.saltoDeNuevo = false;
+            // player.isCollidingWithPlayer = true;
+           
+            // globals.saltoDeNuevo = false;
             
         }
 

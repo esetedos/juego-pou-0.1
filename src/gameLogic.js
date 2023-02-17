@@ -249,7 +249,14 @@ function updatePlayer(sprite)
         {
             sprite.physics.isOnGround = false;
             
-            //asignamos velocidad inicial al salto
+            // asignamos velocidad inicial al salto
+            if(globals.saltoDeNuevo)
+            {
+                sprite.physics.vy = -1;
+                sprite.physics.vy += (sprite.physics.jumpForce);
+                globals.saltoDeNuevo =false;
+            }
+            else
             sprite.physics.vy += sprite.physics.jumpForce;
         }
     }
@@ -683,7 +690,7 @@ function updateNewGame()
         
         
 
-    // if(globals.action.jump)
+    // if(globals.action.jump)     //uwu
         globals.gameState = Game.PLAYING;
     
     if (globals.action.G === true)
@@ -1047,7 +1054,7 @@ function updateTimerSaltoKop()
     
 }
 
-function inicioNEW_GAME()
+function inicioNEW_GAME() //uwu
 {
     // if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
     {
