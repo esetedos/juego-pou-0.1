@@ -322,7 +322,7 @@ export function collisionPlataform(sprite) //colisión entre jugador y plataform
 
         if(sprite.isCollidingWithPlayer && player.physics.vy >= 0)
         {
-            if(sprite.id == SpriteID.PLATAFORM_MOVIMIENTO-1)//sprite.SpriteID == SpriteID.PLATAFORM_MOVIMIENTO)
+            if(sprite.id == SpriteID.PLATAFORMN)//sprite.SpriteID == SpriteID.PLATAFORM_MOVIMIENTO)
             {   
                 sprite.kontMovimiento = globals.levelTime.value;
                 sprite.disappear = true;

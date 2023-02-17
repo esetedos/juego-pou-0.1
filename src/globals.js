@@ -69,11 +69,11 @@ export default {
 
     arrayBD:  [],
 
-    oneMinute: false,
-    twoMinute: false,
-    threeMinute: false,
-    fourMinute: false,
-    fiveMinute: false,
+    levelOne: false,
+    levelTwo: false,
+    levelThree: false,
+    levelFour: false,
+    levelFive: false,
 
     stopMoving: false,
 
@@ -89,7 +89,13 @@ export default {
 
     dificultad: 0,
 
-    saltoDeNuevo: false
+    saltoDeNuevo: false,
 
+    maxPlataformas: 15, //siempre habrá un máximo de 5 plataformas en pantalla
+//3 plataformas por fila, y 5 filas
+
+    kontPlataforms: 0, //número de plataformas al inicio
+
+    maxPlatAlcanzado: false
 
 };

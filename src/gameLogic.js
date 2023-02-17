@@ -94,7 +94,7 @@ function playGame()
 
     actualiceHighScore();
 
-    minutes();
+    levelInGame();
 
    restoreCamera();
 
@@ -102,6 +102,7 @@ function playGame()
 
 //    reiniciaCameraHS();
 
+    contadorDePlataformas();
    
   
 }
@@ -526,60 +527,58 @@ function disappearPlataformN(sprite)
 
 function createPlataforms()
 {
-    if(globals.crearNuevasPlataf == true)
+    for(let i = 1; i < globals.sprites.length; ++i)
     {
-        let a = 3;
-        for(let i = 0; i < a ; i++){
-            let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
-            if(globals.twoMinute == true) //para qeu se creen 2 plataformas por fila en vez de tres
-            {
-                a = 2;
-            }
-            if(globals.oneMinute == true)       
-            {
-                if(globals.threeMinute == true)   //cuando pasen dos minutos
+        const sprite = globals.sprites[i];
+        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) && globals.crearNuevasPlataf == true)   
+        {
+            let a = 3;
+            for(let i = 0; i < a ; i++){
+                let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
+                if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
                 {
-                    if(globals.fourMinute == true)
+                    // a = 2;
+                }
+                if(globals.levelOne == true)       
+                {
+                    if(globals.levelThree == true)   //cuando pasen dos minutos
                     {
-                        //flechas
+                        if(globals.levelFour == true)
+                        {
+                            //flechas
+                            
+                        }
+                    
+                        if(option<15){
+                            //create plataformas de movimiento
+                            createMovingPlataforms();
+                        }   
+                        else if(option<30)
+                        {
+                            //create plataformas que desaparecen
+                            createDisappearPlataforms();
+                        }
+                        else{
+                            createRegularPlataforms();
+                        }
                         
                     }
-                
-                    if(option<15){
-                        //create plataformas de movimiento
-                        createMovingPlataforms();
+                    else //cuando pase un minuto
+                    {                   
+                        if(option<20){
+                            //create plataformas de movimiento
+                            createMovingPlataforms();
+                        }   
+                        else{
+                            createRegularPlataforms();
+                        }
                     }   
-                    else if(option<30)
-                    {
-                        //create plataformas que desaparecen
-                        createDisappearPlataforms();
-                    }
-                    else{
-                        createRegularPlataforms();
-                    }
-                    
                 }
-                else //cuando pase un minuto
-                {                   
-                    if(option<20){
-                        //create plataformas de movimiento
-                        createMovingPlataforms();
-                    }   
-                    else{
-                        createRegularPlataforms();
-                    }
-                }
-                
-                
+                else
+                    createRegularPlataforms();            
             }
-            else
-                createRegularPlataforms();            
-
-
-
-
+            globals.crearNuevasPlataf = false;
         }
-        globals.crearNuevasPlataf = false;
     }
 }
 
@@ -680,12 +679,15 @@ function updateNewGame()
         globals.izena = "";
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
-        globals.oneMinute = false;
-        globals.twoMinute = false;
-        globals.threeMinute = false;
-        globals.fourMinute = false;
-        globals.fiveMinute = false;
+        globals.levelOne = false;
+        globals.levelTwo = false;
+        globals.levelThree = false;
+        globals.levelFour = false;
+        globals.levelFive = false;
+        globals.maxPlataformas = 15;
+        globals.maxPlatAlcanzado = false;
         initSprites;
+        
       
         
         
@@ -833,7 +835,7 @@ function updateCamera()
 {
     //Centramos la cámara en el player
     // const player = globals.sprites[0];
-    if(globals.fiveMinute == true)
+    if(globals.levelFive == true)
     {
         globals.camera.y -=2* globals.deltaTime;
     }
@@ -882,15 +884,30 @@ export function gameMovement()
 export function eliminaciónDePlataformas() 
 {
     for(let i = 1; i < globals.sprites.length; ++i)
-        {
-            const sprite = globals.sprites[i];
+    {
+        const sprite = globals.sprites[i];
 
-            if(sprite.yPos > globals.camera.y+globals.canvas.height - 5){
-                sprite.state = -1;
-                if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
-                globals.crearNuevasPlataf = true;
-            }
+        if(sprite.yPos > globals.camera.y+globals.canvas.height ){
+            sprite.state = -1;
+            // if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
+            globals.crearNuevasPlataf = true;
         }
+    }
+}
+
+function contadorDePlataformas()
+{
+    globals.kontPlataforms = 0;
+    for(let i = 1; i < globals.sprites.length; ++i)
+    {
+        const sprite = globals.sprites[i];
+        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) && sprite.xPos<300 )   
+            globals.kontPlataforms++;
+    }
+    if(globals.kontPlataforms > globals.maxPlataformas)
+        globals.maxPlatAlcanzado = true;
+    else
+    globals.maxPlatAlcanzado = false;
 }
 
 function updateHighScore()
@@ -920,26 +937,26 @@ function updateCameraHS()
 // }
 
 
-function minutes()
+function levelInGame()
 {
-    if( globals.levelTime.value > 60){
-        globals.oneMinute = true;
+    if( globals.levelTime.value > 30){
+        globals.levelOne = true;
         globals.dificultad = 1;
     }
-    if( globals.levelTime.value > 120){
-        globals.twoMinute = true;
+    if( globals.levelTime.value > 90){
+        globals.levelTwo = true;
         globals.dificultad = 2;
     }
-    if( globals.levelTime.value > 180){
-        globals.threeMinute = true;
+    if( globals.levelTime.value > 150){
+        globals.levelThree = true;
         globals.dificultad = 3;
     }
-    if( globals.levelTime.value > 240){
-        globals.fourMinute = true;
+    if( globals.levelTime.value > 210){
+        globals.levelFour = true;
         globals.dificultad = 4;
     }
-    if( globals.levelTime.value > 300){
-        globals.fiveMinute = true;
+    if( globals.levelTime.value > 270){
+        globals.levelFive = true;
         globals.dificultad = 5;
     }
         

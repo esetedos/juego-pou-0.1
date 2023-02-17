@@ -273,7 +273,7 @@ function initPlataforms(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+38, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -293,7 +293,7 @@ function initPlataforms(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+73, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+76, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -313,7 +313,7 @@ function initPlataforms(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+110, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32+114, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
@@ -333,7 +333,7 @@ function initPlataforms(){
         const hitBox = new HitBox(30, 4, 0, 0)
 
         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, 170, (level1.length-6)*32+148, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+        const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, 170, (level1.length-6)*32+152, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
         //añadimos el pirate al array de sprites
         globals.sprites.push(plataforma);
