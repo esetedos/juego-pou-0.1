@@ -87,7 +87,9 @@ export default {
 
     introducirDatosBD: false,
 
-    dificultad: 0
+    dificultad: 0,
+
+    saltoDeNuevo: false
 
 
 };

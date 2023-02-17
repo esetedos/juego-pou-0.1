@@ -217,10 +217,12 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     let isCollidingOnPos4;
     let isCollidingOnPos5;
     let isCollidingOnPos6;
+    let isCollidingOnPos7;
+    let isCollidingOnPos8;
     let isColliding;
     let overlap;
 
-    const brickSize = globals.level.imageSet.xGridSize;
+    const brickSize = globals.level.imageSet.xGridSize-0;
     // const direction = player.state;
 
     //ID del obstáculo
@@ -233,254 +235,66 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     player.isCollidingWithObstacleOnTheTop = false;
     
     //Colisiones (6 puntos posibles)
-    // 6------------1
+    // 6------------1   //vamos a quitar todos los puntos, menos 4 y 3 (que serán para la colisión hacia abajo)
     // --------------
     // --------------
     // 5------------2   en mi caso, el conejo no tiene los puntos 5 y 2
     // --------------
     // --------------
-    // --------------
+    // 7------------8   //estos son los puntos nuevos
     // 4------------3
 
     let overlapX;
     let overlapY;
 
     //calculamos colisiones en los 6 puntos
-
-    if(player.physics.vx > 0) //Movimiento derecha
+//calculamos unos puntos que vayan 1poco + arriba q los .'s de de abajo del todo del player (4 y 3), y que si estos también tocan esta id, entonces que NO salte
+//Recordar sobre player: y=15 & x=15
+    if(player.physics.vy>=0) //player.physics.vx > 0) //Movimiento derecha
     {
-        //PUNTO 6
-        //Primera colisión en (xPos, yPos)
-        xPos = player.xPos;
-        yPos = player.yPos;
-        isCollidingOnPos6 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos6) //Hay colision en punto 6
-        {
-            // console.log("6");
-            //calculamos overlap sólo en Y
-            overlapY = brickSize - Math.floor(yPos) % brickSize;
-
-            //Colisión en eje Y
-            player.yPos += overlapY;
-            player.physics.vy = 0;
-        }
-
         //PUNTO 4
         //colision en (xPos, yPos + ySize - 1)
-        xPos = player.xPos + player.hitBox.xOffset;
+        xPos = player.xPos + player.hitBox.xOffset +3;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
         isCollidingOnPos4 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
 
-        if(isCollidingOnPos4) //hay colision en punto 4
+        //PUNTO 3
+        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -3;
+        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
+        isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+
+        //PUNTO 7
+        xPos = player.xPos + player.hitBox.xOffset +3;
+        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -3;
+        isCollidingOnPos7 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+
+        //PUNTO 8
+        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -3;
+        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -3;
+        isCollidingOnPos8 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+
+        if((isCollidingOnPos4 || isCollidingOnPos3) && (isCollidingOnPos7 == false) && (isCollidingOnPos8 == false)) //hay colision en punto 4
         {
             // console.log("4");
             //calculamos overap sólo en Y
+            // player.physics.vy= 0;
             overlapY = Math.floor(yPos) % brickSize + 1;
 
             //Colisión en eje Y
             player.yPos -= overlapY;
             player.isCollidingWithObstacleOnTheBottom = true;
            
+            globals.saltoDeNuevo = true;
+            
+            
+        }
+        else if(globals.saltoDeNuevo)
+        {
+            // player.physics.vy= 0;
+            player.isCollidingWithPlayer = true;
             player.physics.isOnGround = true;
-        }
-
-        //Punto 2 (que no uso)
-
-        //PUNTO 1
-        //vemos si hay colision en (xPos + xSize -1, yPos)
-        xPos = player.xPos + player.hitBox.xSize - 1;
-        yPos = player.yPos;
-        isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos1) //hay colisión en punto 1
-        {
-            // console.log("1");
-            //se trata de una esquina. Puede haber overlap en X y en Y
-
-            //calculamos overlap en X y en Y con el player
-            overlapX = Math.floor(xPos) % brickSize + 1;
-            overlapY = brickSize - Math.floor(yPos) % brickSize;
-
-            if(overlapX <= overlapY)
-            {
-                //colision en eje X
-                player.xPos -= overlapX;
-            }
-            else
-            {
-                //colisión en ejeY
-                if(player.physics.vy > 0)
-                {
-                    player.yPos -= overlapY;
-                    player.isCollidingWithObstacleOnTheBottom = true; 
-
-                }
-                else
-                {
-                    player.yPos += overlapY;
-                }
-
-                player.physics.vy = 0;
-            }
-        }
-
-        //PUNTO 3
-        //vemos si hay colision en (xPos + xSize -1, yPos)
-        xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1;
-        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
-        isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos3) //hay colisión en punto 3
-        {
-            // console.log("3");
-            //se trata de una esquina. Puede haber overlap en X y en Y
-
-            //calculamos overlap en X y en Y con el player
-            overlapX = Math.floor(xPos) % brickSize + 1;
-            overlapY = Math.floor(yPos) % brickSize + 1;
-
-            if(overlapX <= overlapY)
-            {
-                //colision en eje X
-                player.xPos -= overlapX;
-            }
-            else
-            {
-                //colisión en ejeY
-                if(player.physics.vy > 0)
-                {
-                    player.yPos -= overlapY;
-                    player.isCollidingWithObstacleOnTheBottom = true;
-                    player.physics.vy = 0;
-                    player.physics.isOnGround = true;
-                }
-                else
-                {
-                    player.yPos += overlapY;
-                }
-
-                player.physics.vy = 0;
-            }
-        }
-    }
-    else    //movimiento izquierda
-    {
-        //PUNTO 1
-        //vemos si hay colision en (xPos + xSize -1, yPos)
-        xPos = player.xPos + player.hitBox.xSize - 1;
-        yPos = player.yPos;
-        isCollidingOnPos1 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos1) //hay colisión en punto 1
-        {
-            //calculamos overlap sólo en Y
-            overlapY = brickSize - Math.floor(yPos) % brickSize;
-
-            //Colisión en eje Y
-            player.yPos += overlapY;
-            player.physics.vy = 0;
-        }
-
-
-
-
-
-
-
-
-
-         //PUNTO 3
-        //vemos si hay colision en (xPos + xSize -1, yPos)
-        xPos = player.xPos + player.hitBox.xSize - 1;
-        yPos = player.yPos + player.hitBox.ySize - 1;
-        isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos3) //hay colisión en punto 3
-        {
-            //calculamos overap sólo en Y
-            overlapY = Math.floor(yPos) % brickSize + 1;
-
-            //Colisión en eje Y
-            player.yPos -= overlapY;
-            player.isCollidingWithObstacleOnTheBottom = true;
-            player.physics.vy = 0;
-            player.physics.isOnGround = true;
-        }
-
-        //PUNTO 4
-        //colision en (xPos, yPos + ySize - 1)
-        xPos = player.xPos + player.hitBox.xOffset;
-        yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
-        isCollidingOnPos4 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos4) //hay colision en punto 4
-        {
-            //se trata de una esquina. Puede haber overlap en X y en Y
-
-            //calculamos overlap en X y en Y con el player
-            overlapX = Math.floor(xPos) % brickSize + 1;
-            overlapY = Math.floor(yPos) % brickSize + 1;
-
-            if(overlapX <= overlapY)
-            {
-                //colision en eje X
-                player.xPos -= overlapX;
-            }
-            else
-            {
-                //colisión en ejeY
-                if(player.physics.vy > 0)
-                {
-                    player.yPos -= overlapY;
-                    player.isCollidingWithObstacleOnTheBottom = true;
-                    player.physics.vy = 0;
-                    player.physics.isOnGround = true;
-                }
-                else
-                {
-                    player.yPos += overlapY;
-                }
-
-                player.physics.vy = 0;
-            }
-        }
-
-        //PUNTO 6
-        //Primera colisión en (xPos, yPos)
-        xPos = player.xPos;
-        yPos = player.yPos;
-        isCollidingOnPos6 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
-
-        if(isCollidingOnPos6) //Hay colision en punto 6
-        {
-            //se trata de una esquina. Puede haber overlap en X y en Y
-
-            //calculamos overlap en X y en Y con el player
-            overlapX = Math.floor(xPos) % brickSize + 1;
-            overlapY = brickSize - Math.floor(yPos) % brickSize;
-
-            if(overlapX <= overlapY)
-            {
-                //colision en eje X
-                player.xPos -= overlapX;
-            }
-            else
-            {
-                //colisión en ejeY
-                if(player.physics.vy > 0)
-                {
-                    player.yPos -= overlapY;
-                    player.isCollidingWithObstacleOnTheBottom = true;
-                    player.physics.isOnGround = true;
-                }
-                else
-                {
-                    player.yPos += overlapY;
-                }
-
-                player.physics.vy = 0;
-            }
+            globals.saltoDeNuevo = false;
+            
         }
 
 
