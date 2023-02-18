@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import { Game, State, SpriteID, GRAVITY, ParticleState, ParticleID} from "./constants.js";
+import { Game, State, SpriteID, GRAVITY, ParticleState, ParticleID, Sound} from "./constants.js";
 import callDetectCollisions from "./collisions.js";
 import { Plataformas, PlataformasN} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
@@ -10,6 +10,7 @@ import { initParticles, initSprites } from "./initialize.js";
 import { Level, level1 } from "./Level.js";
 import {collisionPlataform} from "./collisions.js";
 import {postHighScores} from "./events.js";
+
 
 
 
@@ -103,8 +104,9 @@ function playGame()
 //    reiniciaCameraHS();
 
     contadorDePlataformas();
-   
-  
+
+    playSound();
+
 }
 
 function updateSprites()
@@ -249,7 +251,7 @@ function updatePlayer(sprite)
         if(true) //globals.action.jump) //pulsamos la tecla de salto
         {
             sprite.physics.isOnGround = false;
-            
+            globals.currentSound = Sound.JUMP;
             // asignamos velocidad inicial al salto
             if(globals.saltoDeNuevo)
             {
@@ -312,6 +314,9 @@ function updatePlayer(sprite)
     //  const player = globals.sprites[0];
      if(sprite.isCollidingWithObstacleOnTheBottom)
         sprite.physics.isOnGround = true;
+
+
+    
 }
 
 function updateSaltoKop(sprite)
@@ -686,15 +691,19 @@ function updateNewGame()
         globals.levelFive = false;
         globals.maxPlataformas = 15;
         globals.maxPlatAlcanzado = false;
+        globals.saltoKop = 0;
         initSprites;
         
       
         
         
 
-    // if(globals.action.jump)     //uwu
+    if(globals.action.jump){     //uwu
         globals.gameState = Game.PLAYING;
-    
+        //reproducimos GAME_MUSIC a un volumen inferior
+        globals.sounds[Sound.GAME_MUSIC].play();
+        globals.sounds[Sound.GAME_MUSIC].volume = 0.4;
+    }
     if (globals.action.G === true)
     {
         // postHighScores();
@@ -713,6 +722,7 @@ function gameEnd()
     {     
         globals.sprites.splice(0); 
         initSprites();
+        globals.sounds[Sound.GAME_MUSIC].pause();
         globals.gameState = Game.GAME_OVER;   
     }
 }
@@ -1079,3 +1089,17 @@ function inicioNEW_GAME() //uwu
     }
 }
 
+
+function playSound()
+{
+    //Reproducimos el sonido que ha sido involucrado
+    if(globals.currentSound != Sound.NO_SOUND)
+    {
+        //Reproducimos el sonido correspondiente
+        globals.sounds[globals.currentSound].currentTime = 0;
+        globals.sounds[globals.currentSound].play();
+
+        //Reseteamos current sound
+        globals.currentSound = Sound.NO_SOUND;
+    }
+}

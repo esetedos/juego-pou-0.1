@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import {Game, SpriteID, State, FPS, ParticleState, ParticleID} from "./constants.js";
+import {Game, SpriteID, State, FPS, ParticleState, ParticleID, Sound} from "./constants.js";
 import Sprite, { Plataformas, PlataformasN} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
@@ -8,9 +8,9 @@ import Timer from "./Timer.js";
 import Physics from "./Physics.js";
 import { keydownHandler, keyupHandler } from "./events.js";
 import HitBox from "./HitBox.js";
-import ExplosionParticles from "./Particle.js";
 import ExplosionParticle from "./Particle.js";
 import Camera from "./Camera.js";
+import {updateMusic} from "./events.js";
 
 //Función que inicializa los elementos HTML
 function initHTMLelements()
@@ -60,6 +60,9 @@ function initVars()
     //Variables logica juego
     globals.life = 0;
     globals.saltoKop = 0;
+
+    //Inicializamos la variable que controla el sonido a reproducir
+    globals.currentSound = Sound.NO_SOUND;
 }
 
 function loadAssets()
@@ -105,6 +108,20 @@ function loadAssets()
     globals.tileMap.push(tileMap);
     globals.assetsToLoad.push(tileMap);
 
+    //Load sound
+    let gameMusic = document.querySelector("#gameMusic");
+    gameMusic.addEventListener("canplaythrough", loadHandler, false);
+    gameMusic.addEventListener("timeupdate", updateMusic, false);
+    gameMusic.load();
+    globals.sounds.push(gameMusic);
+    globals.assetsToLoad.push(gameMusic);
+
+    let jumpSound = document.querySelector("#jumpSound");
+    jumpSound.addEventListener("canplaythrough", loadHandler, false);
+    jumpSound.load();
+    globals.sounds.push(jumpSound);
+    globals.assetsToLoad.push(jumpSound);
+
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
@@ -118,6 +135,12 @@ function loadHandler(){
         for(let i = 0; i < globals.tileSets; ++i)
         {
             globals.tileSets[i].removeEventListener("load", loadHandler, false);
+        }
+
+        //Remove the load evend listener from sounds
+        for(let i = 0; i< globals.sounds.length; i++)
+        {
+            globals.sounds[i].removeEventListener("canplaythrough", loadHandler, false);
         }
        
         console.log("Assets finished loading");

@@ -1,5 +1,6 @@
 import {Key} from "./constants.js";
 import globals from "./globals.js";
+import {Sound} from "./constants.js";
 
 export function keydownHandler(event)
 {
@@ -195,7 +196,16 @@ function findScore2(resultJSON)
 }
 
 
-
+export function updateMusic()
+{
+    const buffer = 0.28;
+    const music = globals.sounds[Sound.GAME_MUSIC];
+    if(music.currentTime > music.duration - buffer)
+    {
+        music.currentTime = 0;
+        music.play();
+    }
+}
 
 
 

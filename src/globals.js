@@ -96,6 +96,12 @@ export default {
 
     kontPlataforms: 0, //número de plataformas al inicio
 
-    maxPlatAlcanzado: false
+    maxPlatAlcanzado: false,
+
+    //sonidos
+    sounds: [],
+
+    //current sound play
+    currentSound: -1
 
 };

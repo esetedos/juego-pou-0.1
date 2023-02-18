@@ -94,3 +94,10 @@ export const ParticleState = {
     FADE:   1,
     OFF:    -1
 }
+
+//sonidos del juego
+export const Sound = {
+    NO_MUSIC:   -1,
+    GAME_MUSIC: 0,
+    JUMP:       1
+}
