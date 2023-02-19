@@ -535,9 +535,11 @@ function createPlataforms()
     for(let i = 1; i < globals.sprites.length; ++i)
     {
         const sprite = globals.sprites[i];
-        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) && globals.crearNuevasPlataf == true)   
+        console.log(sprite.yPos);   
+        let a = 3;                                                                                                                                //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
+        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  globals.crearNuevasPlataf == true && globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
         {
-            let a = 3;
+           
             for(let i = 0; i < a ; i++){
                 let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
                 if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
@@ -651,24 +653,24 @@ function createDisappearPlataforms()
 
     //and
 
-    //plataforma nube extra ;)
-    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-     imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+    // //plataforma nube extra ;)
+    // //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+    //  imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
-    //creamos los datos de la animacion. 8 framesn / state
-     frames = new Frames(1, 5);
+    // //creamos los datos de la animacion. 8 framesn / state
+    //  frames = new Frames(1, 5);
 
-    //creamos nuestro objeto physics con vLimit = 40 pixels/second
-     physics = new Physics(1, 0); //velocidad de las plataformas
+    // //creamos nuestro objeto physics con vLimit = 40 pixels/second
+    //  physics = new Physics(1, 0); //velocidad de las plataformas
 
-    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-     hitBox = new HitBox(30, 4, 0, 0)
+    // //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    //  hitBox = new HitBox(30, 4, 0, 0)
 
-    //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-     plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 400, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
+    // //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+    //  plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 400, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
 
-    //añadimos el pirate al array de sprites
-    globals.sprites.push(plataformaN);
+    // //añadimos el pirate al array de sprites
+    // globals.sprites.push(plataformaN);
 }
 
 
@@ -760,20 +762,18 @@ function updateParticles()
 
 function updateParticle(particle)
 { 
-    
-    
-        const type = particle.id;
-        switch (type)
-        {
-            //caso del jugador
-            case ParticleID.EXPLOSION:
-                updateExplosionParticle(particle);
-                break;
+    const type = particle.id;
+    switch (type)
+    {
+        //caso del jugador
+        case ParticleID.EXPLOSION:
+            updateExplosionParticle(particle);
+            break;
 
-            //caso del enemigo  (en mi caso, no)
-            default:
-                break;
-        }
+        //caso del enemigo  (en mi caso, no)
+        default:
+            break;
+    }
     
 }
 
@@ -897,7 +897,7 @@ export function eliminaciónDePlataformas()
     {
         const sprite = globals.sprites[i];
 
-        if(sprite.yPos > globals.camera.y+globals.canvas.height ){
+        if(sprite.yPos > globals.camera.y+globals.canvas.height){
             sprite.state = -1;
             // if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
             globals.crearNuevasPlataf = true;
@@ -1083,7 +1083,7 @@ function updateTimerSaltoKop()
 
 function inicioNEW_GAME() //uwu
 {
-    // if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
+    if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
     {
         globals.gameState = Game.NEW_GAME;
     }
