@@ -80,7 +80,7 @@ function loadAssets()
     //load the bricks image
     tileSet = new Image();
     tileSet.addEventListener("load", loadHandler, false);
-    tileSet.src = "./images/fondo19.png"; //ojo que la ruta es relativa al HTML, no al JS 
+    tileSet.src = "./images/fondo21.png"; //ojo que la ruta es relativa al HTML, no al JS 
     globals.tileSets.push(tileSet);
     globals.assetsToLoad.push(tileSet);
 
@@ -383,7 +383,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite                                235
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 150, (level1.length-6)*32+90, imageSet, frames, physics, hitBox, hitBox2, 0);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, (level1.length-6)*32+90, imageSet, frames, physics, hitBox, hitBox2, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);

@@ -297,8 +297,8 @@ function updatePlayer(sprite)
         sprite.physics.vx = 0;
         sprite.frames.frameCounter=0;
        
-        sprite.xPos = 180; //235;
-        sprite.yPos = globals.camera.y+71;
+        sprite.xPos = 235; //235;
+        sprite.yPos = globals.camera.y+40;
         
         globals.life--; //quita dos de vida
    
@@ -480,8 +480,8 @@ function updateValuesAfterCollision(sprite)
         player.physics.vx = 0;
         player.frames.frameCounter=0;
        
-        player.xPos = 180; //235;
-        player.yPos = globals.camera.y+71;
+        player.xPos = 235; //235;
+        player.yPos = globals.camera.y+40;
         globals.life --; //quita dos de vida //updateLife
     }
 }

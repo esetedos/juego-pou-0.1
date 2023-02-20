@@ -222,11 +222,17 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     let isColliding;
     let overlap;
 
+    let isCollidingOnPos23;
+    let isCollidingOnPos24;
+    let isCollidingOnPos27;
+    let isCollidingOnPos28;
+
     const brickSize = globals.level.imageSet.xGridSize-0;
     // const direction = player.state;
 
     //ID del obstáculo
     const obstacleId = Block.WOOD;
+    const obstacleId2 = Block.WOOD_2;
 
     //Reset collisisons state
     player.isCollidingWithObstacleOnTheBottom = false;
@@ -257,28 +263,36 @@ function detectCollisionBetweenPlayerAndMapObstacles()
         xPos = player.xPos + player.hitBox.xOffset +2;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
         isCollidingOnPos4 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+        isCollidingOnPos24 = isCollidingWithObstacleAt(xPos, yPos, obstacleId2);
 
         //PUNTO 3
         xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -2;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1;
         isCollidingOnPos3 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+        isCollidingOnPos23 = isCollidingWithObstacleAt(xPos, yPos, obstacleId2);
 
         //PUNTO 7
         xPos = player.xPos + player.hitBox.xOffset +2;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -5;
         isCollidingOnPos7 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+        isCollidingOnPos27 = isCollidingWithObstacleAt(xPos, yPos, obstacleId2);
 
         //PUNTO 8
         xPos = player.xPos + player.hitBox.xOffset + player.hitBox.xSize - 1 -2;
         yPos = player.yPos + player.hitBox.yOffset + player.hitBox.ySize - 1 -5;
         isCollidingOnPos8 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
+        isCollidingOnPos28 = isCollidingWithObstacleAt(xPos, yPos, obstacleId2);
 
         // if(isCollidingOnPos4 || isCollidingOnPos3)
         // {
         //     player.physics.vy = 0;
         // }
 
-        if((isCollidingOnPos4  && isCollidingOnPos7 == false) || (isCollidingOnPos3 && isCollidingOnPos8 == false)) //hay colision en punto 4
+        if(
+            ((isCollidingOnPos4  && isCollidingOnPos7 == false) || (isCollidingOnPos3 && isCollidingOnPos8 == false))
+            ||
+            ((isCollidingOnPos24  && isCollidingOnPos27 == false) || (isCollidingOnPos23 && isCollidingOnPos28 == false))
+            ) //hay colision en punto 4
         {
             // console.log("4");
             //calculamos overap sólo en Y
