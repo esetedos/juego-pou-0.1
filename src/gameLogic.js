@@ -1,7 +1,7 @@
 import globals from "./globals.js";
 import { Game, State, SpriteID, GRAVITY, ParticleState, ParticleID, Sound} from "./constants.js";
 import callDetectCollisions from "./collisions.js";
-import { Plataformas, PlataformasN} from "./Sprite.js";
+import Sprite, { Plataformas, PlataformasN} from "./Sprite.js";
 import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import Physics from "./Physics.js";
@@ -103,7 +103,7 @@ function playGame()
 
 //    reiniciaCameraHS();
 
-    contadorDePlataformas();
+    // contadorDePlataformas();
 
     playSound();
 
@@ -532,12 +532,14 @@ function disappearPlataformN(sprite)
 
 function createPlataforms()
 {
-    for(let i = 1; i < globals.sprites.length; ++i)
+    // for(let i = 1; i < globals.sprites.length; ++i)
     {
-        const sprite = globals.sprites[i];
-        // console.log(ssprite.yPos);   
+        let numPlatf = contadorDePlataformas(); 
+        const sprite = globals.sprites[numPlatf];
+        // console.log(ssprite.yPos); 
+        
         let a = 3;                                                                                                                                //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
-        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
+        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  sprite.yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
         {
            
             for(let i = 0; i < a ; i++){
@@ -550,11 +552,7 @@ function createPlataforms()
                 {
                     if(globals.levelThree == true)   //cuando pasen dos minutos
                     {
-                        if(globals.levelFour == true)
-                        {
-                            //flechas
-                            
-                        }
+                        
                     
                         if(option<15){
                             //create plataformas de movimiento
@@ -587,7 +585,48 @@ function createPlataforms()
             globals.crearNuevasPlataf = false;
         }
     }
+    if(globals.levelFour == true)
+    {
+        // console.log(globals.kont);
+        // console.log(globals.levelTime.value);
+        //flechas
+        if(globals.kont === 0)
+        {
+            
+            globals.kont = Math.floor(globals.levelTime.value+2);
+        }
+
+        if(globals.kont === Math.floor(globals.levelTime.value))
+        // {console.log("el tiempo se guarda");
+            createArrows();
+            globals.kont = 0;
+        }
+    }
 }
+
+function createArrows()
+{
+    
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+    const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
+
+    //creamos los datos de la animacion. 8 framesn / state
+    const frames = new Frames(1);
+    
+    //creamos los datos de la animacion. 8 framesn / state
+    const physics = new Physics(20);    //velocidad de la flecha, velocidad de las flechas
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(30, 4, 8, 2)
+
+    //creamos nuestro sprite                                                                          //globals.camera.y+Math.floor(Math.random() * 100+(-10))
+    const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, Math.floor(Math.random() * (-30)+(-70)), (globals.sprites[0].yPos -50), imageSet, frames, physics, hitBox);
+
+     //añadimos el pirate al array de sprites
+    globals.sprites.push(flecha);
+
+}
+
 
 function createRegularPlataforms()
 {
@@ -695,7 +734,7 @@ function updateNewGame()
         globals.maxPlatAlcanzado = false;
         globals.saltoKop = 0;
         initSprites;
-        console.log(globals.sprites.length);
+        // console.log(globals.sprites.length);
         
       
         
@@ -910,14 +949,17 @@ function contadorDePlataformas()
 {
     // globals.kontPlataforms = 0;
     let numPlataf = 0;
-    for(let i = 1; i < globals.sprites.length; ++i)
+    for(let i = globals.sprites.length-1; i > 0; --i)
     {
         const sprite = globals.sprites[i];
-        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) && sprite.xPos<300 )   
-            // globals.kontPlataforms++;
-            numPlataf++;
+        if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)   
+        {   // globals.kontPlataforms++;
+            numPlataf = i;
+            i = 0;
+        }
     }
-    console.log(numPlataf);
+    // console.log(numPlataf);
+    return(numPlataf);
     // if(globals.kontPlataforms > globals.maxPlataformas)
     //     globals.maxPlatAlcanzado = true;
     // else
@@ -953,23 +995,23 @@ function updateCameraHS()
 
 function levelInGame()
 {
-    if( globals.levelTime.value > 10){ //30
+    if( globals.levelTime.value > 1){ //30
         globals.levelOne = true;
         globals.dificultad = 1;
     }
-    if( globals.levelTime.value > 20){  //90
+    if( globals.levelTime.value > 2){  //90
         globals.levelTwo = true;
         globals.dificultad = 2;
     }
-    if( globals.levelTime.value > 30){ //150
+    if( globals.levelTime.value > 3){ //150
         globals.levelThree = true;
         globals.dificultad = 3;
     }
-    if( globals.levelTime.value > 40){ //210
+    if( globals.levelTime.value > 4){ //210
         globals.levelFour = true;
         globals.dificultad = 4;
     }
-    if( globals.levelTime.value > 270){
+    if( globals.levelTime.value > 5){ //270
         globals.levelFive = true;
         globals.dificultad = 5;
     }

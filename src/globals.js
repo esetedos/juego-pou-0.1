@@ -89,6 +89,8 @@ export default {
 
     dificultad: 0,
 
+    guardaDeTimer: 0,
+
     saltoDeNuevo: false,
 
     maxPlataformas: 15, //siempre habrá un máximo de 5 plataformas en pantalla
@@ -103,5 +105,7 @@ export default {
 
     //current sound play
     currentSound: -1
+
+    
 
 };
