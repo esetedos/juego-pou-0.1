@@ -597,7 +597,8 @@ function createPlataforms()
         }
 
         if(globals.kont === Math.floor(globals.levelTime.value))
-        // {console.log("el tiempo se guarda");
+        {
+            // console.log("el tiempo se guarda");
             createArrows();
             globals.kont = 0;
         }
@@ -721,7 +722,7 @@ function updateNewGame()
     //reiniciamos valores
     //reinicio
         globals.metroak = 0;
-        globals.life = 30;
+        globals.life = 3;
         globals.izena = "";
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
@@ -887,7 +888,7 @@ function updateCamera()
     // const player = globals.sprites[0];
     if(globals.levelFive == true)
     {
-        globals.camera.y -=2* globals.deltaTime;
+        globals.camera.y -=10* globals.deltaTime;
     }
     globals.camera.y -=10* globals.deltaTime;
     // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
@@ -995,33 +996,28 @@ function updateCameraHS()
 
 function levelInGame()
 {
-    if( globals.levelTime.value > 1){ //30
+    if( globals.levelTime.value > 30){ //30
         globals.levelOne = true;
         globals.dificultad = 1;
     }
-    if( globals.levelTime.value > 2){  //90
+    if( globals.levelTime.value > 75){  //90
         globals.levelTwo = true;
         globals.dificultad = 2;
     }
-    if( globals.levelTime.value > 3){ //150
+    if( globals.levelTime.value > 120){ //150
         globals.levelThree = true;
         globals.dificultad = 3;
     }
-    if( globals.levelTime.value > 4){ //210
+    if( globals.levelTime.value > 180){ //210
         globals.levelFour = true;
         globals.dificultad = 4;
     }
-    if( globals.levelTime.value > 5){ //270
+    if( globals.levelTime.value > 240){ //270
         globals.levelFive = true;
         globals.dificultad = 5;
     }
         
     // globals.levelTime.value = 0;
-}
-
-function saveName()
-{
-// dfg
 }
 
 function typeName()
