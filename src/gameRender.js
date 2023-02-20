@@ -390,7 +390,7 @@ function renderHudHighScore()
             // }
     // }
     //    console.log(globals.cameraHS.y);
-        console.log(100/globals.arrayBD.length);
+        // console.log(100/globals.arrayBD.length);
    if(globals.cameraHS.y > globals.arrayBD.length*17) //8
    {
         globals.cameraHS.y = 70-globals.canvas.height;

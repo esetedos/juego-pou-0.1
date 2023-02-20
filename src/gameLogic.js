@@ -289,7 +289,7 @@ function updatePlayer(sprite)
     //-----------------------------------------
 
     //el  -2 es porqeu si el hitbox del player baja más abajo, surge un probleema porque (enn la parte de colisions) no hay ningun tileset más abajo, y da error
-    if(sprite.yPos > globals.camera.y+globals.canvas.height - sprite.imageSet.ySize-2) //189
+    if(sprite.yPos > globals.camera.y+globals.canvas.height - sprite.imageSet.ySize) //189
     {
         //230x, 130y
         sprite.state = State.LEFT;
@@ -535,16 +535,16 @@ function createPlataforms()
     for(let i = 1; i < globals.sprites.length; ++i)
     {
         const sprite = globals.sprites[i];
-        console.log(sprite.yPos);   
+        // console.log(ssprite.yPos);   
         let a = 3;                                                                                                                                //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
-        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  globals.crearNuevasPlataf == true && globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
+        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
         {
            
             for(let i = 0; i < a ; i++){
                 let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
                 if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
                 {
-                    // a = 2;
+                    a = 2;
                 }
                 if(globals.levelOne == true)       
                 {
@@ -655,7 +655,7 @@ function createDisappearPlataforms()
 
     // //plataforma nube extra ;)
     // //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-    //  imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+    //  imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
     // //creamos los datos de la animacion. 8 framesn / state
     //  frames = new Frames(1, 5);
@@ -667,7 +667,7 @@ function createDisappearPlataforms()
     //  hitBox = new HitBox(30, 4, 0, 0)
 
     // //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-    //  plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 400, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
+    //  plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 200, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
 
     // //añadimos el pirate al array de sprites
     // globals.sprites.push(plataformaN);
@@ -682,7 +682,7 @@ function updateNewGame()
     //reiniciamos valores
     //reinicio
         globals.metroak = 0;
-        globals.life = 3;
+        globals.life = 30;
         globals.izena = "";
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
@@ -695,6 +695,7 @@ function updateNewGame()
         globals.maxPlatAlcanzado = false;
         globals.saltoKop = 0;
         initSprites;
+        console.log(globals.sprites.length);
         
       
         
@@ -907,17 +908,20 @@ export function eliminaciónDePlataformas()
 
 function contadorDePlataformas()
 {
-    globals.kontPlataforms = 0;
+    // globals.kontPlataforms = 0;
+    let numPlataf = 0;
     for(let i = 1; i < globals.sprites.length; ++i)
     {
         const sprite = globals.sprites[i];
         if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) && sprite.xPos<300 )   
-            globals.kontPlataforms++;
+            // globals.kontPlataforms++;
+            numPlataf++;
     }
-    if(globals.kontPlataforms > globals.maxPlataformas)
-        globals.maxPlatAlcanzado = true;
-    else
-    globals.maxPlatAlcanzado = false;
+    console.log(numPlataf);
+    // if(globals.kontPlataforms > globals.maxPlataformas)
+    //     globals.maxPlatAlcanzado = true;
+    // else
+    // globals.maxPlatAlcanzado = false;
 }
 
 function updateHighScore()
@@ -949,19 +953,19 @@ function updateCameraHS()
 
 function levelInGame()
 {
-    if( globals.levelTime.value > 30){
+    if( globals.levelTime.value > 10){ //30
         globals.levelOne = true;
         globals.dificultad = 1;
     }
-    if( globals.levelTime.value > 90){
+    if( globals.levelTime.value > 20){  //90
         globals.levelTwo = true;
         globals.dificultad = 2;
     }
-    if( globals.levelTime.value > 150){
+    if( globals.levelTime.value > 30){ //150
         globals.levelThree = true;
         globals.dificultad = 3;
     }
-    if( globals.levelTime.value > 210){
+    if( globals.levelTime.value > 40){ //210
         globals.levelFour = true;
         globals.dificultad = 4;
     }

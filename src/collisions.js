@@ -291,12 +291,12 @@ function detectCollisionBetweenPlayerAndMapObstacles()
            
             globals.saltoDeNuevo = true;
             player.physics.isOnGround = true;
-            console.log(globals.saltoDeNuevo);
-            console.log("salto");
-            console.log("4: " + isCollidingOnPos4);
-            console.log("3: " + isCollidingOnPos3);
-            console.log("7: " + isCollidingOnPos7);
-            console.log("8: " + isCollidingOnPos8);
+            // console.log(globals.saltoDeNuevo);
+            // console.log("salto");
+            // console.log("4: " + isCollidingOnPos4);
+            // console.log("3: " + isCollidingOnPos3);
+            // console.log("7: " + isCollidingOnPos7);
+            // console.log("8: " + isCollidingOnPos8);
            
         }
         // else if(globals.saltoDeNuevo)
