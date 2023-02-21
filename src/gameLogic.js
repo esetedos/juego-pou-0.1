@@ -874,8 +874,9 @@ function updateExplosionParticle(particle)
 
 function actualiceHighScore()
 {
-    globals.score=Math.floor(globals.metroak/10)*10;
+    // globals.score=Math.floor(globals.metroak/10)*10;
 
+    //para actualizar el fake high score
     if(Math.floor(globals.metroak/10)*10 > globals.highScore)
     {
         globals.highScore = Math.floor(globals.metroak/10)*10;
@@ -913,7 +914,7 @@ export function gameMovement()
 {
     const player = globals.sprites[0];
 
-    globals.score = Math.floor(globals.metroak/10)*10;
+    globals.score = Math.floor(globals.metroak/10)*10 + Math.floor(globals.levelTime.value/10)*10;
     if(player.yPos < globals.camera.y+50)  //70)
     {
         globals.metroak++;
