@@ -161,12 +161,38 @@ function updateSprite(sprite)
             updatePlataformMovimiento(sprite);
             break;
     
+        case SpriteID.CARROT:
+            updateCarrot(sprite);
+            break;
 
         //caso del enemigo
         default:
             break;
     }
 }
+
+
+function updateCarrot(sprite)
+{
+    // sprite.state = State.SOLID_3;
+    // collisionPlataform(sprite);
+    // sprite.yPos -=10*globals.deltaTime;
+    // console.log("dfgthyjuikouytrewdfghj");
+
+    //si sale de la pantalla, lo eliminamos
+    if(sprite.yPos > globals.camera.y+6*32)
+    {
+        sprite.state = State.BROKE_3;
+    }
+
+    //si colisiona con el jugador, añadimos los puntos, y lo eliminamos
+    if(sprite.isCollidingWithPlayer2)
+    {
+        sprite.state = State.BROKE_3;
+        globals.puntosCarrot += 500/2;
+    }
+}
+
 
 //Por último, desde gameLogic.js, podremos cambiar los atributos de nuestro personaje, a través de la función updatePlayer(). 
 
@@ -603,7 +629,43 @@ function createPlataforms()
             globals.kont = 0;
         }
     }
+    
+    if(globals.kont2 == 0)
+    {
+        globals.kont2 = Math.floor(globals.levelTime.value+(Math.random()*20+10));
+    }
+
+    if(globals.kont2 == Math.floor(globals.levelTime.value))
+    {
+        // console.log("el tiempo se guarda");
+        createCarrots();
+        globals.kont2 = 0;
+        console.log("se crrea una zanahoria");
+    }
 }
+
+function createCarrots()
+{
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
+    const imageSet = new ImageSet(6, 0, 10, 6, 10, 16, 0, 2);
+                                //(6, 0, 10, 6, 10, 24, 0, 8);
+                                //(2, 1, 30, 6, 30, 27, 0, 6)
+    //creamos los datos de la animacion. 8 frames / state
+    const frames = new Frames(0, 5); //en teoría debería ser (0, 5)
+
+    //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
+    const physics = new Physics(40);
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(10, 6, 0, 0)
+
+    //creamos nuestro sprite
+    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, hitBox);
+ 
+    //añadimos el player al array de sprites
+    globals.sprites.push(carrot);
+}
+
 
 function createArrows()
 {
@@ -735,6 +797,7 @@ function updateNewGame()
         globals.maxPlataformas = 15;
         globals.maxPlatAlcanzado = false;
         globals.saltoKop = 0;
+        globals.puntosCarrot = 0;
         initSprites;
         // console.log(globals.sprites.length);
         
@@ -915,7 +978,7 @@ export function gameMovement()
 {
     const player = globals.sprites[0];
 
-    globals.score = Math.floor(globals.metroak/10)*10 + Math.floor(globals.levelTime.value/10)*10;
+    globals.score = Math.floor(globals.metroak/10)*10 + Math.floor(globals.levelTime.value/10)*10 + globals.puntosCarrot;
     if(player.yPos < globals.camera.y+50)  //70)
     {
         globals.metroak++;
@@ -998,19 +1061,19 @@ function updateCameraHS()
 
 function levelInGame()
 {
-    if( globals.levelTime.value > 3){ //30
+    if( globals.levelTime.value > 30){ //30
         globals.levelOne = true;
         globals.dificultad = 1;
     }
-    if( globals.levelTime.value > 7){  //75
+    if( globals.levelTime.value > 70){  //75
         globals.levelTwo = true;
         globals.dificultad = 2;
     }
-    if( globals.levelTime.value > 12){ //120
+    if( globals.levelTime.value > 120){ //120
         globals.levelThree = true;
         globals.dificultad = 3;
     }
-    if( globals.levelTime.value > 18){ //180
+    if( globals.levelTime.value > 180){ //180
         globals.levelFour = true;
         globals.dificultad = 4;
     }

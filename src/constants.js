@@ -39,7 +39,9 @@ export const State = {
     BROKE_2:    -1,
     SOLID_2:    0, //para la flecha también
 
-    
+    //Estados para carrot
+    BROKE_3:    -1,
+    SOLID_3:    0,  
 
     //estados PLATAFORMASN
     BROKE_4: -1,
@@ -48,6 +50,7 @@ export const State = {
     //Plataformas en movimiento
     BROKE_5:    -1,
     SOLID_5:    0
+
 }
 
 //diferentes tileSets

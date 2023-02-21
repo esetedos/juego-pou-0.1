@@ -104,7 +104,11 @@ export default {
     sounds: [],
 
     //current sound play
-    currentSound: -1
+    currentSound: -1,
+
+    puntosCarrot: 0,
+
+    kont2: 0
 
     
 

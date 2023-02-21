@@ -157,7 +157,32 @@ function initSprites()//////////////////////////////////////////////////////////
     // initArrow();
     // initPlataformsN();
     // initPlataformsMoviento();
+    initCarrot();
+    // console.log("dfgh");
     
+   
+}
+
+function initCarrot()
+{
+    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
+    const imageSet = new ImageSet(6, 0, 10, 6, 10, 16, 0, 2);
+                                //(6, 0, 10, 6, 10, 24, 0, 8);
+                                //(2, 1, 30, 6, 30, 27, 0, 6)
+    //creamos los datos de la animacion. 8 frames / state
+    const frames = new Frames(0, 5); //en teoría debería ser (0, 5)
+
+    //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
+    const physics = new Physics(40);
+
+    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+    const hitBox = new HitBox(10, 6, 0, 0)
+
+    //creamos nuestro sprite
+    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 60, (level1.length-6)*32+50, imageSet, frames, physics, hitBox);
+ 
+    //añadimos el player al array de sprites
+    globals.sprites.push(carrot);
    
 }
 
