@@ -89,7 +89,7 @@ function playGame()
     // actualización de la lógica del juego
     updateLevelTime();
 
-    createPlataforms();
+    createPlataformsAndLevels();
 
     gameEnd();
 
@@ -556,7 +556,7 @@ function disappearPlataformN(sprite)
         }
 }
 
-function createPlataforms()
+function createPlataformsAndLevels()
 {
     // for(let i = 1; i < globals.sprites.length; ++i)
     {
@@ -564,10 +564,11 @@ function createPlataforms()
         const sprite = globals.sprites[numPlatf];
         // console.log(ssprite.yPos); 
         
-        let a = 3;                                                                                                                                //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
+        let a = 3; 
+        let posicionPlatf = Math.floor(Math.random() * 200);   
+        let kont = posicionPlatf;                                                                                                                           //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
         if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  sprite.yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
         {
-           
             for(let i = 0; i < a ; i++){
                 let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
                 if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
@@ -578,19 +579,17 @@ function createPlataforms()
                 {
                     if(globals.levelThree == true)   //cuando pasen dos minutos
                     {
-                        
-                    
                         if(option<15){
                             //create plataformas de movimiento
-                            createMovingPlataforms();
+                            createMovingPlataforms(posicionPlatf);
                         }   
                         else if(option<30)
                         {
                             //create plataformas que desaparecen
-                            createDisappearPlataforms();
+                            createDisappearPlataforms(posicionPlatf);
                         }
                         else{
-                            createRegularPlataforms();
+                            createRegularPlataforms(posicionPlatf);
                         }
                         
                     }
@@ -598,15 +597,27 @@ function createPlataforms()
                     {                   
                         if(option<20){
                             //create plataformas de movimiento
-                            createMovingPlataforms();
+                            createMovingPlataforms(posicionPlatf);
                         }   
                         else{
-                            createRegularPlataforms();
+                            createRegularPlataforms(posicionPlatf);
                         }
                     }   
                 }
                 else
-                    createRegularPlataforms();            
+                    createRegularPlataforms(posicionPlatf);
+                    
+                
+                // posicionPlatf = Math.floor(Math.random() * 200);
+                // let p = posicionPlatf;
+                
+                while(kont-30 <= posicionPlatf <= kont+30)
+                {
+                    posicionPlatf =  kont+40;
+                    console.log("while");
+                }
+                
+                kont = posicionPlatf;
             }
             globals.crearNuevasPlataf = false;
         }
@@ -618,7 +629,6 @@ function createPlataforms()
         //flechas
         if(globals.kont === 0)
         {
-            
             globals.kont = Math.floor(globals.levelTime.value+3);
         }
 
@@ -694,7 +704,7 @@ function createArrows()
 }
 
 
-function createRegularPlataforms()
+function createRegularPlataforms(posicionPlatf)
 {
      //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
      const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
@@ -709,13 +719,13 @@ function createRegularPlataforms()
      const hitBox = new HitBox(30, 4, 0, 0)
 
      //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-     const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
+     const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, posicionPlatf, globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
 
      //añadimos el pirate al array de sprites
      globals.sprites.push(plataforma);
 }
 
-function createMovingPlataforms()
+function createMovingPlataforms(posicionPlatf)
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
     const imageSet = new ImageSet(2, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
@@ -730,13 +740,13 @@ function createMovingPlataforms()
     const hitBox = new HitBox(30, 4, 0, 0)
 
     //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-    const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
+    const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, posicionPlatf, globals.camera.y, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
 
     //añadimos el pirate al array de sprites
     globals.sprites.push(plataforma);
 }
 
-function createDisappearPlataforms()
+function createDisappearPlataforms(posicionPlatf)
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
     const imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
@@ -751,7 +761,7 @@ function createDisappearPlataforms()
     const hitBox = new HitBox(30, 4, 0, 0)
 
     //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-    const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, Math.floor(Math.random()*150+30), globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
+    const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, posicionPlatf, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
 
     //añadimos el pirate al array de sprites
     globals.sprites.push(plataformaN);
