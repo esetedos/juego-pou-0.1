@@ -619,13 +619,15 @@ function createPlataforms()
         if(globals.kont === 0)
         {
             
-            globals.kont = Math.floor(globals.levelTime.value+2);
+            globals.kont = Math.floor(globals.levelTime.value+3);
         }
 
         if(globals.kont === Math.floor(globals.levelTime.value))
         {
             // console.log("el tiempo se guarda");
             createArrows();
+            // globals.sounds[Sound.ARROW].play();
+            // globals.sounds[Sound.ARROW].volume = 0.4;
             globals.kont = 0;
         }
     }

@@ -102,5 +102,6 @@ export const ParticleState = {
 export const Sound = {
     NO_MUSIC:   -1,
     GAME_MUSIC: 0,
-    JUMP:       1
+    JUMP:       1,
+    ARROW:      2
 }

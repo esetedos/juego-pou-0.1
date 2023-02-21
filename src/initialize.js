@@ -122,6 +122,12 @@ function loadAssets()
     globals.sounds.push(jumpSound);
     globals.assetsToLoad.push(jumpSound);
 
+    // let arrow = document.querySelector("#arrow");
+    // jumpSound.addEventListener("canplaythrough", loadHandler, false);
+    // jumpSound.load();
+    // globals.sounds.push(arrow);
+    // globals.assetsToLoad.push(arrow);
+
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
