@@ -607,7 +607,8 @@ function createPlataforms()
 
 function createArrows()
 {
-    
+    let v = Math.random()*80+50;
+
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
     const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
@@ -615,7 +616,7 @@ function createArrows()
     const frames = new Frames(1);
     
     //creamos los datos de la animacion. 8 framesn / state
-    const physics = new Physics(20);    //velocidad de la flecha, velocidad de las flechas
+    const physics = new Physics(v);    //velocidad de la flecha, velocidad de las flechas
 
     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
     const hitBox = new HitBox(30, 4, 8, 2)
@@ -997,23 +998,23 @@ function updateCameraHS()
 
 function levelInGame()
 {
-    if( globals.levelTime.value > 30){ //30
+    if( globals.levelTime.value > 3){ //30
         globals.levelOne = true;
         globals.dificultad = 1;
     }
-    if( globals.levelTime.value > 75){  //90
+    if( globals.levelTime.value > 7){  //75
         globals.levelTwo = true;
         globals.dificultad = 2;
     }
-    if( globals.levelTime.value > 120){ //150
+    if( globals.levelTime.value > 12){ //120
         globals.levelThree = true;
         globals.dificultad = 3;
     }
-    if( globals.levelTime.value > 180){ //210
+    if( globals.levelTime.value > 18){ //180
         globals.levelFour = true;
         globals.dificultad = 4;
     }
-    if( globals.levelTime.value > 240){ //270
+    if( globals.levelTime.value > 240){ //240
         globals.levelFive = true;
         globals.dificultad = 5;
     }
