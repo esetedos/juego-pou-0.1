@@ -86,7 +86,7 @@ export function initBaseDeDatos()
             if (this.status == 200)
             {
                 // console.log("entra");
-                console.log(this.responseText);
+                // console.log(this.responseText);
                 // console.log(this.responseText === null);
                 if(this.responseText != null)
                 {
@@ -159,10 +159,11 @@ export function postHighScores()
 
                     //Metemos los datos en un array, ya que lo que nos devuelve la ruta es un Objeto.
                     // const arrayResult = [resultJSON];
-
+                    // globals.arrayBD = resultJSON;
                     findScore2(resultJSON);
                     //Iniciamos los datos
                     // initGame(arrayResult);
+                    initBaseDeDatos();
                 }
                 else
                     alert("Comunication error: No data recived");
