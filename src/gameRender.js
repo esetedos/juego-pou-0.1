@@ -353,7 +353,9 @@ function renderHudHighScore()
     globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     // globals.ctxHUDHS.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
     globals.ctx.font = '16px emulogic';
-    globals.ctx.fillText("HIGH SCORES", 40, 16);
+    globals.ctx.fillText("HIGH SCORES", 35, 16);
+    globals.ctx.font = '7px emulogic';
+    globals.ctx.fillText("B tekla atzera bueltatzeko", 30, 180);
     globals.ctx.font = '8px emulogic';
     globals.ctx.fillStyle = 'white';
     // globals.ctxHUDHS.fillText("HIGH SCORES", 85, 10);
@@ -363,7 +365,7 @@ function renderHudHighScore()
     // if(globals.stopMoving == false)
     // {
 
-
+    
     // if(60+globals.arrayBD.length*17-globals.cameraHS.y > 190)
     // {
             moveCameraHS(); 
@@ -373,9 +375,9 @@ function renderHudHighScore()
         {
             let y = 60+i*17;
             //al principio 'y' es 60 y 'globals.cameraHS.y' es 0, asi que es 60 en total
-            if(y - globals.cameraHS.y >40 && y - globals.cameraHS.y <180)
+            if(y - globals.cameraHS.y >40 && y - globals.cameraHS.y <160)
             {
-                globals.ctx.fillText(i, 50, y)
+                globals.ctx.fillText(i+1, 50, y)
                 globals.ctx.fillText(globals.arrayBD[i].izena, 80, y);
                 globals.ctx.fillText(globals.arrayBD[i].score, 150, y);
                 // if(i == globals.arrayBD.length-1)
@@ -396,7 +398,7 @@ function renderHudHighScore()
             // {
             restoreCameraHS();
             // }
-    // }
+    // } 
     //    console.log(globals.cameraHS.y);
         // console.log(100/globals.arrayBD.length);
    if(globals.cameraHS.y > globals.arrayBD.length*17) //8

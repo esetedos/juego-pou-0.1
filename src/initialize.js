@@ -414,7 +414,7 @@ function initPlayer()
     const hitBox2 = new HitBox(10, 12, 3, 3)
 
     //creamos nuestro sprite                                235
-    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, (level1.length-6)*32+90, imageSet, frames, physics, hitBox, hitBox2, 0);
+    const player = new Sprite(SpriteID.PLAYER, State.LEFT, 235, (level1.length-6)*32+60, imageSet, frames, physics, hitBox, hitBox2, 0);
 
     //añadimos el player al array de sprites
     globals.sprites.push(player);
