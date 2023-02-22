@@ -605,7 +605,7 @@ function createPlataformsAndLevels()
 
         
 
-            console.log(posicionPlatf3);
+            // console.log(posicionPlatf3);
             // posicionPlatf3 =  Math.floor(Math.random() * 200);
 
 
@@ -1223,6 +1223,7 @@ function typeName()
             // console.log("entra2");
             
             globals.izena += insertchar;
+            console.log(globals.izena);
             globals.letterTimer.value = 0;
 
             if(globals.izena.length > 2)

@@ -251,6 +251,9 @@ function renderNewGame()
 
 function renderGameOver()
 {
+    
+
+    
     globals.ctxHUD.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctx.drawImage(
         globals.tileMap[1],
@@ -260,6 +263,11 @@ function renderGameOver()
         256, globals.canvas.width                     //the destination height and width
                     
     );
+    globals.ctxHUD.font = '8px emulogic';
+    globals.ctx.fillStyle = 'white';
+    globals.ctx.fillText("name:", 75, 120);
+    globals.ctx.fillStyle = 'lightgray';
+    globals.ctx.fillText(globals.izena, 135, 120);
 
 }
 
