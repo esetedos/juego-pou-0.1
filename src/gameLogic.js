@@ -564,13 +564,111 @@ function createPlataformsAndLevels()
         const sprite = globals.sprites[numPlatf];
         // console.log(ssprite.yPos); 
         
-        let a = 3; 
-        let posicionPlatf = Math.floor(Math.random() * 200);   
-        let kont = posicionPlatf;                                                                                                                           //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
+        
+
+        
+        
+        // let kont = posicionPlatf;                                                                                                                           //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
         if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  sprite.yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
         {
+            let a = 3; 
+            let posicionPlatf = Math.floor(Math.random() * (200-30)); 
+            let posicionPlatf2 = 0;
+            let posicionPlatf3 = 0;
+        //2
+            if(posicionPlatf<=200-30)
+                posicionPlatf2 = Math.floor(Math.random() * (200-(posicionPlatf+30)+1) +posicionPlatf+30); //(posicionPlatf+30));
+            //Math.random()*(75-25+1)+25)  --> [0,25]¿
+            if(posicionPlatf>200-30)
+            {
+                posicionPlatf2 = Math.floor(Math.random() * (posicionPlatf+30-0+1) + 0);
+            }
+            // console.log(posicionPlatf2);
+        //3
+            if(posicionPlatf-(posicionPlatf2+30) > 30)
+            {
+                posicionPlatf3 = Math.floor(Math.random()*(posicionPlatf-(posicionPlatf2+30)+1)+posicionPlatf2+30);
+            }
+            else if(posicionPlatf2-(posicionPlatf+30) >30)
+            {
+                posicionPlatf3 = Math.floor(Math.random()*(posicionPlatf2-(posicionPlatf+30)+1)+posicionPlatf+30);
+            }
+            else {
+                if(posicionPlatf<=200-30)
+                    posicionPlatf3 = Math.floor(Math.random() * (200-(posicionPlatf+30)+1) +posicionPlatf+30); //(posicionPlatf+30));
+                //Math.random()*(75-25+1)+25)  --> [0,25]¿
+                if(posicionPlatf>200-30)
+                {
+                    posicionPlatf3 = Math.floor(Math.random() * (posicionPlatf+30-0+1) + 0);
+                }
+            }
+
+        
+
+            console.log(posicionPlatf3);
+            // posicionPlatf3 =  Math.floor(Math.random() * 200);
+
+
+
+            // if(posicionPlatf-30 <= posicionPlatf2 <= posicionPlatf+30)
+            // {
+            //     posicionPlatf2 +=70;
+            //     console.log("while");
+               
+            //     if(posicionPlatf2+30 > 200)
+            //     {
+            //         posicionPlatf2-=200;
+            //     }
+    
+            // }
+            // if(posicionPlatf2-30 <= posicionPlatf3 <= posicionPlatf2+30)
+            // {
+            //     posicionPlatf3 += 30;
+            //     if(posicionPlatf3+30 > globals.canvas.width)
+            //     {
+            //         posicionPlatf3 = 0;
+            //     }
+            // }
+
+            let posicion = posicionPlatf;
+//pra crear la primera plataforma
+            let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
+            if(globals.levelOne == true)       
+            {
+                if(globals.levelThree == true)   //cuando pasen dos minutos
+                {
+                    if(option<15){
+                        //create plataformas de movimiento
+                        createMovingPlataforms(posicion);
+                    }   
+                    else if(option<30)
+                    {
+                        //create plataformas que desaparecen
+                        createDisappearPlataforms(posicion);
+                    }
+                    else{
+                        createRegularPlataforms(posicion);
+                    }
+                    
+                }
+                else //cuando pase un minuto
+                {                   
+                    if(option<20){
+                        //create plataformas de movimiento
+                        createMovingPlataforms(posicion);
+                    }   
+                    else{
+                        createRegularPlataforms(posicion);
+                    }
+                }   
+            }
+            else
+                createRegularPlataforms(posicion);
+
+//segunda y tercera plataforma
+            posicion = posicionPlatf2;
             for(let i = 0; i < a ; i++){
-                let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
+                option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
                 if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
                 {
                     a = 2;
@@ -581,15 +679,15 @@ function createPlataformsAndLevels()
                     {
                         if(option<15){
                             //create plataformas de movimiento
-                            createMovingPlataforms(posicionPlatf);
+                            createMovingPlataforms(posicion);
                         }   
                         else if(option<30)
                         {
                             //create plataformas que desaparecen
-                            createDisappearPlataforms(posicionPlatf);
+                            createDisappearPlataforms(posicion);
                         }
                         else{
-                            createRegularPlataforms(posicionPlatf);
+                            createRegularPlataforms(posicion);
                         }
                         
                     }
@@ -597,27 +695,37 @@ function createPlataformsAndLevels()
                     {                   
                         if(option<20){
                             //create plataformas de movimiento
-                            createMovingPlataforms(posicionPlatf);
+                            createMovingPlataforms(posicion);
                         }   
                         else{
-                            createRegularPlataforms(posicionPlatf);
+                            createRegularPlataforms(posicion);
                         }
                     }   
                 }
                 else
-                    createRegularPlataforms(posicionPlatf);
+                    createRegularPlataforms(posicion);
                     
-                
+                // if(i == 1)
+                // {
+                    posicion = posicionPlatf3;
+                    // console.log("while");
+                // }
+                    
+                // if(i == 2)
+                // {
+                //     posicion = posicionPlatf3;
+                //     // console.log("while2");
+                // }
                 // posicionPlatf = Math.floor(Math.random() * 200);
                 // let p = posicionPlatf;
                 
-                while(kont-30 <= posicionPlatf <= kont+30)
-                {
-                    posicionPlatf =  kont+40;
-                    console.log("while");
-                }
+                // while(kont-30 <= posicionPlatf <= kont+30)
+                // {
+                //     posicionPlatf =  kont+40;
+                //     console.log("while");
+                // }
                 
-                kont = posicionPlatf;
+                // kont = posicionPlatf;
             }
             globals.crearNuevasPlataf = false;
         }

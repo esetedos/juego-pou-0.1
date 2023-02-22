@@ -102,10 +102,10 @@ function renderSprites() //o drawSprites (que era como estaba)
         //TEST: DIbuja un rectangulo alrededor del sprite
         // drawSpriteRectangle(sprite);     
         renderSprite(sprite);
-        drawHitBox(sprite);
+        // drawHitBox(sprite);
        
     }
-    drawHitBox2(globals.sprites[0]); //dibujo de la segunda HitBox del player n
+    // drawHitBox2(globals.sprites[0]); //dibujo de la segunda HitBox del player n
 }
 
 function drawSpriteRectangle(sprite)
