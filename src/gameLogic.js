@@ -190,6 +190,11 @@ function updateCarrot(sprite)
     {
         sprite.state = State.BROKE_3;
         globals.puntosCarrot += 500/2;
+        globals.zanaRecogidas+=0.5;
+        if(globals.zanaRecogidas % 3 == 0)
+        {
+            globals.life++;
+        }
     }
 }
 
@@ -918,6 +923,7 @@ function updateNewGame()
         globals.maxPlatAlcanzado = false;
         globals.saltoKop = 0;
         globals.puntosCarrot = 0;
+        globals.zanaRecogidas = 0;
         initSprites;
         // console.log(globals.sprites.length);
         
@@ -1098,7 +1104,7 @@ export function gameMovement()
 {
     const player = globals.sprites[0];
 
-    globals.score = Math.floor(globals.metroak/10)*10 + Math.floor(globals.levelTime.value/10)*10 + globals.puntosCarrot;
+    globals.score = Math.floor(globals.metroak/10)*10 + Math.floor(globals.levelTime.value*2)*10 + globals.puntosCarrot;
     if(player.yPos < globals.camera.y+50)  //70)
     {
         globals.metroak++;

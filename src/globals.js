@@ -108,7 +108,9 @@ export default {
 
     puntosCarrot: 0,
 
-    kont2: 0
+    kont2: 0,
+
+    zanaRecogidas: 0
 
     
 

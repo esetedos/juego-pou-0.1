@@ -163,7 +163,7 @@ function initSprites()//////////////////////////////////////////////////////////
     // initArrow();
     // initPlataformsN();
     // initPlataformsMoviento();
-    initCarrot();
+    // initCarrot();
     // console.log("dfgh");
     
    
