@@ -1,7 +1,5 @@
 import globals from "./globals.js";
-import {Block, State, SpriteID} from "./constants.js";
-import { Plataformas } from "./Sprite.js";
-import Physics from "./Physics.js";
+import {Block, SpriteID} from "./constants.js";
 import { initParticles } from "./initialize.js";
 import { gameMovement, eliminaciónDePlataformas } from "./gameLogic.js";
 
@@ -150,9 +148,6 @@ function collisionWBorders()
         // player.physics.vx = 0;
         player.xPos = 0;
     }     
-    //if(h > 200)
-    
-    //sprite.yPos = globals.canvas.height - sprite.imageSet.ySize;
 
 }
 
@@ -211,16 +206,13 @@ function detectCollisionBetweenPlayerAndMapObstacles()
 
     let xPos;
     let yPos;
-    let isCollidingOnPos1;
-    let isCollidingOnPos2;
+
     let isCollidingOnPos3;
     let isCollidingOnPos4;
-    let isCollidingOnPos5;
-    let isCollidingOnPos6;
+
     let isCollidingOnPos7;
     let isCollidingOnPos8;
-    let isColliding;
-    let overlap;
+ 
 
     let isCollidingOnPos23;
     let isCollidingOnPos24;
@@ -250,7 +242,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
     // 7------------8   //estos son los puntos nuevos
     // 4------------3
 
-    let overlapX;
+ 
     let overlapY;
 
     //calculamos colisiones en los 6 puntos
@@ -283,10 +275,6 @@ function detectCollisionBetweenPlayerAndMapObstacles()
         isCollidingOnPos8 = isCollidingWithObstacleAt(xPos, yPos, obstacleId);
         isCollidingOnPos28 = isCollidingWithObstacleAt(xPos, yPos, obstacleId2);
 
-        // if(isCollidingOnPos4 || isCollidingOnPos3)
-        // {
-        //     player.physics.vy = 0;
-        // }
 
         if(
             ((isCollidingOnPos4  && isCollidingOnPos7 == false) || (isCollidingOnPos3 && isCollidingOnPos8 == false))
@@ -294,9 +282,7 @@ function detectCollisionBetweenPlayerAndMapObstacles()
             ((isCollidingOnPos24  && isCollidingOnPos27 == false) || (isCollidingOnPos23 && isCollidingOnPos28 == false))
             ) //hay colision en punto 4
         {
-            // console.log("4");
-            //calculamos overap sólo en Y
-            // player.physics.vy= 0;
+
             overlapY = 1; //Math.floor(yPos) % (brickSize) + 1;
 
             //Colisión en eje Y
@@ -305,24 +291,8 @@ function detectCollisionBetweenPlayerAndMapObstacles()
            
             globals.saltoDeNuevo = true;
             player.physics.isOnGround = true;
-            // console.log(globals.saltoDeNuevo);
-            // console.log("salto");
-            // console.log("4: " + isCollidingOnPos4);
-            // console.log("3: " + isCollidingOnPos3);
-            // console.log("7: " + isCollidingOnPos7);
-            // console.log("8: " + isCollidingOnPos8);
            
         }
-        // else if(globals.saltoDeNuevo)
-        {
-            // player.physics.vy= 0;
-            // player.isCollidingWithPlayer = true;
-           
-            // globals.saltoDeNuevo = false;
-            
-        }
-
-
     }
 
 }

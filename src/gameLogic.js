@@ -6,17 +6,12 @@ import ImageSet from "./ImageSet.js";
 import Frames from "./Frames.js";
 import Physics from "./Physics.js";
 import HitBox from "./HitBox.js";
-import { initParticles, initSprites } from "./initialize.js";
-import { Level, level1 } from "./Level.js";
+import { initSprites } from "./initialize.js";
+import { level1 } from "./Level.js";
 import {collisionPlataform} from "./collisions.js";
 import {postHighScores} from "./events.js";
 
 
-
-
-
-let contadorPrueba = 0; //? h
-let suelo = globals.canvas.height;
 
 export default function update()
 {
@@ -24,7 +19,7 @@ export default function update()
     switch(globals.gameState)
     {
         case Game.LOADING:
-            console.log("Loading assets...");
+            // console.log("Loading assets...");
             inicioNEW_GAME();
 
             break;
@@ -75,15 +70,9 @@ function playGame()
     //pa' las partículas
     updateParticles();
 
-    //colisioNes de las plataformas y hitbox del player
-    // detectCollisions();
-
-    //colisiones; con el resto de objetos (sprites) y hitbox2 del player
-    // detectCollisions2();
-
     callDetectCollisions();
 
-//actualización de la cámara
+    //actualización de la cámara
     updateCamera();
 
     // actualización de la lógica del juego
@@ -93,17 +82,11 @@ function playGame()
 
     gameEnd();
 
-    actualiceHighScore();
-
     levelInGame();
 
    restoreCamera();
 
    updateTimerSaltoKop();
-
-//    reiniciaCameraHS();
-
-    // contadorDePlataformas();
 
     playSound();
 
@@ -122,11 +105,7 @@ function updateSprites()
         if(sprite.state == -1){ //aquí iría el splice (para eliminar el objeto)
             globals.sprites.splice(i,1); 
             i--;
-            // globals.life = 234567;
-        }
-        
-        
-        
+        }   
         updateSprite(sprite);
     }
     
@@ -174,11 +153,6 @@ function updateSprite(sprite)
 
 function updateCarrot(sprite)
 {
-    // sprite.state = State.SOLID_3;
-    // collisionPlataform(sprite);
-    // sprite.yPos -=10*globals.deltaTime;
-    // console.log("dfgthyjuikouytrewdfghj");
-
     //si sale de la pantalla, lo eliminamos
     if(sprite.yPos > globals.camera.y+6*32)
     {
@@ -196,9 +170,6 @@ function updateCarrot(sprite)
             globals.life++;
         }
         globals.currentSound = Sound.EATING;
-        // globals.sounds[Sound.EATING].play();
-        // globals.sounds[Sound.EATING].volume = 0.4;
-
     }
 }
 
@@ -221,20 +192,15 @@ function updatePlayer(sprite)
             case State.RIGHT:
                 //si se mueve a la derecha ax (+)
                 sprite.physics.ax = sprite.physics.aLimit;
-                // sprite.physics.vy = 0;
-                //sprite.frames.frameCounter = 0; //cuando salte, pasara a ser 1
                 break;
 
             case State.LEFT:
                 //si se mueve a la izquierda asignamos ax (-)
                 sprite.physics.ax = -sprite.physics.aLimit;
-                //  sprite.physics.vy = 0;
                 break;
 
             default: //casos de estar parado
                 sprite.physics.ax = 0;
-                // sprite.physics.vy = 0;
-                // sprite.physics.vx = 0;
         }
     }
     else sprite.physics.ax = 0;
@@ -263,7 +229,6 @@ function updatePlayer(sprite)
     //calculamos distancia que se mueve (X = X + Vt)
     //xPos seguirá un movimiento uniforme acelerado
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
-    // sprite.yPos += sprite.physics.vy * globals.deltaTime;
 
 
     //-----------------------------------------
@@ -338,28 +303,14 @@ function updatePlayer(sprite)
         
         globals.life--; //quita dos de vida
         globals.currentSound = Sound.ROBLOX;
-
-    /*
-        //Recolocamos la cámara (camera) del scrolling
-        while(Math.floor(globals.camera.y/32) % 3  == 0)
-            globals.camera.y +=10;
-        // globals.camera.y = (level1.length-7-8)*32;
-    */
     }
 
     //Actualizamos la animación
     updateAnimationFrame(sprite);
     
-
-
-
      //cuando hace colisión con una plataforma:
-    //  const player = globals.sprites[0];
      if(sprite.isCollidingWithObstacleOnTheBottom)
         sprite.physics.isOnGround = true;
-
-
-    
 }
 
 function updateSaltoKop(sprite)
@@ -373,31 +324,20 @@ function updateSaltoKop(sprite)
 
 function updatePlataformMovimiento(sprite)
 {
-    // sprite.frames.frameCounter = 1;
-
     collisionPlataform(sprite);
     movimientoHorizontal(sprite);
 }
 
 function updatePlataformN(sprite)
 { 
-    // sprite.frames.frameCounter = 2; 
     sprite.physics.vy = sprite.physics.vLimit;
 
-    // sprite.state = State.SOLID_4;
-
-    //esto mantiene las tres plataformas con la misma imagen siempre
-    //sprite.frames.frameCounter = sprite.platType;  
-
-  
     collisionPlataform(sprite);
     if(sprite.disappear == true)
     {
         disappearPlataformN(sprite);
     }
     
-
-    //updateAnimationFrame(sprite);
 }
 
 
@@ -405,18 +345,12 @@ function updateArrow(sprite)
 {
     sprite.physics.vx = sprite.physics.vLimit;
 
-    // //aqui actualizaremos el estado de ls vriables del pirata
-    // sprite.xPos = 200;
-    // sprite.yPos = sprite.xInitPosition;
-
     sprite.state = State.SOLID_2;
 
     sprite.xPos += sprite.physics.vx * globals.deltaTime;
     
     if(sprite.xPos > 270){
         sprite.state = State.BROKE_2;
-        // sprite.xPos = -30;
-        // sprite.yPos =  Math.floor(Math.random() * 150+40);
     }
     updateValuesAfterCollision(sprite);
 }
@@ -426,26 +360,8 @@ function updatePlataform(sprite)
 {
     sprite.physics.vy = sprite.physics.vLimit;
 
-    //aqui actualizaremos el estado de las vriables del pirata
-    
-    //sprite.xPos = sprite.xInitPosition;
-    //sprite.yPos = 0;
-
     sprite.state = State.SOLID; 
 
-    //esto mantiene las tres plataformas con la misma imagen siempre
-    //sprite.frames.frameCounter = sprite.platType;  
-/*
-    sprite.yPos += sprite.physics.vy * globals.deltaTime;
-
-    //esto es para que cuando lleguen abajo, vuelvan arriba en un sitio aleatorio y qeu tengan un dibujo aleatorio
-    if(sprite.yPos > 190){
-        sprite.yPos = 0;
-        sprite.xPos =  Math.floor(Math.random() * 200);
-        sprite.frames.frameCounter = Math.floor(Math.random() * 2); 
-    }
-*/
-    //updateAnimationFrame(sprite);
 
     collisionPlataform(sprite); 
     //colisión entre plataforma y jugador    
@@ -483,7 +399,6 @@ function updateAnimationFrame(sprite)
             if(sprite.frames.frameChangeCounter === sprite.frames.speed)
             {
                 //cambiamos de frame y reseteamos el contador de cambio de frame
-                //sprite.frames.frameCounter++;
                 sprite.frames.frameChangeCounter = 0;
             }
 
@@ -541,7 +456,6 @@ function movimientoHorizontal(sprite)
         sprite.kontMovimiento2 = 0;
         sprite.kontMovimiento++;
         sprite.physics.vx = sprite.physics.vLimit;
-        // sprite.xPos += sprite.physics.vx * globals.deltaTime;
     }
     else
     {
@@ -549,7 +463,6 @@ function movimientoHorizontal(sprite)
         {
             sprite.kontMovimiento2++;
             sprite.physics.vx = -sprite.physics.vLimit;
-            // sprite.xPos += sprite.physics.vx * globals.deltaTime;
         }
         else sprite.kontMovimiento = 0;
     }
@@ -567,8 +480,7 @@ function disappearPlataformN(sprite)
         sprite.frames.frameCounter = 1;
     }
         if(globals.levelTime.value >= sprite.kontMovimiento + sprite.physics.vLimit)
-        {
-            //  globals.life = 0; 
+        { 
             sprite.state = State.BROKE_4;
             sprite.frames.frameCounter = -100;
         }
@@ -576,67 +488,61 @@ function disappearPlataformN(sprite)
 
 function createPlataformsAndLevels()
 {
-    // for(let i = 1; i < globals.sprites.length; ++i)
-    {
-        let numPlatf = contadorDePlataformas(); 
-        const sprite = globals.sprites[numPlatf];
-        let option = 0;
-        // console.log(ssprite.yPos); 
-        
+    let numPlatf = contadorDePlataformas(); 
+    const sprite = globals.sprites[numPlatf];
+    let option = 0;
                                                                                                                         //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
-        if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  sprite.yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
-        {
-            let a = 3; 
-            let posicion = Math.floor(Math.random()*200+1);
-            
-            for(let i = 0; i < a ; i++){
-                option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
+    if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  sprite.yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
+    {
+        let a = 3; 
+        let posicion = Math.floor(Math.random()*200+1);
+        
+        for(let i = 0; i < a ; i++){
+            option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
 
-                if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
-                {
-                    a = 2;
-                }
-                if(globals.levelOne == true)       
-                {
-                    if(globals.levelThree == true)   //cuando pasen dos minutos
-                    {
-                        if(option<15){
-                            //create plataformas de movimiento
-                            createMovingPlataforms(posicion);
-                        }   
-                        else if(option<30)
-                        {
-                            //create plataformas que desaparecen
-                            createDisappearPlataforms(posicion);
-                        }
-                        else{
-                            createRegularPlataforms(posicion);
-                        }
-                        
-                    }
-                    else //cuando pase un minuto
-                    {                   
-                        if(option<20){
-                            //create plataformas de movimiento
-                            createMovingPlataforms(posicion);
-                        }   
-                        else{
-                            createRegularPlataforms(posicion);
-                        }
-                    }   
-                }
-                else
-                    createRegularPlataforms(posicion);
-                    
-                posicion = Math.floor(Math.random()*200+1);
+            if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
+            {
+                a = 2;
             }
-            globals.crearNuevasPlataf = false;
+            if(globals.levelOne == true)       
+            {
+                if(globals.levelThree == true)   //cuando pasen dos minutos
+                {
+                    if(option<15){
+                        //create plataformas de movimiento
+                        createMovingPlataforms(posicion);
+                    }   
+                    else if(option<30)
+                    {
+                        //create plataformas que desaparecen
+                        createDisappearPlataforms(posicion);
+                    }
+                    else{
+                        createRegularPlataforms(posicion);
+                    }
+                    
+                }
+                else //cuando pase un minuto
+                {                   
+                    if(option<20){
+                        //create plataformas de movimiento
+                        createMovingPlataforms(posicion);
+                    }   
+                    else{
+                        createRegularPlataforms(posicion);
+                    }
+                }   
+            }
+            else
+                createRegularPlataforms(posicion);
+                
+            posicion = Math.floor(Math.random()*200+1);
         }
+        globals.crearNuevasPlataf = false;
     }
+    
     if(globals.levelFour == true)
     {
-        // console.log(globals.kont);
-        // console.log(globals.levelTime.value);
         //flechas
         if(globals.kont === 0)
         {
@@ -645,7 +551,6 @@ function createPlataformsAndLevels()
 
         if(globals.kont === Math.floor(globals.levelTime.value))
         {
-            // console.log("el tiempo se guarda");
             createArrows();
             globals.currentSound = Sound.ARROW;
             globals.sounds[Sound.ARROW].volume = 0.4;
@@ -660,10 +565,8 @@ function createPlataformsAndLevels()
 
     if(globals.kont2 == Math.floor(globals.levelTime.value))
     {
-        // console.log("el tiempo se guarda");
         createCarrots();
         globals.kont2 = 0;
-        console.log("se crrea una zanahoria");
     }
 }
 
@@ -671,8 +574,7 @@ function createCarrots()
 {
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
     const imageSet = new ImageSet(6, 0, 10, 6, 10, 16, 0, 2);
-                                //(6, 0, 10, 6, 10, 24, 0, 8);
-                                //(2, 1, 30, 6, 30, 27, 0, 6)
+
     //creamos los datos de la animacion. 8 frames / state
     const frames = new Frames(0, 5); //en teoría debería ser (0, 5)
 
@@ -776,35 +678,12 @@ function createDisappearPlataforms(posicionPlatf)
 
     //añadimos el pirate al array de sprites
     globals.sprites.push(plataformaN);
-
-    //and
-
-    // //plataforma nube extra ;)
-    // //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-    //  imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
-
-    // //creamos los datos de la animacion. 8 framesn / state
-    //  frames = new Frames(1, 5);
-
-    // //creamos nuestro objeto physics con vLimit = 40 pixels/second
-    //  physics = new Physics(1, 0); //velocidad de las plataformas
-
-    // //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-    //  hitBox = new HitBox(30, 4, 0, 0)
-
-    // //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-    //  plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 200, globals.camera.y, imageSet, frames, physics, 2, 5, hitBox);
-
-    // //añadimos el pirate al array de sprites
-    // globals.sprites.push(plataformaN);
 }
 
 
 
 function updateNewGame()
 {
-    // console.log("entra");
-    // if (globals.action.jump === true) //to do quitar el if, que lo haga directamente (son las cosas que van a inicializar)
     //reiniciamos valores
     //reinicio
         globals.metroak = 0;
@@ -826,13 +705,8 @@ function updateNewGame()
         globals.kont2 = 0;
         globals.kont = 0;
         initSprites;
-        // console.log(globals.sprites.length);
-        
-      
-        
-        
 
-    if(globals.action.jump){     //uwu
+    if(globals.action.jump){     
         globals.gameState = Game.PLAYING;
         //reproducimos GAME_MUSIC a un volumen inferior
         globals.sounds[Sound.GAME_MUSIC].play();
@@ -840,7 +714,6 @@ function updateNewGame()
     }
     if (globals.action.G === true)
     {
-        // postHighScores();
         globals.gameState = Game.HIGH_SCORE;
     }
     if (globals.action.H === true)
@@ -878,13 +751,8 @@ function updateParticles()
     // 
         for(let i = 0; i < globals.particles.length; ++i)
         {
-            //console.log("Entra: " + i)
             const particle = globals.particles[i];
-            // if(globals.sprites[0].physics.isOnGround === true)
-            // {
-            //     globals.startParticles = true;
-            //     particle.state = ParticleState.ON;
-            // }
+ 
             updateParticle(particle);
         }
 
@@ -913,7 +781,6 @@ function updateExplosionParticle(particle)
 {
     particle.fadeCounter += globals.deltaTime;
 
-
     let xPos  ;
     let yPos = 100 ;
     
@@ -923,7 +790,6 @@ function updateExplosionParticle(particle)
         xPos = globals.sprites[0].xPos + (globals.sprites[0].imageSet.xSize/2);
         yPos = globals.sprites[0].yPos + globals.sprites[0].imageSet.ySize;
     }
-
 
     //Cogemos las velocidades de los arrays
     switch (particle.state)
@@ -948,11 +814,7 @@ function updateExplosionParticle(particle)
             break;
 
         case ParticleState.OFF:
-    //         xInit = 100;
-    // const yInit = 100;
-                
-                // particle.state = ParticleState.ON;
-            
+  
             break;
 
         default:
@@ -963,16 +825,6 @@ function updateExplosionParticle(particle)
     particle.yPos += particle.physics.vy * globals.deltaTime;
 }
 
-function actualiceHighScore()
-{
-    // globals.score=Math.floor(globals.metroak/10)*10;
-
-    //para actualizar el fake high score
-    if(Math.floor(globals.metroak/10)*10 > globals.highScore)
-    {
-        globals.highScore = Math.floor(globals.metroak/10)*10;
-    }
-}
 
 function updateCamera()
 {
@@ -983,8 +835,6 @@ function updateCamera()
         globals.camera.y -=5* globals.deltaTime;
     }
     globals.camera.y -=10* globals.deltaTime;
-    // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
-    // globals.camera.y = Math.floor(player.yPos) + Math.floor((player.imageSet.ySize - globals.canvas.height) / 2);
 }
 
 function restoreCamera()
@@ -1014,10 +864,6 @@ export function gameMovement()
         {
             const sprite = globals.sprites[i];
             sprite.yPos+=40 * globals.deltaTime;
-            // if(player.yPos < globals.camera.y)
-            // {
-            //     sprite.yPos+=10 * globals.deltaTime;
-            // }
         }
         //aquí añadir que la pantalla baje
         // globals.camera.y -=30* globals.deltaTime;
@@ -1032,7 +878,6 @@ export function eliminaciónDePlataformas()
 
         if(sprite.yPos > globals.camera.y+globals.canvas.height){
             sprite.state = -1;
-            // if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)
             globals.crearNuevasPlataf = true;
         }
     }
@@ -1040,23 +885,17 @@ export function eliminaciónDePlataformas()
 
 function contadorDePlataformas()
 {
-    // globals.kontPlataforms = 0;
     let numPlataf = 0;
     for(let i = globals.sprites.length-1; i > 0; --i)
     {
         const sprite = globals.sprites[i];
         if(sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO)   
-        {   // globals.kontPlataforms++;
+        {   
             numPlataf = i;
             i = 0;
         }
     }
-    // console.log(numPlataf);
     return(numPlataf);
-    // if(globals.kontPlataforms > globals.maxPlataformas)
-    //     globals.maxPlatAlcanzado = true;
-    // else
-    // globals.maxPlatAlcanzado = false;
 }
 
 function updateHighScore()
@@ -1064,28 +903,17 @@ function updateHighScore()
     updateCameraHS();  
     updateGame_over4High_Score4History();
     updateTimerProba();
-    
-
-    if(globals.timerProba.value > 5)
-    {
-        // console.log("entra");
-        // reiniciaCameraHS(); 
-    }
 }
 
 function updateCameraHS()
 {
     //to do: aqui ponemos que al pulsar los botones de las flechas, sube o baja
     globals.cameraHS.y += 10* globals.deltaTime;
-    // console.log("high_scores camera dentro");
 }
 
-// function reiniciaCameraHS()
-// {
-//     globals.cameraHS.y = 0;
-// }
 
 
+//Los valores de la derecha son los que deberían de ir si queremos que el juego dure 5 mins aprox
 function levelInGame()
 {
     if( globals.levelTime.value == 30){ //30
@@ -1094,25 +922,25 @@ function levelInGame()
         globals.currentSound = Sound.LEVELUP;
         globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value == 70){  //75
+    if( globals.levelTime.value == 60){  //75
         globals.levelTwo = true;
         globals.dificultad = 2;
         globals.currentSound = Sound.LEVELUP;
         globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value == 120){ //120
+    if( globals.levelTime.value == 90){ //120
         globals.levelThree = true;
         globals.dificultad = 3;
         globals.currentSound = Sound.LEVELUP;
         globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value == 180){ //180
+    if( globals.levelTime.value == 120){ //180
         globals.levelFour = true;
         globals.dificultad = 4;
         globals.currentSound = Sound.LEVELUP;
         globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value == 240){ //240
+    if( globals.levelTime.value == 150){ //240
         globals.levelFive = true;
         globals.dificultad = 5;
         globals.currentSound = Sound.LEVELUP;
@@ -1129,16 +957,9 @@ function typeName()
 
     if(globals.asciCode > 64 && globals.asciCode < 91)
     {
-        // console.log("entra");
-        // console.log(insertchar);
-        // console.log(globals.letterTimer.value);
-
         //meter un timer para que se mantenga pulsada la tecla
         if(globals.letterTimer.value > 1)
         {
-            //aquí no entra
-            // console.log("entra2");
-            
             globals.izena += insertchar;
             console.log(globals.izena);
             globals.letterTimer.value = 0;
@@ -1150,27 +971,11 @@ function typeName()
                 globals.gameState = Game.HIGH_SCORE;
                 
             }
-        
-            // postHighScore();
+
         }
     }
 }
 
-
-// function findScore (objectToSend)
-// {
-//     // for(let i = 0; i < globals.arrayBD.length; i++)
-//     { 
-//         // if(globals.score > globals.arrayBD[i].score)
-//         {
-//             // console.log("entra14");
-//             globals.arrayBD.splice(globals.arrayBD.length+1,0,objectToSend);
-
-//             // i = globals.arrayBD.length;
-//         }
-//     }
-//     console.log(globals.arrayBD);
-// }
 
 function updateGame_over()
 {
@@ -1205,7 +1010,6 @@ function updateTimerProba()
 
         //reseteamos timeChangeCounter
         globals.timerProba.timeChangeCounter = 0;
-        // console.log(globals.timerProba.value);
     }
     
 }
@@ -1221,12 +1025,11 @@ function updateTimerSaltoKop()
 
         //reseteamos timeChangeCounter
         globals.timerSaltoKop.timeChangeCounter = 0;
-        // console.log(globals.timerProba.value);
     }
     
 }
 
-function inicioNEW_GAME() //uwu
+function inicioNEW_GAME() 
 {
     if(globals.action.B && globals.arrayBD !== null && globals.assetsLoaded === globals.assetsToLoad.length)
     {

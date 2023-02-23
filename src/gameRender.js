@@ -1,6 +1,5 @@
 import globals from "./globals.js";
 import { Game, ParticleState, Tile, ParticleID, SpriteID } from "./constants.js";
-import Timer from "./Timer.js"; //lo he puesto yo (no está en los tutoriales)
 
 
 //Función que renderiza los gráficos
@@ -44,11 +43,6 @@ function  drawGame()
     //Borramos la pantalla entera
     globals.ctx.clearRect(0, 0, globals.canvas.width, globals.canvas.height);
     globals.ctxHUD.clearRect(0, 0, globals.canvasHUD.width, globals.canvasHUD.height);
-
-
-    /*//Pintamos los FPS en pantalla
-    globals.ctx.fillText("FPS: " + 1 / globals.deltaTime, 30, 30);
-    */
 
     //Movemos la cámara
     moveCamera();
@@ -213,7 +207,6 @@ function renderHUD() //el texto que aparecerá mostrando la puntuación y tal
     globals.ctxHUD.fillStyle = 'lightgray';
     globals.ctxHUD.fillText(" " + life, 120, 16);
 
-    //ESTAS HACIENDO LO DE LAS PUNTUACIONES Y ASI PA Q SE VEA BONITO
     //draw time
     
     globals.ctxHUD.fillStyle = 'lightgreen';
@@ -317,10 +310,6 @@ function renderParticle(particle)
             renderExplosionParticle(particle);
             break;
 
-        // case ParticleID.FIRE:   //esto creo que sobra
-        //     renderFireParticle(particle); 
-        //     break;
-
         default:
             break;
     }
@@ -365,64 +354,26 @@ function renderHudHighScore()
     globals.ctx.fillText("B tekla atzera bueltatzeko", 30, 180);
     globals.ctx.font = '8px emulogic';
     globals.ctx.fillStyle = 'white';
-    // globals.ctxHUDHS.fillText("HIGH SCORES", 85, 10);
-    // globals.ctxHUDHS.fillText("|", 56, 8);
-    // globals.ctxHUDHS.fillStyle = 'lightgray';
-    // globals.ctxHUDHS.fillText("  " + 677777, 8, 16);
-    // if(globals.stopMoving == false)
-    // {
 
+    moveCameraHS(); 
     
-    // if(60+globals.arrayBD.length*17-globals.cameraHS.y > 190)
-    // {
-            moveCameraHS(); 
-        // }
-    
-        for(let i = 0; i < globals.arrayBD.length; i++)
+    for(let i = 0; i < globals.arrayBD.length; i++)
+    {
+        let y = 60+i*17;
+        if(y - globals.cameraHS.y >40 && y - globals.cameraHS.y <160)
         {
-            let y = 60+i*17;
-            //al principio 'y' es 60 y 'globals.cameraHS.y' es 0, asi que es 60 en total
-            if(y - globals.cameraHS.y >40 && y - globals.cameraHS.y <160)
-            {
-                globals.ctx.fillText(i+1, 50, y)
-                globals.ctx.fillText(globals.arrayBD[i].izena, 80, y);
-                globals.ctx.fillText(globals.arrayBD[i].score, 150, y);
-                // if(i == globals.arrayBD.length-1)
-                // {
-                //     globals.stopMoving = true;
-                // }
-            }
-            // if(i == globals.arrayBD.length-1){
-            //     if(y < globals.cameraHS.y + 32*6-20)
-            //     {
-            //         globals.stopMoving = true;
-            //     }
-            // }
-            
-            
+            globals.ctx.fillText(i+1, 50, y)
+            globals.ctx.fillText(globals.arrayBD[i].izena, 80, y);
+            globals.ctx.fillText(globals.arrayBD[i].score, 150, y);
         }
-            // if(globals.stopMoving == false)
-            // {
-            restoreCameraHS();
-            // }
-    // } 
-    //    console.log(globals.cameraHS.y);
-        // console.log(100/globals.arrayBD.length);
-   if(globals.cameraHS.y > globals.arrayBD.length*17) //8
-   {
-        globals.cameraHS.y = 70-globals.canvas.height;
-   }
+    }
+    restoreCameraHS();
+
+    if(globals.cameraHS.y > globals.arrayBD.length*17) //8
+    {
+            globals.cameraHS.y = 70-globals.canvas.height;
+    }
     
-  
-    
-// globals.ctx.drawImage(
-//     globals.tileMap[2],
-//     0, 0,                       //the source x and y position
-//     256, globals.canvas.width,               //the source height and width
-//     0, 0,                         //the destination x and y position
-//     256, globals.canvas.width                     //the destination height and width
-                
-// );
 }
 
 

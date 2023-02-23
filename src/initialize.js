@@ -40,8 +40,6 @@ function initVars()
     globals.previousCycleMilliseconds = 0;
     globals.deltaTime =                 0;
     globals.frameTimeObj =        1 / FPS; //Frame time in seconds
-    //para poner el fondo en su sitio al inicio
-    // globals.ctx.setTransform(1, 0, 0, 1, 0, 0);
 
 
     //Inicializamos el estado del juego
@@ -166,7 +164,7 @@ function loadHandler(){
             globals.sounds[i].removeEventListener("canplaythrough", loadHandler, false);
         }
        
-        console.log("Assets finished loading");
+        // console.log("Assets finished loading");
 
         //Start the game
         globals.gameState = Game.LOADING;
@@ -177,158 +175,10 @@ function initSprites()//////////////////////////////////////////////////////////
 {
     initPlayer();
     initPlataforms();
-    // initArrow();
-    // initPlataformsN();
-    // initPlataformsMoviento();
-    // initCarrot();
-    // console.log("dfgh");
-    
-   
 }
 
-// function initCarrot()
-// {
-//     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-//     const imageSet = new ImageSet(6, 0, 10, 6, 10, 16, 0, 2);
-//                                 //(6, 0, 10, 6, 10, 24, 0, 8);
-//                                 //(2, 1, 30, 6, 30, 27, 0, 6)
-//     //creamos los datos de la animacion. 8 frames / state
-//     const frames = new Frames(0, 5); //en teoría debería ser (0, 5)
-
-//     //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
-//     const physics = new Physics(40);
-
-//     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-//     const hitBox = new HitBox(10, 6, 0, 0)
-
-//     //creamos nuestro sprite
-//     const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 60, (level1.length-6)*32+50, imageSet, frames, physics, hitBox);
- 
-//     //añadimos el player al array de sprites
-//     globals.sprites.push(carrot);
-   
-// }
-
-// function initPlataformsMoviento(){
-//     for(let i = 0; i < 2 ; i++){
-//         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-//         const imageSet = new ImageSet(2, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
-
-//         //creamos los datos de la animacion. 8 framesn / state
-//         const frames = new Frames(1, 5);
-
-//         //creamos nuestro objeto physics con vLimit = 40 pixels/second
-//         const physics = new Physics(20, 0, 0); //velocidad de las plataformas
-
-//         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-//         const hitBox = new HitBox(30, 4, 0, 0)
-
-//         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-//         const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), (level1.length-6)*32+35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
-
-//         //añadimos el pirate al array de sprites
-//         globals.sprites.push(plataforma);
-//     }
-
-// }
-
-/*
-function initPlataformsN(){
-    let b = 0;
-    for(let a = 0; a < 2; a++)
-    {
-        for(let i = 0; i < 2; ++i){
-            //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-            const imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
-
-            //creamos los datos de la animacion. 8 framesn / state
-            const frames = new Frames(1, 5);
-
-            //creamos nuestro objeto physics con vLimit = 40 pixels/second
-            const physics = new Physics(1, 0); //velocidad de las plataformas
-
-            //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-            const hitBox = new HitBox(30, 4, 0, 0)
-
-            //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, Math.floor(Math.random()*150+30), (level1.length-6)*32+b, imageSet, frames, physics, 2, 5, hitBox);
-
-            //añadimos el pirate al array de sprites
-            globals.sprites.push(plataformaN);
-        }
-        //la plataforma extra por si todas las nubes desaparecen, pa' q al menos esta aguante
-
-            //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-            const imageSet = new ImageSet(2, 2, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
-
-            //creamos los datos de la animacion. 8 framesn / state
-            const frames = new Frames(1, 5);
-
-            //creamos nuestro objeto physics con vLimit = 40 pixels/second
-            const physics = new Physics(1, 0); //velocidad de las plataformas
-
-            //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-            const hitBox = new HitBox(30, 4, 0, 0)
-
-            //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-            const plataformaN = new PlataformasN(SpriteID.PLATAFORMN, State.SOLID, 300, (level1.length-6)*32+b, imageSet, frames, physics, 2, 5, hitBox);
-
-            //añadimos el pirate al array de sprites
-            globals.sprites.push(plataformaN);
-
-        b = 73;
-    }
-
-}
-*/
-
-
-//algo
-// function initArrow(){
-//     for(let i = 0; i < 3; ++i)
-//     {
-//         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-//         const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
-
-//         //creamos los datos de la animacion. 8 framesn / state
-//         const frames = new Frames(1);
-        
-//         //creamos los datos de la animacion. 8 framesn / state
-//         const physics = new Physics(20);    //velocidad de la flecha, velocidad de las flechas
-
-//         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-//         const hitBox = new HitBox(30, 4, 8, 2)
-
-//         //creamos nuestro sprite
-//         const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, Math.floor(Math.random() * (-30)+(-70)), Math.floor(Math.random() * 150+(0)), imageSet, frames, physics, hitBox);
-
-//          //añadimos el pirate al array de sprites
-//         globals.sprites.push(flecha);
-//     }
-        
-
-// }
 
 function initPlataforms(){
-    // for(let i = 0; i < 2; i++){
-    //     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-    //     const imageSet = new ImageSet(2, 0, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
-
-    //     //creamos los datos de la animacion. 8 framesn / state
-    //     const frames = new Frames(1, 5);
-
-    //     //creamos nuestro objeto physics con vLimit = 40 pixels/second
-    //     const physics = new Physics(40, 40, 0); //velocidad de las plataformas
-
-    //     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-    //     const hitBox = new HitBox(30, 4, 0, 0)
-
-    //     //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-    //     const plataforma = new Plataformas(SpriteID.PLATAFORM, State.SOLID, Math.floor(Math.random() * 200), (level1.length-6)*32, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox);
-
-    //     //añadimos el pirate al array de sprites
-    //     globals.sprites.push(plataforma);
-    // }
 
     for(let i = 0; i < 2; i++){
         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
@@ -501,22 +351,7 @@ function initCamera()
     globals.camera = new Camera(0, h);
     globals.cameraHS = new Camera(0, 0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 //Exportamos las funciones
 export {
@@ -529,5 +364,4 @@ export {
     initTimers,
     initEvents,
     initParticles
-    
 }

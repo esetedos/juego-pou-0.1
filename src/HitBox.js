@@ -9,10 +9,3 @@ export default class HitBox
         this.yOffset    = yOffset;      //Offset en X de comienzo de dibujo del HItBOx respecto de yPos
     }
 }
-
-// caso del conejo
-// ySize: 14
-// xSize:13
-// yOffset: 1
-// xOffset: 2
-// 13, 14, 2, 1

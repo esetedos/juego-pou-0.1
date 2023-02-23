@@ -85,18 +85,10 @@ export function initBaseDeDatos()
             //console.log( this.status);
             if (this.status == 200)
             {
-                // console.log("entra");
-                // console.log(this.responseText);
-                // console.log(this.responseText === null);
                 if(this.responseText != null)
                 {
-                    // console.log(this.responseText);
                     const resultJSON = JSON.parse(this.responseText);
-                    // console.log(resultJSON);
-                    // console.log(this.responseText);
-                    
-                    ///Inicializamos los datos del juego
-                    // initGame(resultJSON);
+
                     globals.arrayBD = resultJSON;
                     globals.arrayBD.sort((x, y) => y.score - x.score);
                     console.log(globals.arrayBD);
@@ -120,9 +112,6 @@ export function initBaseDeDatos()
 export function postHighScores()
 {
     console.log("Add button pressed");
-
-    //Generamos isbn aleatorio
-    // const score = Math.floor(globals.metroak/10)*10;
 
     //Send data
     const objectToSend = {
@@ -158,11 +147,8 @@ export function postHighScores()
                     console.log(resultJSON);
 
                     //Metemos los datos en un array, ya que lo que nos devuelve la ruta es un Objeto.
-                    // const arrayResult = [resultJSON];
-                    // globals.arrayBD = resultJSON;
                     findScore2(resultJSON);
-                    //Iniciamos los datos
-                    // initGame(arrayResult);
+
                     initBaseDeDatos();
                 }
                 else
@@ -187,7 +173,6 @@ function findScore2(resultJSON)
     { 
         if(globals.score >= globals.arrayBD[i].score)
         {
-            // console.log("entra14");
             globals.arrayBD.splice(i,0,resultJSON);
 
             i = globals.arrayBD.length;
