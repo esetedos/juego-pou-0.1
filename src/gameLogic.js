@@ -195,6 +195,9 @@ function updateCarrot(sprite)
         {
             globals.life++;
         }
+        globals.sounds[Sound.EATING].play();
+        globals.sounds[Sound.EATING].volume = 0.4;
+
     }
 }
 
@@ -640,8 +643,8 @@ function createPlataformsAndLevels()
         {
             // console.log("el tiempo se guarda");
             createArrows();
-            // globals.sounds[Sound.ARROW].play();
-            // globals.sounds[Sound.ARROW].volume = 0.4;
+            globals.sounds[Sound.ARROW].play();
+            globals.sounds[Sound.ARROW].volume = 0.4;
             globals.kont = 0;
         }
     }
@@ -685,7 +688,7 @@ function createCarrots()
 
 function createArrows()
 {
-    let v = Math.random()*60+30;
+    let v = Math.random()*(30-10)+10;
 
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
     const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
@@ -805,6 +808,7 @@ function updateNewGame()
         globals.izena = "";
         globals.levelTime.value = 0;
         globals.camera.y = (level1.length-6)*32;
+        globals.dificultad = 0;
         globals.levelOne = false;
         globals.levelTwo = false;
         globals.levelThree = false;
@@ -1080,25 +1084,35 @@ function updateCameraHS()
 
 function levelInGame()
 {
-    if( globals.levelTime.value > 30){ //30
+    if( globals.levelTime.value == 30){ //30
         globals.levelOne = true;
         globals.dificultad = 1;
+        globals.sounds[Sound.LEVELUP].play();
+        globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value > 70){  //75
+    if( globals.levelTime.value == 70){  //75
         globals.levelTwo = true;
         globals.dificultad = 2;
+        globals.sounds[Sound.LEVELUP].play();
+        globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value > 120){ //120
+    if( globals.levelTime.value == 120){ //120
         globals.levelThree = true;
         globals.dificultad = 3;
+        globals.sounds[Sound.LEVELUP].play();
+        globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value > 180){ //180
+    if( globals.levelTime.value == 180){ //180
         globals.levelFour = true;
         globals.dificultad = 4;
+        globals.sounds[Sound.LEVELUP].play();
+        globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
-    if( globals.levelTime.value > 240){ //240
+    if( globals.levelTime.value == 240){ //240
         globals.levelFive = true;
         globals.dificultad = 5;
+        globals.sounds[Sound.LEVELUP].play();
+        globals.sounds[Sound.LEVELUP].volume = 0.4;
     }
         
     // globals.levelTime.value = 0;

@@ -122,11 +122,23 @@ function loadAssets()
     globals.sounds.push(jumpSound);
     globals.assetsToLoad.push(jumpSound);
 
-    // let arrow = document.querySelector("#arrow");
-    // jumpSound.addEventListener("canplaythrough", loadHandler, false);
-    // jumpSound.load();
-    // globals.sounds.push(arrow);
-    // globals.assetsToLoad.push(arrow);
+    let arrowSound = document.querySelector("#arrowSound");
+    arrowSound.addEventListener("canplaythrough", loadHandler, false);
+    arrowSound.load();
+    globals.sounds.push(arrowSound);
+    globals.assetsToLoad.push(arrowSound);
+
+    let eatingSound = document.querySelector("#eatingSound");
+    eatingSound.addEventListener("canplaythrough", loadHandler, false);
+    eatingSound.load();
+    globals.sounds.push(eatingSound);
+    globals.assetsToLoad.push(eatingSound);
+
+    let levelUpSound = document.querySelector("#levelUpSound");
+    levelUpSound.addEventListener("canplaythrough", loadHandler, false);
+    levelUpSound.load();
+    globals.sounds.push(levelUpSound);
+    globals.assetsToLoad.push(levelUpSound);
 
 }
 
@@ -169,51 +181,51 @@ function initSprites()//////////////////////////////////////////////////////////
    
 }
 
-function initCarrot()
-{
-    //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
-    const imageSet = new ImageSet(6, 0, 10, 6, 10, 16, 0, 2);
-                                //(6, 0, 10, 6, 10, 24, 0, 8);
-                                //(2, 1, 30, 6, 30, 27, 0, 6)
-    //creamos los datos de la animacion. 8 frames / state
-    const frames = new Frames(0, 5); //en teoría debería ser (0, 5)
+// function initCarrot()
+// {
+//     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, gridSize, xOffset, yOffset
+//     const imageSet = new ImageSet(6, 0, 10, 6, 10, 16, 0, 2);
+//                                 //(6, 0, 10, 6, 10, 24, 0, 8);
+//                                 //(2, 1, 30, 6, 30, 27, 0, 6)
+//     //creamos los datos de la animacion. 8 frames / state
+//     const frames = new Frames(0, 5); //en teoría debería ser (0, 5)
 
-    //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
-    const physics = new Physics(40);
+//     //creamos nuestro objeto physics con vLimit = 40 pixeles/seconds
+//     const physics = new Physics(40);
 
-    //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-    const hitBox = new HitBox(10, 6, 0, 0)
+//     //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+//     const hitBox = new HitBox(10, 6, 0, 0)
 
-    //creamos nuestro sprite
-    const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 60, (level1.length-6)*32+50, imageSet, frames, physics, hitBox);
+//     //creamos nuestro sprite
+//     const carrot = new Sprite(SpriteID.CARROT, State.SOLID_3, 60, (level1.length-6)*32+50, imageSet, frames, physics, hitBox);
  
-    //añadimos el player al array de sprites
-    globals.sprites.push(carrot);
+//     //añadimos el player al array de sprites
+//     globals.sprites.push(carrot);
    
-}
+// }
 
-function initPlataformsMoviento(){
-    for(let i = 0; i < 2 ; i++){
-        //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(2, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
+// function initPlataformsMoviento(){
+//     for(let i = 0; i < 2 ; i++){
+//         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+//         const imageSet = new ImageSet(2, 1, 30, 6, 30, 27, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
-        //creamos los datos de la animacion. 8 framesn / state
-        const frames = new Frames(1, 5);
+//         //creamos los datos de la animacion. 8 framesn / state
+//         const frames = new Frames(1, 5);
 
-        //creamos nuestro objeto physics con vLimit = 40 pixels/second
-        const physics = new Physics(20, 0, 0); //velocidad de las plataformas
+//         //creamos nuestro objeto physics con vLimit = 40 pixels/second
+//         const physics = new Physics(20, 0, 0); //velocidad de las plataformas
 
-        //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-        const hitBox = new HitBox(30, 4, 0, 0)
+//         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+//         const hitBox = new HitBox(30, 4, 0, 0)
 
-        //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
-        const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), (level1.length-6)*32+35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
+//         //creamos nuestro sprite  aqui se pondrá la posición inicial también (xPos e yPos)
+//         const plataforma = new Plataformas(SpriteID.PLATAFORM_MOVIMIENTO, State.SOLID_5, Math.floor(Math.random() * 200), (level1.length-6)*32+35, imageSet, frames, physics, Math.floor(Math.random() * 3), hitBox, Math.random()*30+1);
 
-        //añadimos el pirate al array de sprites
-        globals.sprites.push(plataforma);
-    }
+//         //añadimos el pirate al array de sprites
+//         globals.sprites.push(plataforma);
+//     }
 
-}
+// }
 
 /*
 function initPlataformsN(){
@@ -267,30 +279,30 @@ function initPlataformsN(){
 
 
 //algo
-function initArrow(){
-    for(let i = 0; i < 3; ++i)
-    {
-        //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
-        const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
+// function initArrow(){
+//     for(let i = 0; i < 3; ++i)
+//     {
+//         //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
+//         const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
 
-        //creamos los datos de la animacion. 8 framesn / state
-        const frames = new Frames(1);
+//         //creamos los datos de la animacion. 8 framesn / state
+//         const frames = new Frames(1);
         
-        //creamos los datos de la animacion. 8 framesn / state
-        const physics = new Physics(20);    //velocidad de la flecha, velocidad de las flechas
+//         //creamos los datos de la animacion. 8 framesn / state
+//         const physics = new Physics(20);    //velocidad de la flecha, velocidad de las flechas
 
-        //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
-        const hitBox = new HitBox(30, 4, 8, 2)
+//         //Creamos nuestro objeto HitBox con xSize, ySize, xOffset, yOffset
+//         const hitBox = new HitBox(30, 4, 8, 2)
 
-        //creamos nuestro sprite
-        const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, Math.floor(Math.random() * (-30)+(-70)), Math.floor(Math.random() * 150+(0)), imageSet, frames, physics, hitBox);
+//         //creamos nuestro sprite
+//         const flecha = new Sprite(SpriteID.ARROW, State.SOLID_2, Math.floor(Math.random() * (-30)+(-70)), Math.floor(Math.random() * 150+(0)), imageSet, frames, physics, hitBox);
 
-         //añadimos el pirate al array de sprites
-        globals.sprites.push(flecha);
-    }
+//          //añadimos el pirate al array de sprites
+//         globals.sprites.push(flecha);
+//     }
         
 
-}
+// }
 
 function initPlataforms(){
     // for(let i = 0; i < 2; i++){

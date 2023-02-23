@@ -8,7 +8,7 @@
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     background-color: black;
-
+   
 }
 
 #gameHUD {
@@ -26,5 +26,13 @@
 {
     font-family: emulogic;
     src: url("../fonts/emulogic.ttf");
+    
+}
 
+body {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black; 
 }
