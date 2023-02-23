@@ -140,6 +140,11 @@ function loadAssets()
     globals.sounds.push(levelUpSound);
     globals.assetsToLoad.push(levelUpSound);
 
+    let robloxDeath = document.querySelector("#robloxDeath");
+    robloxDeath.addEventListener("canplaythrough", loadHandler, false);
+    robloxDeath.load();
+    globals.sounds.push(robloxDeath);
+    globals.assetsToLoad.push(robloxDeath);
 }
 
 //UPDATE. funcion que se llama cada vez que se carga un archivo
