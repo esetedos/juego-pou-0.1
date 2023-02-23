@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import { Game, ParticleState, Tile, ParticleID } from "./constants.js";
+import { Game, ParticleState, Tile, ParticleID, SpriteID } from "./constants.js";
 import Timer from "./Timer.js"; //lo he puesto yo (no está en los tutoriales)
 
 
@@ -100,11 +100,18 @@ function renderSprites() //o drawSprites (que era como estaba)
         const sprite = globals.sprites[i];
 
         //TEST: DIbuja un rectangulo alrededor del sprite
-        // drawSpriteRectangle(sprite);     
-        renderSprite(sprite);
+        // drawSpriteRectangle(sprite);   
+        if(sprite.id != SpriteID.CARROT)  
+            renderSprite(sprite);
         // drawHitBox(sprite);
-       
     }
+    for(let i = 0; i < globals.sprites.length; i++)
+    {
+        const sprite = globals.sprites[i];  
+        if(sprite.id == SpriteID.CARROT)  
+            renderSprite(sprite);
+    }
+
     // drawHitBox2(globals.sprites[0]); //dibujo de la segunda HitBox del player n
 }
 

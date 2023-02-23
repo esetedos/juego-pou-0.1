@@ -434,7 +434,7 @@ function initTimers()
 {
     //creamos timer de valor 200, con cambios cada 0.5 segundos
     globals.levelTime = new Timer(0, 1.33);
-    globals.letterTimer = new Timer(0, 0.5);
+    globals.letterTimer = new Timer(0, 0.3);
     globals.timerProba = new Timer(0, 1);
     globals.timerSaltoKop = new Timer(0, 1);
 }

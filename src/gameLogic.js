@@ -332,7 +332,13 @@ function updatePlayer(sprite)
         sprite.yPos = globals.camera.y+40;
         
         globals.life--; //quita dos de vida
-   
+
+    /*
+        //Recolocamos la cámara (camera) del scrolling
+        while(Math.floor(globals.camera.y/32) % 3  == 0)
+            globals.camera.y +=10;
+        // globals.camera.y = (level1.length-7-8)*32;
+    */
     }
 
     //Actualizamos la animación
@@ -567,113 +573,18 @@ function createPlataformsAndLevels()
     {
         let numPlatf = contadorDePlataformas(); 
         const sprite = globals.sprites[numPlatf];
+        let option = 0;
         // console.log(ssprite.yPos); 
         
-        
-
-        
-        
-        // let kont = posicionPlatf;                                                                                                                           //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
+                                                                                                                        //&& globals.sprites[globals.sprites.length-1].yPos > globals.camera.y+38)
         if((sprite.id == SpriteID.PLATAFORM || sprite.id == SpriteID.PLATAFORMN || sprite.id == SpriteID.PLATAFORM_MOVIMIENTO) &&  sprite.yPos > globals.camera.y+40)// && maxPlatAlcanzado == false)     // lo que me dijo oscar que hiciera: && sprite.yPos == globals.camera.y +35)      // globals.crearNuevasPlataf == true)   
         {
             let a = 3; 
-            let posicionPlatf = Math.floor(Math.random() * (200-30)); 
-            let posicionPlatf2 = 0;
-            let posicionPlatf3 = 0;
-        //2
-            if(posicionPlatf<=200-30)
-                posicionPlatf2 = Math.floor(Math.random() * (200-(posicionPlatf+30)+1) +posicionPlatf+30); //(posicionPlatf+30));
-            //Math.random()*(75-25+1)+25)  --> [0,25]¿
-            if(posicionPlatf>200-30)
-            {
-                posicionPlatf2 = Math.floor(Math.random() * (posicionPlatf+30-0+1) + 0);
-            }
-            // console.log(posicionPlatf2);
-        //3
-            if(posicionPlatf-(posicionPlatf2+30) > 30)
-            {
-                posicionPlatf3 = Math.floor(Math.random()*(posicionPlatf-(posicionPlatf2+30)+1)+posicionPlatf2+30);
-            }
-            else if(posicionPlatf2-(posicionPlatf+30) >30)
-            {
-                posicionPlatf3 = Math.floor(Math.random()*(posicionPlatf2-(posicionPlatf+30)+1)+posicionPlatf+30);
-            }
-            else {
-                if(posicionPlatf<=200-30)
-                    posicionPlatf3 = Math.floor(Math.random() * (200-(posicionPlatf+30)+1) +posicionPlatf+30); //(posicionPlatf+30));
-                //Math.random()*(75-25+1)+25)  --> [0,25]¿
-                if(posicionPlatf>200-30)
-                {
-                    posicionPlatf3 = Math.floor(Math.random() * (posicionPlatf+30-0+1) + 0);
-                }
-            }
-
-        
-
-            // console.log(posicionPlatf3);
-            // posicionPlatf3 =  Math.floor(Math.random() * 200);
-
-
-
-            // if(posicionPlatf-30 <= posicionPlatf2 <= posicionPlatf+30)
-            // {
-            //     posicionPlatf2 +=70;
-            //     console.log("while");
-               
-            //     if(posicionPlatf2+30 > 200)
-            //     {
-            //         posicionPlatf2-=200;
-            //     }
-    
-            // }
-            // if(posicionPlatf2-30 <= posicionPlatf3 <= posicionPlatf2+30)
-            // {
-            //     posicionPlatf3 += 30;
-            //     if(posicionPlatf3+30 > globals.canvas.width)
-            //     {
-            //         posicionPlatf3 = 0;
-            //     }
-            // }
-
-            let posicion = posicionPlatf;
-//pra crear la primera plataforma
-            let option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
-            if(globals.levelOne == true)       
-            {
-                if(globals.levelThree == true)   //cuando pasen dos minutos
-                {
-                    if(option<15){
-                        //create plataformas de movimiento
-                        createMovingPlataforms(posicion);
-                    }   
-                    else if(option<30)
-                    {
-                        //create plataformas que desaparecen
-                        createDisappearPlataforms(posicion);
-                    }
-                    else{
-                        createRegularPlataforms(posicion);
-                    }
-                    
-                }
-                else //cuando pase un minuto
-                {                   
-                    if(option<20){
-                        //create plataformas de movimiento
-                        createMovingPlataforms(posicion);
-                    }   
-                    else{
-                        createRegularPlataforms(posicion);
-                    }
-                }   
-            }
-            else
-                createRegularPlataforms(posicion);
-
-//segunda y tercera plataforma
-            posicion = posicionPlatf2;
+            let posicion = Math.floor(Math.random()*200+1);
+            
             for(let i = 0; i < a ; i++){
                 option = Math.floor(Math.random()*100+1); // Número aleatorio:(0,100]
+
                 if(globals.levelTwo == true) //para qeu se creen 2 plataformas por fila en vez de tres
                 {
                     a = 2;
@@ -710,27 +621,7 @@ function createPlataformsAndLevels()
                 else
                     createRegularPlataforms(posicion);
                     
-                // if(i == 1)
-                // {
-                    posicion = posicionPlatf3;
-                    // console.log("while");
-                // }
-                    
-                // if(i == 2)
-                // {
-                //     posicion = posicionPlatf3;
-                //     // console.log("while2");
-                // }
-                // posicionPlatf = Math.floor(Math.random() * 200);
-                // let p = posicionPlatf;
-                
-                // while(kont-30 <= posicionPlatf <= kont+30)
-                // {
-                //     posicionPlatf =  kont+40;
-                //     console.log("while");
-                // }
-                
-                // kont = posicionPlatf;
+                posicion = Math.floor(Math.random()*200+1);
             }
             globals.crearNuevasPlataf = false;
         }
@@ -924,6 +815,8 @@ function updateNewGame()
         globals.saltoKop = 0;
         globals.puntosCarrot = 0;
         globals.zanaRecogidas = 0;
+        globals.kont2 = 0;
+        globals.kont = 0;
         initSprites;
         // console.log(globals.sprites.length);
         
@@ -1079,7 +972,7 @@ function updateCamera()
     // const player = globals.sprites[0];
     if(globals.levelFive == true)
     {
-        globals.camera.y -=10* globals.deltaTime;
+        globals.camera.y -=5* globals.deltaTime;
     }
     globals.camera.y -=10* globals.deltaTime;
     // globals.camera.x = Math.floor(player.xPos) + Math.floor((player.imageSet.xSize - globals.canvas.width) / 2);
