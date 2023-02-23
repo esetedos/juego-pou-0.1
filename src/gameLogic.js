@@ -685,7 +685,7 @@ function createCarrots()
 
 function createArrows()
 {
-    let v = Math.random()*80+50;
+    let v = Math.random()*60+30;
 
     //creamos las propiedades de las imagenes: initFil, initCOl, xSize, ySize, xgridSize, yGridsize, xOffset, yOffset
     const imageSet = new ImageSet(3, 0, 40, 8, 40, 24, 0, 6); //se supone que grid side sería 30, y yOffset 12
