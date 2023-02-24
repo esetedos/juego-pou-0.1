@@ -81,8 +81,6 @@ export function initBaseDeDatos()
         
         if(this.readyState == 4)
         {
-            
-            //console.log( this.status);
             if (this.status == 200)
             {
                 if(this.responseText != null)
@@ -91,7 +89,7 @@ export function initBaseDeDatos()
 
                     globals.arrayBD = resultJSON;
                     globals.arrayBD.sort((x, y) => y.score - x.score);
-                    console.log(globals.arrayBD);
+                    // console.log(globals.arrayBD);
                 }
                 else
                     alert("Communication error: No data recived");
@@ -111,7 +109,7 @@ export function initBaseDeDatos()
 //Post
 export function postHighScores()
 {
-    console.log("Add button pressed");
+    // console.log("Add button pressed");
 
     //Send data
     const objectToSend = {
@@ -122,9 +120,6 @@ export function postHighScores()
     //String data to send
     const dataToSend =  'izena=' + objectToSend.izena + 
                         '&score=' + objectToSend.score;
-
-    // console.log(dataToSend);
-
 
     //Ruta relativa al fichero que hace la petición (testAjax.php)
     const url = "http://localhost:8080/juego/CarpetaDelJuego(git)/server/routes/postClassic.php/";
@@ -142,9 +137,9 @@ export function postHighScores()
             {
                 if(this.responseText != null)
                 {
-                    console.log(this.responseText); //objeto que se acaba de meter
+                    // console.log(this.responseText); //objeto que se acaba de meter
                     const resultJSON = JSON.parse(this.responseText);
-                    console.log(resultJSON);
+                    // console.log(resultJSON);
 
                     //Metemos los datos en un array, ya que lo que nos devuelve la ruta es un Objeto.
                     findScore2(resultJSON);

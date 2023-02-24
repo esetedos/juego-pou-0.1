@@ -90,6 +90,8 @@ function playGame()
 
     playSound();
 
+    updateFakeHS();
+
 }
 
 function updateSprites()
@@ -1050,4 +1052,9 @@ function playSound()
         //Reseteamos current sound
         globals.currentSound = Sound.NO_SOUND;
     }
+}
+
+function updateFakeHS()
+{
+    globals.fakeHS = globals.arrayBD[0].score;
 }

@@ -110,7 +110,9 @@ export default {
 
     kont2: 0,
 
-    zanaRecogidas: 0
+    zanaRecogidas: 0,
+
+    fakeHS: 0
 
     
 
